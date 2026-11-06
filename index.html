@@ -7,12 +7,70 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#10151f;color:#fff;
- font-family:Arial,sans-serif;min-height:100vh;
- display:flex;justify-content:center;align-items:center;
- padding:20px
+ margin:0;
+ background:#10151f;
+ color:#fff;
+ font-family:Arial,sans-serif;
+ min-height:100vh;
+ padding:20px;
 }
-.app{width:100%;max-width:440px}
+
+/* Main page layout and advertising areas */
+.site-layout{
+ width:100%;
+ max-width:1200px;
+ margin:0 auto;
+ display:grid;
+ grid-template-columns:minmax(0,1fr) minmax(280px,440px) minmax(0,1fr);
+ grid-template-areas:
+  "top top top"
+  "left main right"
+  "bottom bottom bottom";
+ gap:22px;
+ align-items:start;
+}
+.ad-top{grid-area:top}
+.ad-left{grid-area:left}
+.ad-right{grid-area:right}
+.app{grid-area:main;width:100%;max-width:440px;justify-self:center}
+.ad-bottom{grid-area:bottom}
+
+/* Visible placeholders only: replace their contents with AdSense code after approval */
+.ad-slot{
+ width:100%;
+ min-height:250px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ gap:8px;
+ padding:18px;
+ border:1px dashed #526174;
+ border-radius:14px;
+ background:#182231;
+ color:#aab6c5;
+ text-align:center;
+}
+.ad-slot strong{
+ color:#d5deea;
+ font-size:14px;
+ font-weight:600;
+}
+.ad-slot span{
+ color:#8493a6;
+ font-size:12px;
+}
+.ad-horizontal{min-height:120px}
+.ad-side-stack{
+ display:flex;
+ flex-direction:column;
+ gap:22px;
+}
+.ad-side-stack .ad-slot{min-height:300px}
+.ad-after-calculator{margin-top:22px;min-height:180px}
+.ad-bottom{min-height:130px}
+
+/* Original calculator styles */
 header{text-align:center;margin-bottom:22px}
 header h1{color:#42d77d;margin:0;font-size:30px}
 header p{color:#929eae;font-size:13px}
@@ -34,66 +92,151 @@ button.clear{background:#8c3540}
 button.equal{background:#25a968;font-weight:bold}
 button.wide{grid-column:span 2}
 footer{text-align:center;color:#778596;font-size:12px;margin-top:18px}
+
+/* Tablet and mobile layout */
+@media(max-width:900px){
+ body{padding:16px}
+ .site-layout{
+  max-width:560px;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-areas:
+   "top"
+   "left"
+   "main"
+   "right"
+   "bottom";
+  gap:16px;
+ }
+ .app{width:100%;max-width:440px}
+ .ad-side-stack{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+ }
+ .ad-side-stack .ad-slot{min-height:150px}
+ .ad-horizontal{min-height:110px}
+ .ad-after-calculator{margin-top:16px;min-height:140px}
+}
+@media(max-width:480px){
+ body{padding:12px}
+ .site-layout{gap:14px}
+ .calc{padding:16px}
+ .keys{gap:8px}
+ button{padding:14px 4px;font-size:16px}
+ .ad-side-stack{grid-template-columns:1fr}
+ .ad-side-stack .ad-slot{min-height:120px}
+ .ad-horizontal{min-height:100px}
+}
 </style>
 </head>
 <body>
-<div class="app">
-<header>
-<h1>CALCNOVA</h1>
-<p>Advanced Scientific Calculator</p>
-</header>
-<div class="calc">
-<div class="display">
-<div id="expression">Ready to calculate</div>
-<div id="result">0</div>
+
+<div class="site-layout">
+
+  <!-- Wide advertising area above the calculator -->
+  <div class="ad-slot ad-horizontal ad-top">
+    <strong>Advertising Space</strong>
+    <span>Top banner · AdSense code can be added here later</span>
+  </div>
+
+  <!-- Two advertising areas on the left (desktop) -->
+  <aside class="ad-side-stack ad-left" aria-label="Left advertising spaces">
+    <div class="ad-slot">
+      <strong>Advertising Space</strong>
+      <span>Left banner 1</span>
+    </div>
+    <div class="ad-slot">
+      <strong>Advertising Space</strong>
+      <span>Left banner 2</span>
+    </div>
+  </aside>
+
+  <!-- Original calculator: its HTML, styling and functionality are preserved -->
+  <div class="app">
+    <header>
+      <h1>CALCNOVA</h1>
+      <p>Advanced Scientific Calculator</p>
+    </header>
+    <div class="calc">
+      <div class="display">
+        <div id="expression">Ready to calculate</div>
+        <div id="result">0</div>
+      </div>
+      <div class="mode">
+        <span>SCIENTIFIC MODE</span>
+        <button id="angle" style="padding:7px 13px;font-size:12px">DEG</button>
+      </div>
+      <div class="keys">
+        <button class="clear" data-action="clear">AC</button>
+        <button class="fn" data-value="(">(</button>
+        <button class="fn" data-value=")">)</button>
+        <button class="op" data-action="delete">DEL</button>
+
+        <button class="fn" data-value="sin(">sin</button>
+        <button class="fn" data-value="cos(">cos</button>
+        <button class="fn" data-value="tan(">tan</button>
+        <button class="op" data-value="/">÷</button>
+
+        <button class="fn" data-value="sqrt(">√</button>
+        <button class="fn" data-value="log(">log</button>
+        <button class="fn" data-value="ln(">ln</button>
+        <button class="op" data-value="*">×</button>
+
+        <button class="fn" data-value="π">π</button>
+        <button class="fn" data-value="e">e</button>
+        <button class="fn" data-value="^">xʸ</button>
+        <button class="op" data-value="-">−</button>
+
+        <button data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button class="op" data-value="+">+</button>
+
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button class="fn" data-value="%">%</button>
+
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button class="fn" data-value=".">.</button>
+
+        <button class="wide" data-value="0">0</button>
+        <button data-action="sign">±</button>
+        <button class="equal" data-action="calculate">=</button>
+      </div>
+    </div>
+
+    <!-- Extra advertising area directly below the calculator -->
+    <div class="ad-slot ad-after-calculator">
+      <strong>Advertising Space</strong>
+      <span>Below calculator</span>
+    </div>
+
+    <footer>CALCNOVA © 2026 · Calculate smarter</footer>
+  </div>
+
+  <!-- Two advertising areas on the right (desktop) -->
+  <aside class="ad-side-stack ad-right" aria-label="Right advertising spaces">
+    <div class="ad-slot">
+      <strong>Advertising Space</strong>
+      <span>Right banner 1</span>
+    </div>
+    <div class="ad-slot">
+      <strong>Advertising Space</strong>
+      <span>Right banner 2</span>
+    </div>
+  </aside>
+
+  <!-- Wide advertising area at the bottom of the page -->
+  <div class="ad-slot ad-bottom">
+    <strong>Advertising Space</strong>
+    <span>Bottom banner · AdSense code can be added here later</span>
+  </div>
+
 </div>
-<div class="mode">
-<span>SCIENTIFIC MODE</span>
-<button id="angle" style="padding:7px 13px;font-size:12px">DEG</button>
-</div>
-<div class="keys">
-<button class="clear" data-action="clear">AC</button>
-<button class="fn" data-value="(">(</button>
-<button class="fn" data-value=")">)</button>
-<button class="op" data-action="delete">DEL</button>
 
-<button class="fn" data-value="sin(">sin</button>
-<button class="fn" data-value="cos(">cos</button>
-<button class="fn" data-value="tan(">tan</button>
-<button class="op" data-value="/">÷</button>
-
-<button class="fn" data-value="sqrt(">√</button>
-<button class="fn" data-value="log(">log</button>
-<button class="fn" data-value="ln(">ln</button>
-<button class="op" data-value="*">×</button>
-
-<button class="fn" data-value="π">π</button>
-<button class="fn" data-value="e">e</button>
-<button class="fn" data-value="^">xʸ</button>
-<button class="op" data-value="-">−</button>
-
-<button data-value="7">7</button>
-<button data-value="8">8</button>
-<button data-value="9">9</button>
-<button class="op" data-value="+">+</button>
-
-<button data-value="4">4</button>
-<button data-value="5">5</button>
-<button data-value="6">6</button>
-<button class="fn" data-value="%">%</button>
-
-<button data-value="1">1</button>
-<button data-value="2">2</button>
-<button data-value="3">3</button>
-<button class="fn" data-value=".">.</button>
-
-<button class="wide" data-value="0">0</button>
-<button data-action="sign">±</button>
-<button class="equal" data-action="calculate">=</button>
-</div>
-</div>
-<footer>CALCNOVA © 2026 · Calculate smarter</footer>
-</div>
 <script>
 const expression=document.getElementById('expression');
 const result=document.getElementById('result');
