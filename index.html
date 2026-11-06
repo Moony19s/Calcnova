@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcnova - Scientific Calculator</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#10151f;color:#fff;
+ font-family:Arial,sans-serif;min-height:100vh;
+ display:flex;justify-content:center;align-items:center;
+ padding:20px
+}
+.app{width:100%;max-width:440px}
+header{text-align:center;margin-bottom:22px}
+header h1{color:#42d77d;margin:0;font-size:30px}
+header p{color:#929eae;font-size:13px}
+.calc{background:#1b2432;padding:20px;border-radius:22px}
+.display{background:#101722;padding:18px;border-radius:14px;margin-bottom:15px;min-height:105px;overflow:hidden}
+#expression{color:#9caaba;text-align:right;min-height:25px;word-break:break-all}
+#result{font-size:34px;text-align:right;margin-top:10px;word-break:break-all}
+.mode{display:flex;justify-content:space-between;margin-bottom:14px;color:#aab6c5;font-size:13px}
+button{
+ border:0;border-radius:12px;padding:15px 5px;
+ background:#2b3748;color:white;font-size:17px;
+ cursor:pointer;min-width:0
+}
+button:active{opacity:.7}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+button.fn{background:#34465c;color:#70d9a0}
+button.op{background:#304c45;color:#71e3a4}
+button.clear{background:#8c3540}
+button.equal{background:#25a968;font-weight:bold}
+button.wide{grid-column:span 2}
+footer{text-align:center;color:#778596;font-size:12px;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<h1>CALCNOVA</h1>
+<p>Advanced Scientific Calculator</p>
+</header>
+<div class="calc">
+<div class="display">
+<div id="expression">Ready to calculate</div>
+<div id="result">0</div>
+</div>
+<div class="mode">
+<span>SCIENTIFIC MODE</span>
+<button id="angle" style="padding:7px 13px;font-size:12px">DEG</button>
+</div>
+<div class="keys">
+<button class="clear" data-action="clear">AC</button>
+<button class="fn" data-value="(">(</button>
+<button class="fn" data-value=")">)</button>
+<button class="op" data-action="delete">DEL</button>
+
+<button class="fn" data-value="sin(">sin</button>
+<button class="fn" data-value="cos(">cos</button>
+<button class="fn" data-value="tan(">tan</button>
+<button class="op" data-value="/">÷</button>
+
+<button class="fn" data-value="sqrt(">√</button>
+<button class="fn" data-value="log(">log</button>
+<button class="fn" data-value="ln(">ln</button>
+<button class="op" data-value="*">×</button>
+
+<button class="fn" data-value="π">π</button>
+<button class="fn" data-value="e">e</button>
+<button class="fn" data-value="^">xʸ</button>
+<button class="op" data-value="-">−</button>
+
+<button data-value="7">7</button>
+<button data-value="8">8</button>
+<button data-value="9">9</button>
+<button class="op" data-value="+">+</button>
+
+<button data-value="4">4</button>
+<button data-value="5">5</button>
+<button data-value="6">6</button>
+<button class="fn" data-value="%">%</button>
+
+<button data-value="1">1</button>
+<button data-value="2">2</button>
+<button data-value="3">3</button>
+<button class="fn" data-value=".">.</button>
+
+<button class="wide" data-value="0">0</button>
+<button data-action="sign">±</button>
+<button class="equal" data-action="calculate">=</button>
+</div>
+</div>
+<footer>CALCNOVA © 2026 · Calculate smarter</footer>
+</div>
+<script>
+const expression=document.getElementById('expression');
+const result=document.getElementById('result');
+let input='',degree=true;
+
+document.getElementById('angle').onclick=()=>{
+ degree=!degree;
+ document.getElementById('angle').textContent=degree?'DEG':'RAD';
+};
+
+function tokenize(s){
+ const re=/\s*([0-9]+(?:\.[0-9]*)?|\.[0-9]+|[a-zA-Z]+|π|[+\-*/%^()])\s*/gy;
+ let t=[],i=0,m;
+ while(i<s.length){
+  re.lastIndex=i;m=re.exec(s);
+  if(!m)throw Error('Invalid expression');
+  t.push(m[1]);i=re.lastIndex;
+ }
+ return t;
+}
+function calculate(s){
+ const t=tokenize(s);let p=0;
+ function expr(){
+  let v=term();
+  while(t[p]==='+'||t[p]==='-'){
+   let op=t[p++],b=term();v=op==='+'?v+b:v-b;
+  }
+  return v;
+ }
+ function term(){
+  let v=unary();
+  while(['*','/','%'].includes(t[p])){
+   let op=t[p++],b=unary();
+   if(op==='*')v*=b;
+   if(op==='/')v/=b;
+   if(op==='%')v%=b;
+  }
+  return v;
+ }
+ function unary(){
+  if(t[p]==='+'){p++;return unary()}
+  if(t[p]==='-'){p++;return -unary()}
+  return power();
+ }
+ function power(){
+  let v=primary();
+  if(t[p]==='^'){p++;v=Math.pow(v,unary())}
+  return v;
+ }
+ function primary(){
+  let x=t[p++];
+  if(x==='('){
+   let v=expr();
+   if(t[p++]!==')')throw Error('Missing )');
+   return v;
+  }
+  if(x==='π')return Math.PI;
+  if(x==='e')return Math.E;
+  if(!isNaN(Number(x))&&x!==undefined)return Number(x);
+  if(['sin','cos','tan','sqrt','log','ln','abs','asin','acos','atan'].includes(x)){
+   if(t[p++]!=='(')throw Error('Missing (');
+   let a=expr();
+   if(t[p++]!==')')throw Error('Missing )');
+   if(['sin','cos','tan'].includes(x)){
+    if(degree)a=a*Math.PI/180;
+   }
+   if(x==='sin')return Math.sin(a);
+   if(x==='cos')return Math.cos(a);
+   if(x==='tan')return Math.tan(a);
+   if(x==='sqrt')return Math.sqrt(a);
+   if(x==='log')return Math.log10(a);
+   if(x==='ln')return Math.log(a);
+   if(x==='abs')return Math.abs(a);
+   if(x==='asin')return Math.asin(a)*(degree?180/Math.PI:1);
+   if(x==='acos')return Math.acos(a)*(degree?180/Math.PI:1);
+   if(x==='atan')return Math.atan(a)*(degree?180/Math.PI:1);
+  }
+  throw Error('Invalid input');
+ }
+ let answer=expr();
+ if(p<t.length)throw Error('Invalid expression');
+ if(!Number.isFinite(answer))throw Error('Math error');
+ return answer;
+}
+document.querySelectorAll('[data-value]').forEach(b=>{
+ b.onclick=()=>{
+  input+=b.dataset.value;
+  expression.textContent=input;
+  result.textContent='...';
+ };
+});
+document.querySelectorAll('[data-action]').forEach(b=>{
+ b.onclick=()=>{
+  let a=b.dataset.action;
+  if(a==='clear'){input='';expression.textContent='Ready to calculate';result.textContent='0'}
+  if(a==='delete'){input=input.slice(0,-1);expression.textContent=input||'Ready to calculate';result.textContent='0'}
+  if(a==='sign'){input='-('+input+')';expression.textContent=input}
+  if(a==='calculate'){
+   try{
+    let answer=calculate(input);
+    expression.textContent=input+' =';
+    result.textContent=Number(answer.toPrecision(12)).toString();
+    input=String(answer);
+   }catch(e){result.textContent='Error'}
+  }
+ };
+});
+document.addEventListener('keydown',e=>{
+ if(/^[0-9.+\-*/%^()]$/.test(e.key)){
+  input+=e.key;expression.textContent=input;
+ }else if(e.key==='Enter'){
+  document.querySelector('[data-action="calculate"]').click();
+ }else if(e.key==='Backspace'){
+  input=input.slice(0,-1);expression.textContent=input;
+ }else if(e.key==='Escape'){
+  document.querySelector('[data-action="clear"]').click();
+ }
+});
+</script>
+</body>
+</html>
