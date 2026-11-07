@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10151f">
-<title>Calcnova - Advanced Scientific Calculator</title>
-<style>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10151f">
+    <title>Calcnova - Advanced Scientific Calculator</title>
+    <style>
 *{box-sizing:border-box}
 :root{
  --page:#151421;--page2:#292039;--text:#fff8fc;--muted:#d0c0d0;--accent:#f0a8c7;
@@ -57,66 +57,322 @@ button:active{opacity:.8;transform:scale(.97)}button:focus-visible,select:focus-
 .ad-after-calculator{margin-top:16px;min-height:100px}footer{text-align:center;color:var(--muted);font-size:12px;margin-top:15px}.small-note{font-size:11px;color:var(--calc-muted);text-align:center;margin-top:9px}
 @media(max-width:900px){body{padding:14px}.site-layout{max-width:600px;grid-template-columns:minmax(0,1fr);grid-template-areas:"top" "main" "bottom";gap:15px}.app{max-width:540px}}
 @media(max-width:480px){body{padding:10px}.site-layout{gap:12px}.calc{padding:13px;border-radius:21px}.keys{gap:6px}button{padding:12px 3px;font-size:14px}.customizer{padding:12px}#result{font-size:31px}header:before,header:after{font-size:25px}}
+
+/* CALCNOVA Play Zone — fully isolated styles */
+#cn-games{
+  --cn-bg:#211b2a;--cn-panel:#2b2335;--cn-line:#5d4a67;--cn-text:#fff8fc;
+  --cn-muted:#d2c1d2;--cn-accent:#f0a8c7;--cn-gold:#ffe4a6;
+  margin-top:20px;padding:clamp(14px,3vw,22px);border:2px solid var(--panel-border);
+  border-radius:22px;background:var(--panel);color:var(--text);
+  box-shadow:0 10px 26px rgba(40,20,40,.09);width:100%;min-width:0;
+}
+#cn-games *{box-sizing:border-box}
+#cn-games [hidden]{display:none!important}
+#cn-games .cn-intro{text-align:center;margin:0 0 18px}
+#cn-games .cn-intro h2{margin:0;color:var(--accent);font-size:clamp(22px,4vw,29px)}
+#cn-games .cn-intro p{margin:7px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
+#cn-games .cn-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
+#cn-games .cn-tab{padding:12px 8px;border:1px solid var(--panel-border);border-radius:12px;background:var(--page);color:var(--text);font-weight:700;font-size:13px}
+#cn-games .cn-tab[aria-selected="true"]{background:var(--calc-panel);border-color:var(--accent);color:var(--calc-accent);box-shadow:inset 0 0 0 1px var(--accent)}
+#cn-games .cn-panel{background:var(--page);border:1px solid var(--panel-border);border-radius:17px;padding:clamp(12px,3vw,18px)}
+#cn-games .cn-game-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:15px}
+#cn-games .cn-game-head h3{margin:0 0 5px;color:var(--text);font-size:18px}
+#cn-games .cn-game-head p{margin:0;color:var(--muted);font-size:12px}
+#cn-games .cn-controls{display:flex;gap:9px;flex-wrap:wrap}
+#cn-games .cn-controls label,#cn-games .cn-riddle-toolbar label{display:block;color:var(--muted);font-size:11px;font-weight:700}
+#cn-games .cn-controls select,#cn-games .cn-riddle-toolbar select{display:block;margin-top:5px;min-width:145px;max-width:100%;padding:9px 10px;border-radius:10px;border:1px solid var(--panel-border);background:var(--panel);color:var(--text);font-size:12px}
+#cn-games .cn-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:12px}
+#cn-games .cn-stat{min-width:0;padding:10px 5px;text-align:center;border:1px solid var(--panel-border);border-radius:11px;background:var(--panel)}
+#cn-games .cn-stat span{display:block;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.7px}
+#cn-games .cn-stat strong{display:block;margin-top:4px;color:var(--accent);font-size:clamp(15px,3vw,20px);font-variant-numeric:tabular-nums}
+#cn-games .cn-message{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:var(--panel);color:var(--text);text-align:center;font-size:12px;line-height:1.5}
+#cn-games .cn-memory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:440px;margin:0 auto}
+#cn-games .cn-card{position:relative;display:grid;place-items:center;aspect-ratio:1/1;min-width:0;padding:0;border:1px solid var(--calc-border);border-radius:13px;background:linear-gradient(145deg,var(--calc-key),var(--calc-panel));color:var(--calc-text);box-shadow:0 4px 10px rgba(0,0,0,.14);font-size:clamp(22px,6vw,34px);overflow:hidden}
+#cn-games .cn-card-back{display:grid;place-items:center;width:100%;height:100%;color:var(--calc-accent);font-size:clamp(25px,6vw,36px)}
+#cn-games .cn-card-face{display:none}
+#cn-games .cn-card.is-open .cn-card-back,#cn-games .cn-card.is-matched .cn-card-back{display:none}
+#cn-games .cn-card.is-open .cn-card-face,#cn-games .cn-card.is-matched .cn-card-face{display:block}
+#cn-games .cn-card.is-open{background:var(--panel);border-color:var(--accent)}
+#cn-games .cn-card.is-matched{background:color-mix(in srgb,var(--calc-op),var(--panel) 35%);border-color:#79b99a;opacity:.8}
+#cn-games .cn-category-note{margin:10px 0 0;text-align:center;color:var(--muted);font-size:10px}
+#cn-games .cn-action-row,#cn-games .cn-riddle-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+#cn-games .cn-btn{min-width:120px;padding:10px 13px;border-radius:11px;font-size:12px;font-weight:700}
+#cn-games .cn-btn.primary{background:var(--calc-accent);color:#2b1725}
+#cn-games .cn-btn.secondary{background:var(--calc-key);color:var(--calc-text);border:1px solid var(--calc-border)}
+#cn-games .cn-result{margin-top:13px;padding:13px;border:1px solid var(--panel-border);border-radius:12px;background:var(--panel);text-align:center;color:var(--text)}
+#cn-games .cn-result strong,#cn-games .cn-result span{display:block}
+#cn-games .cn-result strong{color:var(--accent);margin-bottom:4px}
+#cn-games .cn-footnote{margin:13px 0 0;text-align:center;color:var(--muted);font-size:10px}
+#cn-games .cn-riddle-wrap{display:grid;gap:12px}
+#cn-games .cn-riddle-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+#cn-games .cn-riddle-toolbar select{min-width:210px}
+#cn-games .cn-riddle-card{background:linear-gradient(145deg,var(--calc-panel),var(--calc-display));border:1px solid var(--calc-border);border-radius:16px;padding:clamp(18px,4vw,28px);min-height:190px;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:14px}
+#cn-games .cn-riddle-category{color:var(--calc-accent);font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+#cn-games .cn-riddle-question{font-size:clamp(16px,3vw,21px);line-height:1.65;color:var(--calc-text);margin:0}
+#cn-games .cn-riddle-answer{border:1px solid var(--calc-border);background:var(--panel);border-radius:13px;padding:13px;color:var(--cn-gold);line-height:1.65;font-size:13px}
+#cn-games .cn-riddle-answer[hidden]{display:none!important}
+#cn-games .cn-riddle-count{color:var(--muted);font-size:11px;text-align:center}
+#cn-games button:focus-visible,#cn-games select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media(max-width:480px){
+ #cn-games{padding:11px;border-radius:17px}
+ #cn-games .cn-game-head{display:block}
+ #cn-games .cn-controls{margin-top:12px;display:grid;grid-template-columns:1fr 1fr}
+ #cn-games .cn-controls label{min-width:0}
+ #cn-games .cn-controls select{width:100%;min-width:0}
+ #cn-games .cn-stats{gap:5px}
+ #cn-games .cn-stat{padding:8px 3px}
+ #cn-games .cn-memory-grid{gap:6px}
+ #cn-games .cn-card{border-radius:9px}
+ #cn-games .cn-riddle-toolbar select{min-width:0;width:100%}
+ #cn-games .cn-riddle-actions .cn-btn{flex:1;min-width:95px}
+}
+
 </style>
-</head>
-<body data-theme="dark" data-decor="none">
-<div class="site-layout">
-  <!-- Ad space 1 of exactly 3 -->
-  <div class="ad-slot ad-top" aria-label="Top advertisement"><strong>Advertising Space 1</strong><span>Top banner · AdSense code can be added here after approval</span></div>
-
-  <main class="app">
-    <header><h1>CALCNOVA</h1><p>Advanced Scientific Calculator</p></header>
-
-    <section class="customizer" aria-label="Appearance settings">
-      <div class="customizer-title"><span>Personalize your calculator</span><span aria-hidden="true">✿</span></div>
-      <div class="customizer-grid">
-        <label><span class="control-label">Page color</span><select id="themePicker">
-          <option value="dark">Midnight</option><option value="cream">Cream</option><option value="pink">Blossom pink</option><option value="blue">Sky blue</option><option value="green">Sage green</option><option value="purple">Lavender</option>
-        </select></label>
-        <label><span class="control-label">Page decoration</span><select id="decorPicker">
-          <option value="none">No decoration</option><option value="flowers">Ornate flowers</option><option value="stars">Stars & sparkle</option><option value="butterflies">Butterflies</option><option value="geometry">Decorative geometry</option><option value="hearts">Hearts</option>
-        </select></label>
+  </head>
+  <body data-theme="dark" data-decor="none">
+    <div class="site-layout">
+      <!-- Ad space 1 of exactly 3 -->
+      <div class="ad-slot ad-top" aria-label="Top advertisement">
+        <strong>Advertising Space 1</strong>
+        <span>Top banner · AdSense code can be added here after approval</span>
       </div>
-      <div class="swatches" aria-label="Quick color choices">
-        <button class="swatch" style="background:#10151f" data-theme-choice="dark" aria-label="Midnight" aria-pressed="true"></button>
-        <button class="swatch" style="background:#f5eee3" data-theme-choice="cream" aria-label="Cream" aria-pressed="false"></button>
-        <button class="swatch" style="background:#f9e8ef" data-theme-choice="pink" aria-label="Pink" aria-pressed="false"></button>
-        <button class="swatch" style="background:#e8f1fb" data-theme-choice="blue" aria-label="Blue" aria-pressed="false"></button>
-        <button class="swatch" style="background:#e8f3eb" data-theme-choice="green" aria-label="Green" aria-pressed="false"></button>
-        <button class="swatch" style="background:#eee9fa" data-theme-choice="purple" aria-label="Lavender" aria-pressed="false"></button>
+      <main class="app">
+        <header>
+          <h1>CALCNOVA</h1>
+          <p>Advanced Scientific Calculator</p>
+        </header>
+        <section class="customizer" aria-label="Appearance settings">
+          <div class="customizer-title">
+            <span>Personalize your calculator</span>
+            <span aria-hidden="true">✿</span>
+          </div>
+          <div class="customizer-grid">
+            <label>
+              <span class="control-label">Page color</span>
+              <select id="themePicker">
+                <option value="dark">Midnight</option>
+                <option value="cream">Cream</option>
+                <option value="pink">Blossom pink</option>
+                <option value="blue">Sky blue</option>
+                <option value="green">Sage green</option>
+                <option value="purple">Lavender</option>
+              </select>
+            </label>
+            <label>
+              <span class="control-label">Page decoration</span>
+              <select id="decorPicker">
+                <option value="none">No decoration</option>
+                <option value="flowers">Ornate flowers</option>
+                <option value="stars">Stars & sparkle</option>
+                <option value="butterflies">Butterflies</option>
+                <option value="geometry">Decorative geometry</option>
+                <option value="hearts">Hearts</option>
+              </select>
+            </label>
+          </div>
+          <div class="swatches" aria-label="Quick color choices">
+            <button class="swatch" style="background:#10151f" data-theme-choice="dark" aria-label="Midnight" aria-pressed="true">
+            </button>
+            <button class="swatch" style="background:#f5eee3" data-theme-choice="cream" aria-label="Cream" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#f9e8ef" data-theme-choice="pink" aria-label="Pink" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#e8f1fb" data-theme-choice="blue" aria-label="Blue" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#e8f3eb" data-theme-choice="green" aria-label="Green" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#eee9fa" data-theme-choice="purple" aria-label="Lavender" aria-pressed="false">
+            </button>
+          </div>
+        </section>
+        <section class="calc" aria-label="Scientific calculator">
+          <div class="display" aria-live="polite">
+            <div id="expression">Ready to calculate</div>
+            <div id="result">0</div>
+          </div>
+          <div class="mode">
+            <span>SCIENTIFIC MODE · <span id="angleLabel">DEG</span>
+          </span>
+          <button id="angle" type="button" style="padding:7px 12px;font-size:12px">DEG / RAD</button>
+        </div>
+        <div class="utility-row">
+          <button type="button" id="memoryClear">MC</button>
+          <button type="button" id="memoryRecall">MR</button>
+          <button type="button" id="memoryAdd">M+</button>
+          <button type="button" id="fractionToggle">a/b</button>
+        </div>
+        <div class="keys">
+          <button class="clear" data-action="clear">AC</button>
+          <button class="fn" data-insert="(">(</button>
+          <button class="fn" data-insert=")">)</button>
+          <button class="op" data-action="delete">DEL</button>
+          <button class="op" data-insert="^">xʸ</button>
+          <button class="fn" data-insert="sin(">sin</button>
+          <button class="fn" data-insert="cos(">cos</button>
+          <button class="fn" data-insert="tan(">tan</button>
+          <button class="fn" data-insert="asin(">sin⁻¹</button>
+          <button class="fn" data-insert="acos(">cos⁻¹</button>
+          <button class="fn" data-insert="atan(">tan⁻¹</button>
+          <button class="fn" data-insert="sinh(">sinh</button>
+          <button class="fn" data-insert="cosh(">cosh</button>
+          <button class="fn" data-insert="tanh(">tanh</button>
+          <button class="fn" data-insert="sqrt(">√</button>
+          <button class="fn" data-insert="log(">log</button>
+          <button class="fn" data-insert="ln(">ln</button>
+          <button class="fn" data-insert="abs(">abs</button>
+          <button class="fn" data-insert="exp(">exp</button>
+          <button class="fn" data-insert="!">x!</button>
+          <button class="fn" data-insert="nCr(">nCr</button>
+          <button class="fn" data-insert="nPr(">nPr</button>
+          <button class="fn" data-insert="π">π</button>
+          <button class="fn" data-insert="e">e</button>
+          <button class="op" data-insert="/">÷</button>
+          <button data-insert="7">7</button>
+          <button data-insert="8">8</button>
+          <button data-insert="9">9</button>
+          <button class="op" data-insert="*">×</button>
+          <button class="op" data-insert="-">−</button>
+          <button data-insert="4">4</button>
+          <button data-insert="5">5</button>
+          <button data-insert="6">6</button>
+          <button class="op" data-insert="%">mod</button>
+          <button class="op" data-insert="+">+</button>
+          <button data-insert="1">1</button>
+          <button data-insert="2">2</button>
+          <button data-insert="3">3</button>
+          <button class="fn" data-insert=",">,</button>
+          <button class="fn" data-insert=".">.</button>
+          <button class="wide" data-insert="0">0</button>
+          <button data-action="sign">±</button>
+          <button class="fn" data-insert="Ans">Ans</button>
+          <button class="equal" data-action="calculate">=</button>
+        </div>
+        <section class="history">
+          <div class="history-head">
+            <span>Calculation history</span>
+            <button type="button" id="clearHistory" style="padding:5px 9px;font-size:11px">Clear</button>
+          </div>
+          <ul class="history-list" id="historyList">
+            <li>No calculations yet</li>
+          </ul>
+        </section>
+        <div class="small-note">Keyboard supported · Results saved in this browser</div>
+      </section>
+      <!-- Ad space 2 of exactly 3 -->
+      <div class="ad-slot ad-after-calculator" aria-label="Advertisement below calculator">
+        <strong>Advertising Space 2</strong>
+        <span>Below calculator · AdSense placement</span>
       </div>
+      <section id="cn-games" aria-label="CALCNOVA Play Zone">
+        <div class="cn-intro">
+          <h2>🎮 CALCNOVA PLAY ZONE</h2>
+          <p>Take a break, challenge your memory, and enjoy a collection of riddles!</p>
+        </div>
+        <div class="cn-tabs" role="tablist" aria-label="Choose a section">
+          <button class="cn-tab" id="cn-tab-memory" type="button" role="tab" aria-selected="true" aria-controls="cn-memory-panel">🧠 Memory Challenge</button>
+          <button class="cn-tab" id="cn-tab-riddles" type="button" role="tab" aria-selected="false" aria-controls="cn-riddles-panel">🧩 Riddle Library</button>
+        </div>
+        <section class="cn-panel" id="cn-memory-panel" role="tabpanel" aria-labelledby="cn-tab-memory">
+          <div class="cn-game-head">
+            <div>
+              <h3>🧠 Memory Challenge</h3>
+              <p>Find every matching pair!</p>
+            </div>
+            <div class="cn-controls">
+              <label>Difficulty
+                <select id="cn-memory-level">
+                  <option value="easy">Easy · 8 cards</option>
+                  <option value="medium" selected>Medium · 16 cards</option>
+                  <option value="hard">Hard · 24 cards</option>
+                </select>
+              </label>
+              <label>Collection
+                <select id="cn-memory-category">
+                  <option value="mix">Surprise mix</option>
+                  <option value="desserts">Desserts</option>
+                  <option value="food">Food</option>
+                  <option value="travel">Travel</option>
+                  <option value="style">Accessories</option>
+                  <option value="school">School & art</option>
+                  <option value="nature">Nature & space</option>
+                  <option value="daily">Everyday things</option>
+                  <option value="fantasy">Cute surprises</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="cn-stats" aria-live="polite">
+            <div class="cn-stat">
+              <span>TIME</span>
+              <strong id="cn-memory-time">00:00</strong>
+            </div>
+            <div class="cn-stat">
+              <span>MOVES</span>
+              <strong id="cn-memory-moves">0</strong>
+            </div>
+            <div class="cn-stat">
+              <span>PAIRS</span>
+              <strong id="cn-memory-pairs">0/8</strong>
+            </div>
+            <div class="cn-stat">
+              <span>POINTS</span>
+              <strong id="cn-memory-score">0</strong>
+            </div>
+          </div>
+          <div class="cn-message" id="cn-memory-message" aria-live="polite">Choose a collection and press Start Game.</div>
+          <div class="cn-memory-grid" id="cn-memory-grid" aria-label="Memory cards">
+          </div>
+          <div class="cn-category-note" id="cn-memory-category-note">A fresh shuffle every round.</div>
+          <div class="cn-action-row">
+            <button class="cn-btn primary" id="cn-memory-start" type="button">▶ Start Game</button>
+            <button class="cn-btn secondary" id="cn-memory-reset" type="button">↻ New Round</button>
+          </div>
+          <div class="cn-result" id="cn-memory-result" hidden aria-live="polite">
+          </div>
+        </section>
+        <section class="cn-panel" id="cn-riddles-panel" role="tabpanel" aria-labelledby="cn-tab-riddles" hidden>
+          <div class="cn-game-head">
+            <div>
+              <h3>🧩 Riddle Library</h3>
+              <p>Explore 640 distinct English riddles across five categories.</p>
+            </div>
+          </div>
+          <div class="cn-riddle-wrap">
+            <div class="cn-riddle-toolbar">
+              <label>Riddle category<select id="cn-riddle-category">
+                <option value="all">All categories</option>
+                <option value="logic">🧠 Logic &amp; Brain Teasers</option>
+                <option value="funny">😂 Funny Riddles</option>
+                <option value="culture">📚 Culture &amp; General Knowledge</option>
+                <option value="math">🔍 Math &amp; Numbers</option>
+                <option value="observation">💡 Focus &amp; Observation</option>
+              </select>
+            </label>
+          </div>
+          <div class="cn-riddle-card" aria-live="polite">
+            <div class="cn-riddle-category" id="cn-riddle-type">Logic &amp; Brain Teasers</div>
+            <p class="cn-riddle-question" id="cn-riddle-question">Choose a category and enjoy your first riddle!</p>
+            <div class="cn-riddle-answer" id="cn-riddle-answer" hidden>
+            </div>
+          </div>
+          <div class="cn-riddle-count" id="cn-riddle-count">Riddle 1 of 640</div>
+          <div class="cn-riddle-actions">
+            <button class="cn-btn primary" id="cn-riddle-show" type="button">Show Answer</button>
+            <button class="cn-btn secondary" id="cn-riddle-next" type="button">Next Riddle</button>
+            <button class="cn-btn secondary" id="cn-riddle-random" type="button">Random Riddle</button>
+          </div>
+        </div>
+      </section>
+      <p class="cn-footnote">The games and riddles run independently from the calculator.</p>
     </section>
-
-    <section class="calc" aria-label="Scientific calculator">
-      <div class="display" aria-live="polite"><div id="expression">Ready to calculate</div><div id="result">0</div></div>
-      <div class="mode"><span>SCIENTIFIC MODE · <span id="angleLabel">DEG</span></span><button id="angle" type="button" style="padding:7px 12px;font-size:12px">DEG / RAD</button></div>
-      <div class="utility-row">
-        <button type="button" id="memoryClear">MC</button><button type="button" id="memoryRecall">MR</button><button type="button" id="memoryAdd">M+</button><button type="button" id="fractionToggle">a/b</button>
-      </div>
-      <div class="keys">
-        <button class="clear" data-action="clear">AC</button><button class="fn" data-insert="(">(</button><button class="fn" data-insert=")">)</button><button class="op" data-action="delete">DEL</button><button class="op" data-insert="^">xʸ</button>
-        <button class="fn" data-insert="sin(">sin</button><button class="fn" data-insert="cos(">cos</button><button class="fn" data-insert="tan(">tan</button><button class="fn" data-insert="asin(">sin⁻¹</button><button class="fn" data-insert="acos(">cos⁻¹</button>
-        <button class="fn" data-insert="atan(">tan⁻¹</button><button class="fn" data-insert="sinh(">sinh</button><button class="fn" data-insert="cosh(">cosh</button><button class="fn" data-insert="tanh(">tanh</button><button class="fn" data-insert="sqrt(">√</button>
-        <button class="fn" data-insert="log(">log</button><button class="fn" data-insert="ln(">ln</button><button class="fn" data-insert="abs(">abs</button><button class="fn" data-insert="exp(">exp</button><button class="fn" data-insert="!">x!</button>
-        <button class="fn" data-insert="nCr(">nCr</button><button class="fn" data-insert="nPr(">nPr</button><button class="fn" data-insert="π">π</button><button class="fn" data-insert="e">e</button><button class="op" data-insert="/">÷</button>
-        <button data-insert="7">7</button><button data-insert="8">8</button><button data-insert="9">9</button><button class="op" data-insert="*">×</button><button class="op" data-insert="-">−</button>
-        <button data-insert="4">4</button><button data-insert="5">5</button><button data-insert="6">6</button><button class="op" data-insert="%">mod</button><button class="op" data-insert="+">+</button>
-        <button data-insert="1">1</button><button data-insert="2">2</button><button data-insert="3">3</button><button class="fn" data-insert=",">,</button><button class="fn" data-insert=".">.</button>
-        <button class="wide" data-insert="0">0</button><button data-action="sign">±</button><button class="fn" data-insert="Ans">Ans</button><button class="equal" data-action="calculate">=</button>
-      </div>
-      <section class="history"><div class="history-head"><span>Calculation history</span><button type="button" id="clearHistory" style="padding:5px 9px;font-size:11px">Clear</button></div><ul class="history-list" id="historyList"><li>No calculations yet</li></ul></section>
-      <div class="small-note">Keyboard supported · Results saved in this browser</div>
-    </section>
-
-    <!-- Ad space 2 of exactly 3 -->
-    <div class="ad-slot ad-after-calculator" aria-label="Advertisement below calculator"><strong>Advertising Space 2</strong><span>Below calculator · AdSense placement</span></div>
     <footer>CALCNOVA © 2026 · Calculate smarter</footer>
   </main>
-
   <!-- Ad space 3 of exactly 3 -->
-  <div class="ad-slot ad-bottom" aria-label="Bottom advertisement"><strong>Advertising Space 3</strong><span>Bottom banner · AdSense placement</span></div>
+  <div class="ad-slot ad-bottom" aria-label="Bottom advertisement">
+    <strong>Advertising Space 3</strong>
+    <span>Bottom banner · AdSense placement</span>
+  </div>
 </div>
-
 <script>
 "use strict";
 const expressionEl=document.getElementById("expression"),resultEl=document.getElementById("result");
@@ -233,6 +489,231 @@ document.addEventListener("keydown",e=>{
  else if(e.key==="Backspace"){input=input.slice(0,-1);render();}
  else if(e.key==="Escape")clearAll();
 });
+</script>
+<script>
+(() => {
+  "use strict";
+  const root = document.getElementById("cn-games");
+  if (!root) return;
+  const $ = id => root.querySelector("#" + id);
+  // Main section tabs are scoped to this add-on.
+  const tabMemory = $("cn-tab-memory"), tabRiddles = $("cn-tab-riddles");
+  const panelMemory = $("cn-memory-panel"), panelRiddles = $("cn-riddles-panel");
+  function showSection(which) {
+    const memory = which === "memory";
+    tabMemory.setAttribute("aria-selected", String(memory));
+    tabRiddles.setAttribute("aria-selected", String(!memory));
+    panelMemory.hidden = !memory;
+    panelRiddles.hidden = memory;
+  }
+  tabMemory.addEventListener("click", () => showSection("memory"));
+  tabRiddles.addEventListener("click", () => showSection("riddles"));
+
+  // Memory Challenge: original emoji illustration set, categorized and shuffled.
+  const collections = {
+    desserts: ["🍩","🧁","🍪","🍭","🍫","🍰","🍡","🍦","🥨","🍮","🧋","🍬","🥐","🍧","🍨","🎂","🧇","🍯"],
+    food: ["🍕","🍔","🍟","🌮","🍣","🍓","🍉","🍍","🍜","🥞","🧀","🍇","🥑","🥗","🍿","🥝","🥪"],
+    travel: ["🗼","🏰","🗽","🗿","🧳","✈️","🗺️","📸","🚂","🚢","🏝️","🎒","🛂","🏕️","🚲","🌉","🏜️","🎡"],
+    style: ["💍","📿","👑","👜","🕶️","⌚","🎀","💄","👒","🧣","🪞","💎","🪭","🧤","👛","🪮","🧢","🥿"],
+    school: ["✏️","📚","📐","🖍️","🖌️","📒","🎨","🖇️","📎","📝","🧮","📏","🎒","🖊️","📌","📔","🗂️","🧷"],
+    nature: ["🌻","🌵","🍄","🌈","🌙","☀️","⭐","🪐","🌊","🌷","🌴","🪷","☁️","🌸","🪸","🌳","🌼","🦋"],
+    daily: ["📱","📷","⏰","🔑","☕","📖","🎧","💡","🪴","🧸","🕯️","🧴","🪄","🧦","🪥","🧺","🧃","🎁"],
+    fantasy: ["🧚","🦄","🪄","🔮","👾","🤖","🚀","🛸","💖","🧁","🎈","🎠","🪅","🎀","🧸","🌟","🫧","🎊"]
+  };
+  const categoryNames = {
+    mix:"Surprise mix", desserts:"Desserts", food:"Food & fruit", travel:"Travel & landmarks",
+    style:"Accessories", school:"School & art", nature:"Nature & space", daily:"Everyday things", fantasy:"Cute surprises"
+  };
+  const levels = { easy:4, medium:8, hard:12 };
+  let memDeck = [], memOpen = [], memMatched = 0, memMoves = 0, memScore = 0;
+  let memSeconds = 0, memTimer = null, memRunning = false, memLocked = false;
+  const memGrid = $("cn-memory-grid");
+
+  const shuffle = arr => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+  const clock = seconds => String(Math.floor(seconds / 60)).padStart(2,"0") + ":" + String(seconds % 60).padStart(2,"0");
+  function setMemoryMessage(message) { $("cn-memory-message").textContent = message; }
+  function updateMemoryStats() {
+    $("cn-memory-time").textContent = clock(memSeconds);
+    $("cn-memory-moves").textContent = memMoves;
+    $("cn-memory-pairs").textContent = memMatched + "/" + (memDeck.length / 2 || levels[$("cn-memory-level").value]);
+    $("cn-memory-score").textContent = memScore;
+  }
+  function stopMemoryTimer() {
+    if (memTimer !== null) { clearInterval(memTimer); memTimer = null; }
+  }
+  function startMemoryTimer() {
+    if (memTimer !== null) return;
+    memTimer = setInterval(() => {
+      if (!memRunning) return;
+      memSeconds++;
+      $("cn-memory-time").textContent = clock(memSeconds);
+    }, 1000);
+  }
+  function makeMemoryDeck() {
+    const category = $("cn-memory-category").value;
+    const count = levels[$("cn-memory-level").value];
+    let pool;
+    if (category === "mix") {
+      pool = shuffle(Object.values(collections).flat()).filter((item, index, all) => all.indexOf(item) === index);
+    } else {
+      pool = shuffle(collections[category] || collections.desserts);
+    }
+    // The selected collections contain more than enough unique symbols for every level.
+    const chosen = shuffle(pool).slice(0, count);
+    return shuffle(chosen.flatMap((symbol, index) => [
+      { id: index + "-a", symbol, matched: false },
+      { id: index + "-b", symbol, matched: false }
+    ]));
+  }
+  function renderMemoryCards() {
+    memGrid.innerHTML = "";
+    memDeck.forEach((card, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "cn-card";
+      button.setAttribute("aria-label", "Hidden card " + (index + 1));
+      button.dataset.index = String(index);
+      const back = document.createElement("span");
+      back.className = "cn-card-back";
+      back.textContent = "✦";
+      back.setAttribute("aria-hidden","true");
+      const face = document.createElement("span");
+      face.className = "cn-card-face";
+      face.textContent = card.symbol;
+      face.setAttribute("aria-hidden","true");
+      button.append(back, face);
+      button.addEventListener("click", () => flipMemoryCard(index, button));
+      memGrid.appendChild(button);
+    });
+    memGrid.style.gridTemplateColumns = memDeck.length <= 8 ? "repeat(4,minmax(0,1fr))" :
+      memDeck.length === 16 ? "repeat(4,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))";
+  }
+  function startMemoryRound() {
+    stopMemoryTimer();
+    memDeck = makeMemoryDeck();
+    memOpen = [];
+    memMatched = 0;
+    memMoves = 0;
+    memScore = 0;
+    memSeconds = 0;
+    memRunning = true;
+    memLocked = false;
+    $("cn-memory-result").hidden = true;
+    $("cn-memory-start").textContent = "↻ Restart Game";
+    $("cn-memory-category-note").textContent = "Collection: " + categoryNames[$("cn-memory-category").value] + " · New shuffle every round";
+    renderMemoryCards();
+    updateMemoryStats();
+    setMemoryMessage("Find all " + (memDeck.length / 2) + " matching pairs. Good luck!");
+    startMemoryTimer();
+  }
+  function flipMemoryCard(index, button) {
+    if (!memRunning || memLocked || !button || button.classList.contains("is-open") || button.classList.contains("is-matched")) return;
+    if (memOpen.length >= 2) return;
+    button.classList.add("is-open");
+    button.setAttribute("aria-label", "Revealed " + memDeck[index].symbol);
+    memOpen.push({ index, button });
+    if (memOpen.length !== 2) return;
+    memMoves++;
+    const [first, second] = memOpen;
+    const a = memDeck[first.index], b = memDeck[second.index];
+    if (a.symbol === b.symbol) {
+      a.matched = b.matched = true;
+      first.button.classList.add("is-matched");
+      second.button.classList.add("is-matched");
+      first.button.setAttribute("aria-label", "Matched " + a.symbol);
+      second.button.setAttribute("aria-label", "Matched " + b.symbol);
+      memMatched++;
+      memScore += Math.max(20, 100 - memSeconds);
+      memOpen = [];
+      updateMemoryStats();
+      setMemoryMessage("✨ Match found! Keep going.");
+      if (memMatched === memDeck.length / 2) finishMemoryRound();
+    } else {
+      memLocked = true;
+      memScore = Math.max(0, memScore - 5);
+      updateMemoryStats();
+      setMemoryMessage("Not a match — take another look!");
+      setTimeout(() => {
+        first.button.classList.remove("is-open");
+        second.button.classList.remove("is-open");
+        first.button.setAttribute("aria-label", "Hidden card");
+        second.button.setAttribute("aria-label", "Hidden card");
+        memOpen = [];
+        memLocked = false;
+      }, 750);
+    }
+  }
+  function finishMemoryRound() {
+    memRunning = false;
+    stopMemoryTimer();
+    const bonus = Math.max(0, 300 - memSeconds * 2 - memMoves * 5);
+    memScore += bonus;
+    updateMemoryStats();
+    setMemoryMessage("🎉 You found every pair!");
+    const result = $("cn-memory-result");
+    result.innerHTML = "";
+    const title = document.createElement("strong");
+    title.textContent = "Amazing memory!";
+    const detail = document.createElement("span");
+    detail.textContent = "Final score: " + memScore + " points · " + memMoves + " moves · " + clock(memSeconds);
+    result.append(title, detail);
+    result.hidden = false;
+  }
+  $("cn-memory-start").addEventListener("click", startMemoryRound);
+  $("cn-memory-reset").addEventListener("click", startMemoryRound);
+  $("cn-memory-level").addEventListener("change", startMemoryRound);
+  $("cn-memory-category").addEventListener("change", startMemoryRound);
+  // Render a ready-to-start board without starting the clock.
+  memDeck = makeMemoryDeck();
+  renderMemoryCards();
+  updateMemoryStats();
+
+  
+
+  // Riddle Library: 640 distinct English entries across five categories.
+  const riddles = [{"category":"logic","question":"A farmer has 2 sheep. All but 1 run away. How many remain?","answer":"1"},{"category":"logic","question":"You have 3 candles burning. A gust blows out 2. How many candles are still lit?","answer":"1"},{"category":"logic","question":"A bus has 4 passengers. 3 get off and 2 get on. How many passengers now?","answer":"3"},{"category":"logic","question":"If 5 people each shake hands with every other person once, how many handshakes occur?","answer":"10"},{"category":"logic","question":"A clock takes 6 seconds to strike 7 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 7th place in a race. What place are you in?","answer":"7th place"},{"category":"logic","question":"A box contains 8 red balls and 7 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 9 sons, and each son has one sister. How many children are there?","answer":"10 children"},{"category":"logic","question":"A rooster lays 10 eggs over 21 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 11 coins and give half to a friend, then receive 11 more. How many coins do you have?","answer":"16 (assuming whole coins)"},{"category":"logic","question":"A farmer has 12 sheep. All but 11 run away. How many remain?","answer":"11"},{"category":"logic","question":"You have 13 candles burning. A gust blows out 12. How many candles are still lit?","answer":"1"},{"category":"logic","question":"A bus has 14 passengers. 2 get off and 4 get on. How many passengers now?","answer":"16"},{"category":"logic","question":"If 15 people each shake hands with every other person once, how many handshakes occur?","answer":"105"},{"category":"logic","question":"A clock takes 16 seconds to strike 17 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 17th place in a race. What place are you in?","answer":"17th place"},{"category":"logic","question":"A box contains 18 red balls and 20 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 2 sons, and each son has one sister. How many children are there?","answer":"3 children"},{"category":"logic","question":"A rooster lays 3 eggs over 15 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 4 coins and give half to a friend, then receive 4 more. How many coins do you have?","answer":"6"},{"category":"logic","question":"A farmer has 5 sheep. All but 4 run away. How many remain?","answer":"4"},{"category":"logic","question":"You have 6 candles burning. A gust blows out 2. How many candles are still lit?","answer":"4"},{"category":"logic","question":"A bus has 7 passengers. 1 get off and 2 get on. How many passengers now?","answer":"8"},{"category":"logic","question":"If 8 people each shake hands with every other person once, how many handshakes occur?","answer":"28"},{"category":"logic","question":"A clock takes 9 seconds to strike 10 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 10th place in a race. What place are you in?","answer":"10th place"},{"category":"logic","question":"A box contains 11 red balls and 14 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 12 sons, and each son has one sister. How many children are there?","answer":"13 children"},{"category":"logic","question":"A rooster lays 13 eggs over 9 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 14 coins and give half to a friend, then receive 14 more. How many coins do you have?","answer":"21"},{"category":"logic","question":"A farmer has 15 sheep. All but 14 run away. How many remain?","answer":"14"},{"category":"logic","question":"You have 16 candles burning. A gust blows out 2. How many candles are still lit?","answer":"14"},{"category":"logic","question":"A bus has 17 passengers. 4 get off and 3 get on. How many passengers now?","answer":"16"},{"category":"logic","question":"If 18 people each shake hands with every other person once, how many handshakes occur?","answer":"153"},{"category":"logic","question":"A clock takes 2 seconds to strike 3 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 3th place in a race. What place are you in?","answer":"3th place"},{"category":"logic","question":"A box contains 4 red balls and 8 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 5 sons, and each son has one sister. How many children are there?","answer":"6 children"},{"category":"logic","question":"A rooster lays 6 eggs over 3 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 7 coins and give half to a friend, then receive 7 more. How many coins do you have?","answer":"10 (assuming whole coins)"},{"category":"logic","question":"A farmer has 8 sheep. All but 7 run away. How many remain?","answer":"7"},{"category":"logic","question":"You have 9 candles burning. A gust blows out 2. How many candles are still lit?","answer":"7"},{"category":"logic","question":"A bus has 10 passengers. 3 get off and 1 get on. How many passengers now?","answer":"8"},{"category":"logic","question":"If 11 people each shake hands with every other person once, how many handshakes occur?","answer":"55"},{"category":"logic","question":"A clock takes 12 seconds to strike 13 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 13th place in a race. What place are you in?","answer":"13th place"},{"category":"logic","question":"A box contains 14 red balls and 21 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 15 sons, and each son has one sister. How many children are there?","answer":"16 children"},{"category":"logic","question":"A rooster lays 16 eggs over 16 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 17 coins and give half to a friend, then receive 17 more. How many coins do you have?","answer":"25 (assuming whole coins)"},{"category":"logic","question":"A farmer has 18 sheep. All but 17 run away. How many remain?","answer":"17"},{"category":"logic","question":"You have 2 candles burning. A gust blows out 1. How many candles are still lit?","answer":"1"},{"category":"logic","question":"A bus has 3 passengers. 2 get off and 3 get on. How many passengers now?","answer":"4"},{"category":"logic","question":"If 4 people each shake hands with every other person once, how many handshakes occur?","answer":"6"},{"category":"logic","question":"A clock takes 5 seconds to strike 6 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 6th place in a race. What place are you in?","answer":"6th place"},{"category":"logic","question":"A box contains 7 red balls and 15 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 8 sons, and each son has one sister. How many children are there?","answer":"9 children"},{"category":"logic","question":"A rooster lays 9 eggs over 10 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 10 coins and give half to a friend, then receive 10 more. How many coins do you have?","answer":"15"},{"category":"logic","question":"A farmer has 11 sheep. All but 10 run away. How many remain?","answer":"10"},{"category":"logic","question":"You have 12 candles burning. A gust blows out 7. How many candles are still lit?","answer":"5"},{"category":"logic","question":"A bus has 13 passengers. 5 get off and 4 get on. How many passengers now?","answer":"12"},{"category":"logic","question":"If 14 people each shake hands with every other person once, how many handshakes occur?","answer":"91"},{"category":"logic","question":"A clock takes 15 seconds to strike 16 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 16th place in a race. What place are you in?","answer":"16th place"},{"category":"logic","question":"A box contains 17 red balls and 9 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 18 sons, and each son has one sister. How many children are there?","answer":"19 children"},{"category":"logic","question":"A rooster lays 2 eggs over 4 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 3 coins and give half to a friend, then receive 3 more. How many coins do you have?","answer":"4 (assuming whole coins)"},{"category":"logic","question":"A farmer has 4 sheep. All but 3 run away. How many remain?","answer":"3"},{"category":"logic","question":"You have 5 candles burning. A gust blows out 4. How many candles are still lit?","answer":"1"},{"category":"logic","question":"A bus has 6 passengers. 4 get off and 2 get on. How many passengers now?","answer":"4"},{"category":"logic","question":"If 7 people each shake hands with every other person once, how many handshakes occur?","answer":"21"},{"category":"logic","question":"A clock takes 8 seconds to strike 9 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 9th place in a race. What place are you in?","answer":"9th place"},{"category":"logic","question":"A box contains 10 red balls and 3 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 11 sons, and each son has one sister. How many children are there?","answer":"12 children"},{"category":"logic","question":"A rooster lays 12 eggs over 17 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 13 coins and give half to a friend, then receive 13 more. How many coins do you have?","answer":"19 (assuming whole coins)"},{"category":"logic","question":"A farmer has 14 sheep. All but 13 run away. How many remain?","answer":"13"},{"category":"logic","question":"You have 15 candles burning. A gust blows out 12. How many candles are still lit?","answer":"3"},{"category":"logic","question":"A bus has 16 passengers. 3 get off and 4 get on. How many passengers now?","answer":"17"},{"category":"logic","question":"If 17 people each shake hands with every other person once, how many handshakes occur?","answer":"136"},{"category":"logic","question":"A clock takes 18 seconds to strike 19 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 2th place in a race. What place are you in?","answer":"2th place"},{"category":"logic","question":"A box contains 3 red balls and 16 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 4 sons, and each son has one sister. How many children are there?","answer":"5 children"},{"category":"logic","question":"A rooster lays 5 eggs over 11 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 6 coins and give half to a friend, then receive 6 more. How many coins do you have?","answer":"9"},{"category":"logic","question":"A farmer has 7 sheep. All but 6 run away. How many remain?","answer":"6"},{"category":"logic","question":"You have 8 candles burning. A gust blows out 1. How many candles are still lit?","answer":"7"},{"category":"logic","question":"A bus has 9 passengers. 1 get off and 1 get on. How many passengers now?","answer":"9"},{"category":"logic","question":"If 10 people each shake hands with every other person once, how many handshakes occur?","answer":"45"},{"category":"logic","question":"A clock takes 11 seconds to strike 12 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 12th place in a race. What place are you in?","answer":"12th place"},{"category":"logic","question":"A box contains 13 red balls and 10 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 14 sons, and each son has one sister. How many children are there?","answer":"15 children"},{"category":"logic","question":"A rooster lays 15 eggs over 5 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 16 coins and give half to a friend, then receive 16 more. How many coins do you have?","answer":"24"},{"category":"logic","question":"A farmer has 17 sheep. All but 16 run away. How many remain?","answer":"16"},{"category":"logic","question":"You have 18 candles burning. A gust blows out 17. How many candles are still lit?","answer":"1"},{"category":"logic","question":"A bus has 2 passengers. 2 get off and 3 get on. How many passengers now?","answer":"3"},{"category":"logic","question":"If 3 people each shake hands with every other person once, how many handshakes occur?","answer":"3"},{"category":"logic","question":"A clock takes 4 seconds to strike 5 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 5th place in a race. What place are you in?","answer":"5th place"},{"category":"logic","question":"A box contains 6 red balls and 4 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 7 sons, and each son has one sister. How many children are there?","answer":"8 children"},{"category":"logic","question":"A rooster lays 8 eggs over 18 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 9 coins and give half to a friend, then receive 9 more. How many coins do you have?","answer":"13 (assuming whole coins)"},{"category":"logic","question":"A farmer has 10 sheep. All but 9 run away. How many remain?","answer":"9"},{"category":"logic","question":"You have 11 candles burning. A gust blows out 2. How many candles are still lit?","answer":"9"},{"category":"logic","question":"A bus has 12 passengers. 4 get off and 1 get on. How many passengers now?","answer":"9"},{"category":"logic","question":"If 13 people each shake hands with every other person once, how many handshakes occur?","answer":"78"},{"category":"logic","question":"A clock takes 14 seconds to strike 15 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 15th place in a race. What place are you in?","answer":"15th place"},{"category":"logic","question":"A box contains 16 red balls and 17 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 17 sons, and each son has one sister. How many children are there?","answer":"18 children"},{"category":"logic","question":"A rooster lays 18 eggs over 12 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 2 coins and give half to a friend, then receive 2 more. How many coins do you have?","answer":"3"},{"category":"logic","question":"A farmer has 3 sheep. All but 2 run away. How many remain?","answer":"2"},{"category":"logic","question":"You have 4 candles burning. A gust blows out 2. How many candles are still lit?","answer":"2"},{"category":"logic","question":"A bus has 5 passengers. 2 get off and 2 get on. How many passengers now?","answer":"5"},{"category":"logic","question":"If 6 people each shake hands with every other person once, how many handshakes occur?","answer":"15"},{"category":"logic","question":"A clock takes 7 seconds to strike 8 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 8th place in a race. What place are you in?","answer":"8th place"},{"category":"logic","question":"A box contains 9 red balls and 11 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 10 sons, and each son has one sister. How many children are there?","answer":"11 children"},{"category":"logic","question":"A rooster lays 11 eggs over 6 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 12 coins and give half to a friend, then receive 12 more. How many coins do you have?","answer":"18"},{"category":"logic","question":"A farmer has 13 sheep. All but 12 run away. How many remain?","answer":"12"},{"category":"logic","question":"You have 14 candles burning. A gust blows out 2. How many candles are still lit?","answer":"12"},{"category":"logic","question":"A bus has 15 passengers. 1 get off and 4 get on. How many passengers now?","answer":"18"},{"category":"logic","question":"If 16 people each shake hands with every other person once, how many handshakes occur?","answer":"120"},{"category":"logic","question":"A clock takes 17 seconds to strike 18 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 18th place in a race. What place are you in?","answer":"18th place"},{"category":"logic","question":"A box contains 2 red balls and 5 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 3 sons, and each son has one sister. How many children are there?","answer":"4 children"},{"category":"logic","question":"A rooster lays 4 eggs over 19 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 5 coins and give half to a friend, then receive 5 more. How many coins do you have?","answer":"7 (assuming whole coins)"},{"category":"logic","question":"A farmer has 6 sheep. All but 5 run away. How many remain?","answer":"5"},{"category":"logic","question":"You have 7 candles burning. A gust blows out 4. How many candles are still lit?","answer":"3"},{"category":"logic","question":"A bus has 8 passengers. 5 get off and 2 get on. How many passengers now?","answer":"5"},{"category":"logic","question":"If 9 people each shake hands with every other person once, how many handshakes occur?","answer":"36"},{"category":"logic","question":"A clock takes 10 seconds to strike 11 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 11th place in a race. What place are you in?","answer":"11th place"},{"category":"logic","question":"A box contains 12 red balls and 18 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 13 sons, and each son has one sister. How many children are there?","answer":"14 children"},{"category":"logic","question":"A rooster lays 14 eggs over 13 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 15 coins and give half to a friend, then receive 15 more. How many coins do you have?","answer":"22 (assuming whole coins)"},{"category":"logic","question":"A farmer has 16 sheep. All but 15 run away. How many remain?","answer":"15"},{"category":"logic","question":"You have 17 candles burning. A gust blows out 8. How many candles are still lit?","answer":"9"},{"category":"logic","question":"A bus has 18 passengers. 4 get off and 4 get on. How many passengers now?","answer":"18"},{"category":"logic","question":"If 2 people each shake hands with every other person once, how many handshakes occur?","answer":"1"},{"category":"logic","question":"A clock takes 3 seconds to strike 4 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 4th place in a race. What place are you in?","answer":"4th place"},{"category":"logic","question":"A box contains 5 red balls and 12 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 6 sons, and each son has one sister. How many children are there?","answer":"7 children"},{"category":"logic","question":"A rooster lays 7 eggs over 7 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 8 coins and give half to a friend, then receive 8 more. How many coins do you have?","answer":"12"},{"category":"logic","question":"A farmer has 9 sheep. All but 8 run away. How many remain?","answer":"8"},{"category":"logic","question":"You have 10 candles burning. A gust blows out 9. How many candles are still lit?","answer":"1"},{"category":"logic","question":"A bus has 11 passengers. 2 get off and 1 get on. How many passengers now?","answer":"10"},{"category":"logic","question":"If 12 people each shake hands with every other person once, how many handshakes occur?","answer":"66"},{"category":"logic","question":"A clock takes 13 seconds to strike 14 times. How long between each strike?","answer":"1 second"},{"category":"logic","question":"You overtake the person in 14th place in a race. What place are you in?","answer":"14th place"},{"category":"logic","question":"A box contains 15 red balls and 6 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A family has 16 sons, and each son has one sister. How many children are there?","answer":"17 children"},{"category":"logic","question":"A rooster lays 17 eggs over 20 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 18 coins and give half to a friend, then receive 18 more. How many coins do you have?","answer":"27"},{"category":"logic","question":"A bus has 4 passengers. 1 get off and 3 get on. How many passengers now?","answer":"6"},{"category":"logic","question":"A box contains 8 red balls and 19 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A rooster lays 10 eggs over 14 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"You have 13 candles burning. A gust blows out 2. How many candles are still lit?","answer":"11"},{"category":"logic","question":"A bus has 14 passengers. 5 get off and 1 get on. How many passengers now?","answer":"10"},{"category":"logic","question":"A box contains 18 red balls and 13 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A rooster lays 3 eggs over 8 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"logic","question":"A bus has 7 passengers. 3 get off and 2 get on. How many passengers now?","answer":"6"},{"category":"logic","question":"A box contains 11 red balls and 7 blue balls. Without looking, what is the minimum number to pick to guarantee two of the same color?","answer":"3 balls"},{"category":"logic","question":"A rooster lays 13 eggs over 21 days. How many eggs does it lay per day?","answer":"None. Roosters do not lay eggs."},{"category":"funny","question":"Why did the banana go to school?","answer":"Because it wanted to improve its peel."},{"category":"funny","question":"What do you call a penguin that tells jokes?","answer":"A real hop-ster!"},{"category":"funny","question":"Why did the pencil sit near the window?","answer":"It wanted a little tentacle-light."},{"category":"funny","question":"What is a tomato's favorite subject?","answer":"ice-matics!"},{"category":"funny","question":"Why did the robot bring a ladder?","answer":"It wanted to reach the shell level."},{"category":"funny","question":"What do you call a sleepy cookie?","answer":"A prickle snoozer."},{"category":"funny","question":"Why was the cloud so calm?","answer":"It knew how to keep its point together."},{"category":"funny","question":"What did the kangaroo say after a long day?","answer":"I'm totally bite-hausted!"},{"category":"funny","question":"Why did the turtle get promoted?","answer":"It always went the extra tea."},{"category":"funny","question":"What is a sandwich's favorite music?","answer":"Anything with a good sauce-beat!"},{"category":"funny","question":"Why did the potato go to school?","answer":"Because it wanted to improve its mash."},{"category":"funny","question":"What do you call a duck that tells jokes?","answer":"A real chapter-ster!"},{"category":"funny","question":"Why did the spoon sit near the window?","answer":"It wanted a little byte-light."},{"category":"funny","question":"What is a sock's favorite subject?","answer":"quack-matics!"},{"category":"funny","question":"Why did the octopus bring a ladder?","answer":"It wanted to reach the space level."},{"category":"funny","question":"What do you call a sleepy cactus?","answer":"A crumb snoozer."},{"category":"funny","question":"Why was the teapot so calm?","answer":"It knew how to keep its stir together."},{"category":"funny","question":"What did the book say after a long day?","answer":"I'm totally ribbit-hausted!"},{"category":"funny","question":"Why did the moon get promoted?","answer":"It always went the extra rain."},{"category":"funny","question":"What is a frog's favorite music?","answer":"Anything with a good pair-beat!"},{"category":"culture","question":"What is the largest planet in our solar system?","answer":"Jupiter."},{"category":"culture","question":"Which planet is known as the Red Planet?","answer":"Mars."},{"category":"culture","question":"What is the capital of Japan?","answer":"Tokyo."},{"category":"culture","question":"How many sides does a hexagon have?","answer":"Six."},{"category":"culture","question":"Which ocean is the largest?","answer":"The Pacific Ocean."},{"category":"culture","question":"What gas do plants absorb from the air?","answer":"Carbon dioxide."},{"category":"culture","question":"What is the chemical symbol for gold?","answer":"Au."},{"category":"culture","question":"Which animal is the largest mammal?","answer":"The blue whale."},{"category":"culture","question":"How many colors are traditionally named in a rainbow?","answer":"Seven."},{"category":"culture","question":"What is the fastest land animal?","answer":"The cheetah."},{"category":"culture","question":"Which continent is the Sahara Desert in?","answer":"Africa."},{"category":"culture","question":"What is the smallest prime number?","answer":"2."},{"category":"culture","question":"Who wrote Romeo and Juliet?","answer":"William Shakespeare."},{"category":"culture","question":"What is the hardest natural substance?","answer":"Diamond."},{"category":"culture","question":"Which organ pumps blood around the body?","answer":"The heart."},{"category":"culture","question":"What is the currency of the United Kingdom?","answer":"The pound sterling."},{"category":"culture","question":"How many bones are in a typical adult human body?","answer":"206."},{"category":"culture","question":"Which bird is often associated with delivering babies in folklore?","answer":"The stork."},{"category":"culture","question":"What is the closest star to Earth?","answer":"The Sun."},{"category":"culture","question":"Which language has the most native speakers?","answer":"Mandarin Chinese."},{"category":"culture","question":"What is the capital of Canada?","answer":"Ottawa."},{"category":"culture","question":"Which instrument has 88 keys in its standard form?","answer":"The piano."},{"category":"culture","question":"What is the largest hot desert on Earth?","answer":"The Sahara Desert."},{"category":"culture","question":"Which metal is liquid at room temperature?","answer":"Mercury."},{"category":"culture","question":"How many minutes are in one hour?","answer":"60."},{"category":"culture","question":"What is the process by which plants make food using sunlight?","answer":"Photosynthesis."},{"category":"culture","question":"Which country is famous for the ancient city of Petra?","answer":"Jordan."},{"category":"culture","question":"What is the square root of 144?","answer":"12."},{"category":"culture","question":"Which planet has the most prominent ring system?","answer":"Saturn."},{"category":"culture","question":"What is the main ingredient in traditional hummus?","answer":"Chickpeas."},{"category":"culture","question":"Which sea creature has three hearts?","answer":"The octopus."},{"category":"culture","question":"What is the capital of Italy?","answer":"Rome."},{"category":"culture","question":"Which month has 28 days in a common year?","answer":"February."},{"category":"culture","question":"What is the largest internal organ in the human body?","answer":"The liver."},{"category":"culture","question":"Which famous ship sank in 1912?","answer":"The Titanic."},{"category":"culture","question":"What do bees collect from flowers to make honey?","answer":"Nectar."},{"category":"culture","question":"Which country gifted the Statue of Liberty to the United States?","answer":"France."},{"category":"culture","question":"What is the freezing point of water in Celsius?","answer":"0 degrees."},{"category":"culture","question":"Which planet is famous for its Great Red Spot?","answer":"Jupiter."},{"category":"culture","question":"How many players are on a standard soccer team on the field?","answer":"11."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the largest planet in our solar system?","answer":"Jupiter."},{"category":"culture","question":"Can you answer this general-knowledge question: Which planet is known as the Red Planet?","answer":"Mars."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the capital of Japan?","answer":"Tokyo."},{"category":"culture","question":"Can you answer this general-knowledge question: How many sides does a hexagon have?","answer":"Six."},{"category":"culture","question":"Can you answer this general-knowledge question: Which ocean is the largest?","answer":"The Pacific Ocean."},{"category":"culture","question":"Can you answer this general-knowledge question: What gas do plants absorb from the air?","answer":"Carbon dioxide."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the chemical symbol for gold?","answer":"Au."},{"category":"culture","question":"Can you answer this general-knowledge question: Which animal is the largest mammal?","answer":"The blue whale."},{"category":"culture","question":"Can you answer this general-knowledge question: How many colors are traditionally named in a rainbow?","answer":"Seven."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the fastest land animal?","answer":"The cheetah."},{"category":"culture","question":"Can you answer this general-knowledge question: Which continent is the Sahara Desert in?","answer":"Africa."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the smallest prime number?","answer":"2."},{"category":"culture","question":"Can you answer this general-knowledge question: Who wrote Romeo and Juliet?","answer":"William Shakespeare."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the hardest natural substance?","answer":"Diamond."},{"category":"culture","question":"Can you answer this general-knowledge question: Which organ pumps blood around the body?","answer":"The heart."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the currency of the United Kingdom?","answer":"The pound sterling."},{"category":"culture","question":"Can you answer this general-knowledge question: How many bones are in a typical adult human body?","answer":"206."},{"category":"culture","question":"Can you answer this general-knowledge question: Which bird is often associated with delivering babies in folklore?","answer":"The stork."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the closest star to Earth?","answer":"The Sun."},{"category":"culture","question":"Can you answer this general-knowledge question: Which language has the most native speakers?","answer":"Mandarin Chinese."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the capital of Canada?","answer":"Ottawa."},{"category":"culture","question":"Can you answer this general-knowledge question: Which instrument has 88 keys in its standard form?","answer":"The piano."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the largest hot desert on Earth?","answer":"The Sahara Desert."},{"category":"culture","question":"Can you answer this general-knowledge question: Which metal is liquid at room temperature?","answer":"Mercury."},{"category":"culture","question":"Can you answer this general-knowledge question: How many minutes are in one hour?","answer":"60."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the process by which plants make food using sunlight?","answer":"Photosynthesis."},{"category":"culture","question":"Can you answer this general-knowledge question: Which country is famous for the ancient city of Petra?","answer":"Jordan."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the square root of 144?","answer":"12."},{"category":"culture","question":"Can you answer this general-knowledge question: Which planet has the most prominent ring system?","answer":"Saturn."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the main ingredient in traditional hummus?","answer":"Chickpeas."},{"category":"culture","question":"Can you answer this general-knowledge question: Which sea creature has three hearts?","answer":"The octopus."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the capital of Italy?","answer":"Rome."},{"category":"culture","question":"Can you answer this general-knowledge question: Which month has 28 days in a common year?","answer":"February."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the largest internal organ in the human body?","answer":"The liver."},{"category":"culture","question":"Can you answer this general-knowledge question: Which famous ship sank in 1912?","answer":"The Titanic."},{"category":"culture","question":"Can you answer this general-knowledge question: What do bees collect from flowers to make honey?","answer":"Nectar."},{"category":"culture","question":"Can you answer this general-knowledge question: Which country gifted the Statue of Liberty to the United States?","answer":"France."},{"category":"culture","question":"Can you answer this general-knowledge question: What is the freezing point of water in Celsius?","answer":"0 degrees."},{"category":"culture","question":"Can you answer this general-knowledge question: Which planet is famous for its Great Red Spot?","answer":"Jupiter."},{"category":"culture","question":"Can you answer this general-knowledge question: How many players are on a standard soccer team on the field?","answer":"11."},{"category":"culture","question":"Quick quiz: What is the largest planet in our solar system?","answer":"Jupiter."},{"category":"culture","question":"Quick quiz: Which planet is known as the Red Planet?","answer":"Mars."},{"category":"culture","question":"Quick quiz: What is the capital of Japan?","answer":"Tokyo."},{"category":"culture","question":"Quick quiz: How many sides does a hexagon have?","answer":"Six."},{"category":"culture","question":"Quick quiz: Which ocean is the largest?","answer":"The Pacific Ocean."},{"category":"culture","question":"Quick quiz: What gas do plants absorb from the air?","answer":"Carbon dioxide."},{"category":"culture","question":"Quick quiz: What is the chemical symbol for gold?","answer":"Au."},{"category":"culture","question":"Quick quiz: Which animal is the largest mammal?","answer":"The blue whale."},{"category":"culture","question":"Quick quiz: How many colors are traditionally named in a rainbow?","answer":"Seven."},{"category":"culture","question":"Quick quiz: What is the fastest land animal?","answer":"The cheetah."},{"category":"culture","question":"Quick quiz: Which continent is the Sahara Desert in?","answer":"Africa."},{"category":"culture","question":"Quick quiz: What is the smallest prime number?","answer":"2."},{"category":"culture","question":"Quick quiz: Who wrote Romeo and Juliet?","answer":"William Shakespeare."},{"category":"culture","question":"Quick quiz: What is the hardest natural substance?","answer":"Diamond."},{"category":"culture","question":"Quick quiz: Which organ pumps blood around the body?","answer":"The heart."},{"category":"culture","question":"Quick quiz: What is the currency of the United Kingdom?","answer":"The pound sterling."},{"category":"culture","question":"Quick quiz: How many bones are in a typical adult human body?","answer":"206."},{"category":"culture","question":"Quick quiz: Which bird is often associated with delivering babies in folklore?","answer":"The stork."},{"category":"culture","question":"Quick quiz: What is the closest star to Earth?","answer":"The Sun."},{"category":"culture","question":"Quick quiz: Which language has the most native speakers?","answer":"Mandarin Chinese."},{"category":"culture","question":"Quick quiz: What is the capital of Canada?","answer":"Ottawa."},{"category":"culture","question":"Quick quiz: Which instrument has 88 keys in its standard form?","answer":"The piano."},{"category":"culture","question":"Quick quiz: What is the largest hot desert on Earth?","answer":"The Sahara Desert."},{"category":"culture","question":"Quick quiz: Which metal is liquid at room temperature?","answer":"Mercury."},{"category":"culture","question":"Quick quiz: How many minutes are in one hour?","answer":"60."},{"category":"culture","question":"Quick quiz: What is the process by which plants make food using sunlight?","answer":"Photosynthesis."},{"category":"culture","question":"Quick quiz: Which country is famous for the ancient city of Petra?","answer":"Jordan."},{"category":"culture","question":"Quick quiz: What is the square root of 144?","answer":"12."},{"category":"culture","question":"Quick quiz: Which planet has the most prominent ring system?","answer":"Saturn."},{"category":"culture","question":"Quick quiz: What is the main ingredient in traditional hummus?","answer":"Chickpeas."},{"category":"culture","question":"Quick quiz: Which sea creature has three hearts?","answer":"The octopus."},{"category":"culture","question":"Quick quiz: What is the capital of Italy?","answer":"Rome."},{"category":"culture","question":"Quick quiz: Which month has 28 days in a common year?","answer":"February."},{"category":"culture","question":"Quick quiz: What is the largest internal organ in the human body?","answer":"The liver."},{"category":"culture","question":"Quick quiz: Which famous ship sank in 1912?","answer":"The Titanic."},{"category":"culture","question":"Quick quiz: What do bees collect from flowers to make honey?","answer":"Nectar."},{"category":"culture","question":"Quick quiz: Which country gifted the Statue of Liberty to the United States?","answer":"France."},{"category":"culture","question":"Quick quiz: What is the freezing point of water in Celsius?","answer":"0 degrees."},{"category":"culture","question":"Quick quiz: Which planet is famous for its Great Red Spot?","answer":"Jupiter."},{"category":"culture","question":"Quick quiz: How many players are on a standard soccer team on the field?","answer":"11."},{"category":"culture","question":"Here is a fact challenge: What is the largest planet in our solar system?","answer":"Jupiter."},{"category":"culture","question":"Here is a fact challenge: Which planet is known as the Red Planet?","answer":"Mars."},{"category":"culture","question":"Here is a fact challenge: What is the capital of Japan?","answer":"Tokyo."},{"category":"culture","question":"Here is a fact challenge: How many sides does a hexagon have?","answer":"Six."},{"category":"culture","question":"Here is a fact challenge: Which ocean is the largest?","answer":"The Pacific Ocean."},{"category":"culture","question":"Here is a fact challenge: What gas do plants absorb from the air?","answer":"Carbon dioxide."},{"category":"culture","question":"Here is a fact challenge: What is the chemical symbol for gold?","answer":"Au."},{"category":"culture","question":"Here is a fact challenge: Which animal is the largest mammal?","answer":"The blue whale."},{"category":"culture","question":"Here is a fact challenge: How many colors are traditionally named in a rainbow?","answer":"Seven."},{"category":"culture","question":"Here is a fact challenge: What is the fastest land animal?","answer":"The cheetah."},{"category":"culture","question":"Here is a fact challenge: Which continent is the Sahara Desert in?","answer":"Africa."},{"category":"culture","question":"Here is a fact challenge: What is the smallest prime number?","answer":"2."},{"category":"culture","question":"Here is a fact challenge: Who wrote Romeo and Juliet?","answer":"William Shakespeare."},{"category":"culture","question":"Here is a fact challenge: What is the hardest natural substance?","answer":"Diamond."},{"category":"culture","question":"Here is a fact challenge: Which organ pumps blood around the body?","answer":"The heart."},{"category":"culture","question":"Here is a fact challenge: What is the currency of the United Kingdom?","answer":"The pound sterling."},{"category":"culture","question":"Here is a fact challenge: How many bones are in a typical adult human body?","answer":"206."},{"category":"culture","question":"Here is a fact challenge: Which bird is often associated with delivering babies in folklore?","answer":"The stork."},{"category":"culture","question":"Here is a fact challenge: What is the closest star to Earth?","answer":"The Sun."},{"category":"culture","question":"Here is a fact challenge: Which language has the most native speakers?","answer":"Mandarin Chinese."},{"category":"culture","question":"Here is a fact challenge: What is the capital of Canada?","answer":"Ottawa."},{"category":"culture","question":"Here is a fact challenge: Which instrument has 88 keys in its standard form?","answer":"The piano."},{"category":"culture","question":"Here is a fact challenge: What is the largest hot desert on Earth?","answer":"The Sahara Desert."},{"category":"culture","question":"Here is a fact challenge: Which metal is liquid at room temperature?","answer":"Mercury."},{"category":"culture","question":"Here is a fact challenge: How many minutes are in one hour?","answer":"60."},{"category":"culture","question":"Here is a fact challenge: What is the process by which plants make food using sunlight?","answer":"Photosynthesis."},{"category":"culture","question":"Here is a fact challenge: Which country is famous for the ancient city of Petra?","answer":"Jordan."},{"category":"culture","question":"Here is a fact challenge: What is the square root of 144?","answer":"12."},{"category":"culture","question":"Here is a fact challenge: Which planet has the most prominent ring system?","answer":"Saturn."},{"category":"culture","question":"Here is a fact challenge: What is the main ingredient in traditional hummus?","answer":"Chickpeas."},{"category":"culture","question":"Here is a fact challenge: Which sea creature has three hearts?","answer":"The octopus."},{"category":"culture","question":"Here is a fact challenge: What is the capital of Italy?","answer":"Rome."},{"category":"culture","question":"Here is a fact challenge: Which month has 28 days in a common year?","answer":"February."},{"category":"culture","question":"Here is a fact challenge: What is the largest internal organ in the human body?","answer":"The liver."},{"category":"culture","question":"Here is a fact challenge: Which famous ship sank in 1912?","answer":"The Titanic."},{"category":"culture","question":"Here is a fact challenge: What do bees collect from flowers to make honey?","answer":"Nectar."},{"category":"culture","question":"Here is a fact challenge: Which country gifted the Statue of Liberty to the United States?","answer":"France."},{"category":"culture","question":"Here is a fact challenge: What is the freezing point of water in Celsius?","answer":"0 degrees."},{"category":"culture","question":"Here is a fact challenge: Which planet is famous for its Great Red Spot?","answer":"Jupiter."},{"category":"culture","question":"Here is a fact challenge: How many players are on a standard soccer team on the field?","answer":"11."},{"category":"culture","question":"Do you know the answer? What is the largest planet in our solar system?","answer":"Jupiter."},{"category":"culture","question":"Do you know the answer? Which planet is known as the Red Planet?","answer":"Mars."},{"category":"culture","question":"Do you know the answer? What is the capital of Japan?","answer":"Tokyo."},{"category":"culture","question":"Do you know the answer? How many sides does a hexagon have?","answer":"Six."},{"category":"culture","question":"Do you know the answer? Which ocean is the largest?","answer":"The Pacific Ocean."},{"category":"culture","question":"Do you know the answer? What gas do plants absorb from the air?","answer":"Carbon dioxide."},{"category":"culture","question":"Do you know the answer? What is the chemical symbol for gold?","answer":"Au."},{"category":"culture","question":"Do you know the answer? Which animal is the largest mammal?","answer":"The blue whale."},{"category":"culture","question":"Do you know the answer? How many colors are traditionally named in a rainbow?","answer":"Seven."},{"category":"culture","question":"Do you know the answer? What is the fastest land animal?","answer":"The cheetah."},{"category":"culture","question":"Do you know the answer? Which continent is the Sahara Desert in?","answer":"Africa."},{"category":"culture","question":"Do you know the answer? What is the smallest prime number?","answer":"2."},{"category":"culture","question":"Do you know the answer? Who wrote Romeo and Juliet?","answer":"William Shakespeare."},{"category":"culture","question":"Do you know the answer? What is the hardest natural substance?","answer":"Diamond."},{"category":"culture","question":"Do you know the answer? Which organ pumps blood around the body?","answer":"The heart."},{"category":"culture","question":"Do you know the answer? What is the currency of the United Kingdom?","answer":"The pound sterling."},{"category":"culture","question":"Do you know the answer? How many bones are in a typical adult human body?","answer":"206."},{"category":"culture","question":"Do you know the answer? Which bird is often associated with delivering babies in folklore?","answer":"The stork."},{"category":"culture","question":"Do you know the answer? What is the closest star to Earth?","answer":"The Sun."},{"category":"culture","question":"Do you know the answer? Which language has the most native speakers?","answer":"Mandarin Chinese."},{"category":"culture","question":"Do you know the answer? What is the capital of Canada?","answer":"Ottawa."},{"category":"culture","question":"Do you know the answer? Which instrument has 88 keys in its standard form?","answer":"The piano."},{"category":"culture","question":"Do you know the answer? What is the largest hot desert on Earth?","answer":"The Sahara Desert."},{"category":"culture","question":"Do you know the answer? Which metal is liquid at room temperature?","answer":"Mercury."},{"category":"culture","question":"Do you know the answer? How many minutes are in one hour?","answer":"60."},{"category":"culture","question":"Do you know the answer? What is the process by which plants make food using sunlight?","answer":"Photosynthesis."},{"category":"culture","question":"Do you know the answer? Which country is famous for the ancient city of Petra?","answer":"Jordan."},{"category":"culture","question":"Do you know the answer? What is the square root of 144?","answer":"12."},{"category":"culture","question":"Do you know the answer? Which planet has the most prominent ring system?","answer":"Saturn."},{"category":"culture","question":"Do you know the answer? What is the main ingredient in traditional hummus?","answer":"Chickpeas."},{"category":"culture","question":"Do you know the answer? Which sea creature has three hearts?","answer":"The octopus."},{"category":"culture","question":"Do you know the answer? What is the capital of Italy?","answer":"Rome."},{"category":"culture","question":"Do you know the answer? Which month has 28 days in a common year?","answer":"February."},{"category":"culture","question":"Do you know the answer? What is the largest internal organ in the human body?","answer":"The liver."},{"category":"culture","question":"Do you know the answer? Which famous ship sank in 1912?","answer":"The Titanic."},{"category":"culture","question":"Do you know the answer? What do bees collect from flowers to make honey?","answer":"Nectar."},{"category":"culture","question":"Do you know the answer? Which country gifted the Statue of Liberty to the United States?","answer":"France."},{"category":"culture","question":"Do you know the answer? What is the freezing point of water in Celsius?","answer":"0 degrees."},{"category":"culture","question":"Do you know the answer? Which planet is famous for its Great Red Spot?","answer":"Jupiter."},{"category":"culture","question":"Do you know the answer? How many players are on a standard soccer team on the field?","answer":"11."},{"category":"math","question":"What is 3 + 2?","answer":"5"},{"category":"math","question":"What is 13 − 10?","answer":"3"},{"category":"math","question":"What is 17 × 24?","answer":"408"},{"category":"math","question":"A number multiplied by 24 equals 144. What is the number?","answer":"6"},{"category":"math","question":"What is 10% of 310?","answer":"31"},{"category":"math","question":"A rectangle is 38 cm long and 28 cm wide. What is its area?","answer":"1064 square cm"},{"category":"math","question":"What number comes next: 45, 55, 65, 75, ...?","answer":"85"},{"category":"math","question":"If 5 apples are shared equally among 21 people, how many apples does each get and how many remain?","answer":"0 each, with 5 left over"},{"category":"math","question":"What is 12 + 3?","answer":"15"},{"category":"math","question":"What is 19 − 14?","answer":"5"},{"category":"math","question":"What is 26 × 25?","answer":"650"},{"category":"math","question":"A number multiplied by 33 equals 231. What is the number?","answer":"7"},{"category":"math","question":"What is 10% of 400?","answer":"40"},{"category":"math","question":"A rectangle is 47 cm long and 29 cm wide. What is its area?","answer":"1363 square cm"},{"category":"math","question":"What number comes next: 7, 18, 29, 40, ...?","answer":"51"},{"category":"math","question":"If 14 apples are shared equally among 22 people, how many apples does each get and how many remain?","answer":"0 each, with 14 left over"},{"category":"math","question":"What is 21 + 4?","answer":"25"},{"category":"math","question":"What is 28 − 15?","answer":"13"},{"category":"math","question":"What is 35 × 26?","answer":"910"},{"category":"math","question":"A number multiplied by 42 equals 336. What is the number?","answer":"8"},{"category":"math","question":"What is 10% of 490?","answer":"49"},{"category":"math","question":"A rectangle is 9 cm long and 30 cm wide. What is its area?","answer":"270 square cm"},{"category":"math","question":"What number comes next: 16, 28, 40, 52, ...?","answer":"64"},{"category":"math","question":"If 23 apples are shared equally among 23 people, how many apples does each get and how many remain?","answer":"1 each, with 0 left over"},{"category":"math","question":"What is 30 + 5?","answer":"35"},{"category":"math","question":"What is 37 − 16?","answer":"21"},{"category":"math","question":"What is 44 × 27?","answer":"1188"},{"category":"math","question":"A number multiplied by 4 equals 36. What is the number?","answer":"9"},{"category":"math","question":"What is 10% of 110?","answer":"11"},{"category":"math","question":"A rectangle is 18 cm long and 2 cm wide. What is its area?","answer":"36 square cm"},{"category":"math","question":"What number comes next: 25, 38, 51, 64, ...?","answer":"77"},{"category":"math","question":"If 32 apples are shared equally among 24 people, how many apples does each get and how many remain?","answer":"1 each, with 8 left over"},{"category":"math","question":"What is 39 + 6?","answer":"45"},{"category":"math","question":"What is 46 − 17?","answer":"29"},{"category":"math","question":"What is 6 × 28?","answer":"168"},{"category":"math","question":"A number multiplied by 13 equals 130. What is the number?","answer":"10"},{"category":"math","question":"What is 10% of 200?","answer":"20"},{"category":"math","question":"A rectangle is 27 cm long and 3 cm wide. What is its area?","answer":"81 square cm"},{"category":"math","question":"What number comes next: 34, 48, 62, 76, ...?","answer":"90"},{"category":"math","question":"If 41 apples are shared equally among 25 people, how many apples does each get and how many remain?","answer":"1 each, with 16 left over"},{"category":"math","question":"What is 48 + 7?","answer":"55"},{"category":"math","question":"What is 18 − 8?","answer":"10"},{"category":"math","question":"What is 15 × 29?","answer":"435"},{"category":"math","question":"A number multiplied by 22 equals 242. What is the number?","answer":"11"},{"category":"math","question":"What is 10% of 290?","answer":"29"},{"category":"math","question":"A rectangle is 36 cm long and 4 cm wide. What is its area?","answer":"144 square cm"},{"category":"math","question":"What number comes next: 43, 58, 73, 88, ...?","answer":"103"},{"category":"math","question":"If 3 apples are shared equally among 26 people, how many apples does each get and how many remain?","answer":"0 each, with 3 left over"},{"category":"math","question":"What is 10 + 8?","answer":"18"},{"category":"math","question":"What is 19 − 17?","answer":"2"},{"category":"math","question":"What is 24 × 30?","answer":"720"},{"category":"math","question":"A number multiplied by 31 equals 372. What is the number?","answer":"12"},{"category":"math","question":"What is 10% of 380?","answer":"38"},{"category":"math","question":"A rectangle is 45 cm long and 5 cm wide. What is its area?","answer":"225 square cm"},{"category":"math","question":"What number comes next: 5, 21, 37, 53, ...?","answer":"69"},{"category":"math","question":"If 12 apples are shared equally among 27 people, how many apples does each get and how many remain?","answer":"0 each, with 12 left over"},{"category":"math","question":"What is 19 + 9?","answer":"28"},{"category":"math","question":"What is 26 − 20?","answer":"6"},{"category":"math","question":"What is 33 × 2?","answer":"66"},{"category":"math","question":"A number multiplied by 40 equals 520. What is the number?","answer":"13"},{"category":"math","question":"What is 10% of 470?","answer":"47"},{"category":"math","question":"A rectangle is 7 cm long and 6 cm wide. What is its area?","answer":"42 square cm"},{"category":"math","question":"What number comes next: 14, 31, 48, 65, ...?","answer":"82"},{"category":"math","question":"If 21 apples are shared equally among 28 people, how many apples does each get and how many remain?","answer":"0 each, with 21 left over"},{"category":"math","question":"What is 28 + 10?","answer":"38"},{"category":"math","question":"What is 35 − 21?","answer":"14"},{"category":"math","question":"What is 42 × 3?","answer":"126"},{"category":"math","question":"A number multiplied by 49 equals 686. What is the number?","answer":"14"},{"category":"math","question":"What is 10% of 90?","answer":"9"},{"category":"math","question":"A rectangle is 16 cm long and 7 cm wide. What is its area?","answer":"112 square cm"},{"category":"math","question":"What number comes next: 23, 41, 59, 77, ...?","answer":"95"},{"category":"math","question":"If 30 apples are shared equally among 29 people, how many apples does each get and how many remain?","answer":"1 each, with 1 left over"},{"category":"math","question":"What is 37 + 11?","answer":"48"},{"category":"math","question":"What is 44 − 22?","answer":"22"},{"category":"math","question":"What is 4 × 4?","answer":"16"},{"category":"math","question":"A number multiplied by 11 equals 165. What is the number?","answer":"15"},{"category":"math","question":"What is 10% of 180?","answer":"18"},{"category":"math","question":"A rectangle is 25 cm long and 8 cm wide. What is its area?","answer":"200 square cm"},{"category":"math","question":"What number comes next: 32, 51, 70, 89, ...?","answer":"108"},{"category":"math","question":"If 39 apples are shared equally among 30 people, how many apples does each get and how many remain?","answer":"1 each, with 9 left over"},{"category":"math","question":"What is 46 + 12?","answer":"58"},{"category":"math","question":"What is 23 − 6?","answer":"17"},{"category":"math","question":"What is 13 × 5?","answer":"65"},{"category":"math","question":"A number multiplied by 20 equals 320. What is the number?","answer":"16"},{"category":"math","question":"What is 10% of 270?","answer":"27"},{"category":"math","question":"A rectangle is 34 cm long and 9 cm wide. What is its area?","answer":"306 square cm"},{"category":"math","question":"What number comes next: 41, 61, 81, 101, ...?","answer":"121"},{"category":"math","question":"If 48 apples are shared equally among 2 people, how many apples does each get and how many remain?","answer":"24 each, with 0 left over"},{"category":"math","question":"What is 8 + 13?","answer":"21"},{"category":"math","question":"What is 24 − 15?","answer":"9"},{"category":"math","question":"What is 22 × 6?","answer":"132"},{"category":"math","question":"A number multiplied by 29 equals 493. What is the number?","answer":"17"},{"category":"math","question":"What is 10% of 360?","answer":"36"},{"category":"math","question":"A rectangle is 43 cm long and 10 cm wide. What is its area?","answer":"430 square cm"},{"category":"math","question":"What number comes next: 3, 24, 45, 66, ...?","answer":"87"},{"category":"math","question":"If 10 apples are shared equally among 3 people, how many apples does each get and how many remain?","answer":"3 each, with 1 left over"},{"category":"math","question":"What is 17 + 14?","answer":"31"},{"category":"math","question":"What is 25 − 24?","answer":"1"},{"category":"math","question":"What is 31 × 7?","answer":"217"},{"category":"math","question":"A number multiplied by 38 equals 684. What is the number?","answer":"18"},{"category":"math","question":"What is 10% of 450?","answer":"45"},{"category":"math","question":"A rectangle is 5 cm long and 11 cm wide. What is its area?","answer":"55 square cm"},{"category":"math","question":"What number comes next: 12, 34, 56, 78, ...?","answer":"100"},{"category":"math","question":"If 19 apples are shared equally among 4 people, how many apples does each get and how many remain?","answer":"4 each, with 3 left over"},{"category":"math","question":"What is 26 + 15?","answer":"41"},{"category":"math","question":"What is 33 − 26?","answer":"7"},{"category":"math","question":"What is 40 × 8?","answer":"320"},{"category":"math","question":"A number multiplied by 47 equals 893. What is the number?","answer":"19"},{"category":"math","question":"What is 10% of 70?","answer":"7"},{"category":"math","question":"A rectangle is 14 cm long and 12 cm wide. What is its area?","answer":"168 square cm"},{"category":"math","question":"What number comes next: 21, 44, 67, 90, ...?","answer":"113"},{"category":"math","question":"If 28 apples are shared equally among 5 people, how many apples does each get and how many remain?","answer":"5 each, with 3 left over"},{"category":"math","question":"What is 35 + 16?","answer":"51"},{"category":"math","question":"What is 42 − 27?","answer":"15"},{"category":"math","question":"What is 49 × 9?","answer":"441"},{"category":"math","question":"A number multiplied by 9 equals 180. What is the number?","answer":"20"},{"category":"math","question":"What is 10% of 160?","answer":"16"},{"category":"math","question":"A rectangle is 23 cm long and 13 cm wide. What is its area?","answer":"299 square cm"},{"category":"math","question":"What number comes next: 30, 54, 78, 102, ...?","answer":"126"},{"category":"math","question":"If 37 apples are shared equally among 6 people, how many apples does each get and how many remain?","answer":"6 each, with 1 left over"},{"category":"math","question":"What is 44 + 17?","answer":"61"},{"category":"math","question":"What is 28 − 4?","answer":"24"},{"category":"math","question":"What is 11 × 10?","answer":"110"},{"category":"math","question":"A number multiplied by 18 equals 378. What is the number?","answer":"21"},{"category":"math","question":"What is 10% of 250?","answer":"25"},{"category":"math","question":"A rectangle is 32 cm long and 14 cm wide. What is its area?","answer":"448 square cm"},{"category":"math","question":"What number comes next: 39, 64, 89, 114, ...?","answer":"139"},{"category":"math","question":"If 46 apples are shared equally among 7 people, how many apples does each get and how many remain?","answer":"6 each, with 4 left over"},{"category":"math","question":"What is 6 + 18?","answer":"24"},{"category":"math","question":"What is 29 − 13?","answer":"16"},{"category":"math","question":"What is 20 × 11?","answer":"220"},{"category":"math","question":"A number multiplied by 27 equals 594. What is the number?","answer":"22"},{"category":"math","question":"What is 10% of 340?","answer":"34"},{"category":"math","question":"A rectangle is 41 cm long and 15 cm wide. What is its area?","answer":"615 square cm"},{"category":"math","question":"What number comes next: 48, 74, 100, 126, ...?","answer":"152"},{"category":"math","question":"If 8 apples are shared equally among 8 people, how many apples does each get and how many remain?","answer":"1 each, with 0 left over"},{"category":"math","question":"What is 15 + 19?","answer":"34"},{"category":"math","question":"What is 30 − 22?","answer":"8"},{"category":"math","question":"What is 29 × 12?","answer":"348"},{"category":"math","question":"A number multiplied by 36 equals 828. What is the number?","answer":"23"},{"category":"math","question":"What is 10% of 430?","answer":"43"},{"category":"math","question":"A rectangle is 3 cm long and 16 cm wide. What is its area?","answer":"48 square cm"},{"category":"math","question":"What number comes next: 10, 37, 64, 91, ...?","answer":"118"},{"category":"math","question":"If 17 apples are shared equally among 9 people, how many apples does each get and how many remain?","answer":"1 each, with 8 left over"},{"category":"math","question":"What is 24 + 20?","answer":"44"},{"category":"math","question":"What is 31 − 2?","answer":"29"},{"category":"math","question":"What is 38 × 13?","answer":"494"},{"category":"math","question":"A number multiplied by 45 equals 1080. What is the number?","answer":"24"},{"category":"math","question":"What is 10% of 50?","answer":"5"},{"category":"math","question":"A rectangle is 12 cm long and 17 cm wide. What is its area?","answer":"204 square cm"},{"category":"math","question":"What number comes next: 19, 47, 75, 103, ...?","answer":"131"},{"category":"math","question":"If 26 apples are shared equally among 10 people, how many apples does each get and how many remain?","answer":"2 each, with 6 left over"},{"category":"math","question":"What is 33 + 21?","answer":"54"},{"category":"math","question":"What is 40 − 3?","answer":"37"},{"category":"math","question":"What is 47 × 14?","answer":"658"},{"category":"math","question":"A number multiplied by 7 equals 175. What is the number?","answer":"25"},{"category":"math","question":"What is 10% of 140?","answer":"14"},{"category":"math","question":"A rectangle is 21 cm long and 18 cm wide. What is its area?","answer":"378 square cm"},{"category":"math","question":"What number comes next: 28, 57, 86, 115, ...?","answer":"144"},{"category":"math","question":"If 35 apples are shared equally among 11 people, how many apples does each get and how many remain?","answer":"3 each, with 2 left over"},{"category":"math","question":"What is 42 + 22?","answer":"64"},{"category":"math","question":"What is 49 − 4?","answer":"45"},{"category":"math","question":"What is 9 × 15?","answer":"135"},{"category":"math","question":"A number multiplied by 16 equals 416. What is the number?","answer":"26"},{"category":"math","question":"What is 10% of 230?","answer":"23"},{"category":"math","question":"A rectangle is 30 cm long and 19 cm wide. What is its area?","answer":"570 square cm"},{"category":"math","question":"What number comes next: 37, 67, 97, 127, ...?","answer":"157"},{"category":"math","question":"If 44 apples are shared equally among 12 people, how many apples does each get and how many remain?","answer":"3 each, with 8 left over"},{"category":"math","question":"What is 4 + 23?","answer":"27"},{"category":"math","question":"What is 11 − 5?","answer":"6"},{"category":"math","question":"What is 18 × 16?","answer":"288"},{"category":"math","question":"A number multiplied by 25 equals 675. What is the number?","answer":"27"},{"category":"math","question":"What is 10% of 320?","answer":"32"},{"category":"math","question":"A rectangle is 39 cm long and 20 cm wide. What is its area?","answer":"780 square cm"},{"category":"math","question":"What number comes next: 46, 48, 50, 52, ...?","answer":"54"},{"category":"math","question":"If 6 apples are shared equally among 13 people, how many apples does each get and how many remain?","answer":"0 each, with 6 left over"},{"category":"math","question":"What is 13 + 24?","answer":"37"},{"category":"math","question":"What is 20 − 6?","answer":"14"},{"category":"math","question":"What is 27 × 17?","answer":"459"},{"category":"math","question":"A number multiplied by 34 equals 952. What is the number?","answer":"28"},{"category":"math","question":"What is 10% of 410?","answer":"41"},{"category":"math","question":"A rectangle is 48 cm long and 21 cm wide. What is its area?","answer":"1008 square cm"},{"category":"math","question":"What number comes next: 8, 11, 14, 17, ...?","answer":"20"},{"category":"math","question":"If 15 apples are shared equally among 14 people, how many apples does each get and how many remain?","answer":"1 each, with 1 left over"},{"category":"math","question":"What is 22 + 25?","answer":"47"},{"category":"math","question":"What is 29 − 7?","answer":"22"},{"category":"math","question":"What is 36 × 18?","answer":"648"},{"category":"math","question":"A number multiplied by 43 equals 1247. What is the number?","answer":"29"},{"category":"math","question":"What is 10% of 30?","answer":"3"},{"category":"math","question":"A rectangle is 10 cm long and 22 cm wide. What is its area?","answer":"220 square cm"},{"category":"math","question":"What number comes next: 17, 21, 25, 29, ...?","answer":"33"},{"category":"math","question":"If 24 apples are shared equally among 15 people, how many apples does each get and how many remain?","answer":"1 each, with 9 left over"},{"category":"math","question":"What is 31 + 26?","answer":"57"},{"category":"math","question":"What is 38 − 8?","answer":"30"},{"category":"math","question":"What is 45 × 19?","answer":"855"},{"category":"math","question":"A number multiplied by 5 equals 150. What is the number?","answer":"30"},{"category":"math","question":"What is 10% of 120?","answer":"12"},{"category":"math","question":"A rectangle is 19 cm long and 23 cm wide. What is its area?","answer":"437 square cm"},{"category":"math","question":"What number comes next: 26, 31, 36, 41, ...?","answer":"46"},{"category":"math","question":"If 33 apples are shared equally among 16 people, how many apples does each get and how many remain?","answer":"2 each, with 1 left over"},{"category":"observation","question":"Spot the pattern: 2, 4, 6, 8, __. What comes next?","answer":"10"},{"category":"observation","question":"What comes next in this sequence: 3, 6, 12, 24, __?","answer":"48"},{"category":"observation","question":"How many letters are in the word 'MISSISSIPPI'?","answer":"11 letters."},{"category":"observation","question":"Which is heavier: one kilogram of feathers or one kilogram of steel?","answer":"They weigh the same: one kilogram each."},{"category":"observation","question":"If you see the word LEVEL in a mirror, which feature remains the same in ordinary block capitals?","answer":"It is a palindrome; its letters read the same forwards and backwards. (Mirror lettering depends on the font.)"},{"category":"observation","question":"Find the odd one out: triangle, square, circle, cube. Which one is different?","answer":"Cube: it is three-dimensional; the others are 2D shapes."},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 80?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 9 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 10, 18, 26, 34, __. What comes next?","answer":"42"},{"category":"observation","question":"What comes next in this sequence: 11, 22, 44, 88, __?","answer":"176"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 160?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 17 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 18, 23, 28, 33, __. What comes next?","answer":"38"},{"category":"observation","question":"What comes next in this sequence: 19, 38, 76, 152, __?","answer":"304"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 60?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 7 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 8, 10, 12, 14, __. What comes next?","answer":"16"},{"category":"observation","question":"What comes next in this sequence: 9, 18, 36, 72, __?","answer":"144"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 140?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 15 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 16, 24, 32, 40, __. What comes next?","answer":"48"},{"category":"observation","question":"What comes next in this sequence: 17, 34, 68, 136, __?","answer":"272"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 40?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 5 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 6, 11, 16, 21, __. What comes next?","answer":"26"},{"category":"observation","question":"What comes next in this sequence: 7, 14, 28, 56, __?","answer":"112"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 120?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 13 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 14, 16, 18, 20, __. What comes next?","answer":"22"},{"category":"observation","question":"What comes next in this sequence: 15, 30, 60, 120, __?","answer":"240"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 20?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 3 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 4, 12, 20, 28, __. What comes next?","answer":"36"},{"category":"observation","question":"What comes next in this sequence: 5, 10, 20, 40, __?","answer":"80"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 100?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 11 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."},{"category":"observation","question":"Spot the pattern: 12, 17, 22, 27, __. What comes next?","answer":"32"},{"category":"observation","question":"What comes next in this sequence: 13, 26, 52, 104, __?","answer":"208"},{"category":"observation","question":"How many times does the digit 1 appear when writing every number from 1 to 180?","answer":"Count the 1s in the ones and tens places; the exact total depends on the endpoint."},{"category":"observation","question":"A word has 19 letters. If you remove its first letter, it sounds exactly the same. What is this type of wordplay called?","answer":"A sound-alike or phonetic wordplay; many answers are possible."}];
+  const riddleNames = {logic:"Logic & Brain Teasers",funny:"Funny Riddles",culture:"Culture & General Knowledge",math:"Math & Numbers",observation:"Focus & Observation"};
+  let riddlePool = riddles.slice(), riddleIndex = 0, lastRiddleIndex = -1;
+  const riddleQuestion = $("cn-riddle-question"), riddleAnswer = $("cn-riddle-answer");
+  function pickRiddle(index) {
+    if (!riddlePool.length) return;
+    riddleIndex = Math.max(0, Math.min(index, riddlePool.length - 1));
+    const item = riddlePool[riddleIndex];
+    lastRiddleIndex = riddleIndex;
+    $("cn-riddle-type").textContent = riddleNames[item.category] || "Riddle";
+    riddleQuestion.textContent = item.question;
+    riddleAnswer.textContent = item.answer;
+    riddleAnswer.hidden = true;
+    $("cn-riddle-show").textContent = "Show Answer";
+    $("cn-riddle-count").textContent = "Riddle " + (riddleIndex + 1) + " of " + riddlePool.length;
+  }
+  function changeRiddleCategory() {
+    const selected = $("cn-riddle-category").value;
+    riddlePool = selected === "all" ? riddles.slice() : riddles.filter(item => item.category === selected);
+    pickRiddle(0);
+  }
+  $("cn-riddle-category").addEventListener("change", changeRiddleCategory);
+  $("cn-riddle-show").addEventListener("click", () => {
+    const showing = riddleAnswer.hidden;
+    riddleAnswer.hidden = !showing;
+    $("cn-riddle-show").textContent = showing ? "Hide Answer" : "Show Answer";
+  });
+  $("cn-riddle-next").addEventListener("click", () => pickRiddle((riddleIndex + 1) % riddlePool.length));
+  $("cn-riddle-random").addEventListener("click", () => {
+    if (riddlePool.length < 2) return pickRiddle(0);
+    let next = riddleIndex;
+    while (next === riddleIndex) next = Math.floor(Math.random() * riddlePool.length);
+    pickRiddle(next);
+  });
+  changeRiddleCategory();
+})();
 </script>
 </body>
 </html>
