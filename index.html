@@ -86,7 +86,7 @@ button:active{opacity:.8;transform:scale(.97)}button:focus-visible,select:focus-
 #cn-games .cn-stat span{display:block;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.7px}
 #cn-games .cn-stat strong{display:block;margin-top:4px;color:var(--accent);font-size:clamp(15px,3vw,20px);font-variant-numeric:tabular-nums}
 #cn-games .cn-message{margin:0 0 12px;padding:10px 12px;border-radius:10px;background:var(--panel);color:var(--text);text-align:center;font-size:12px;line-height:1.5}
-#cn-games .cn-memory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:440px;margin:0 auto}
+#cn-games .cn-memory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:760px;margin:0 auto}
 #cn-games .cn-card{position:relative;display:grid;place-items:center;aspect-ratio:1/1;min-width:0;padding:0;border:1px solid var(--calc-border);border-radius:13px;background:linear-gradient(145deg,var(--calc-key),var(--calc-panel));color:var(--calc-text);box-shadow:0 4px 10px rgba(0,0,0,.14);font-size:clamp(22px,6vw,34px);overflow:hidden}
 #cn-games .cn-card-back{display:grid;place-items:center;width:100%;height:100%;color:var(--calc-accent);font-size:clamp(25px,6vw,36px)}
 #cn-games .cn-card-face{display:none}
@@ -105,7 +105,7 @@ button:active{opacity:.8;transform:scale(.97)}button:focus-visible,select:focus-
 #cn-games .cn-footnote{margin:13px 0 0;text-align:center;color:var(--muted);font-size:10px}
 #cn-games .cn-riddle-wrap{display:grid;gap:12px}
 #cn-games .cn-riddle-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
-#cn-games .cn-riddle-toolbar select{min-width:190px}\n#cn-games #cn-sources-panel p{line-height:1.7;color:var(--text)}
+#cn-games .cn-riddle-toolbar select{min-width:190px}\n
 #cn-games .cn-riddle-card{background:linear-gradient(145deg,var(--calc-panel),var(--calc-display));border:1px solid var(--calc-border);border-radius:16px;padding:clamp(18px,4vw,28px);min-height:190px;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:14px}
 #cn-games .cn-riddle-category{color:var(--calc-accent);font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
 #cn-games .cn-riddle-question{font-size:clamp(16px,3vw,21px);line-height:1.65;color:var(--calc-text);margin:0}
@@ -128,27 +128,14 @@ button:active{opacity:.8;transform:scale(.97)}button:focus-visible,select:focus-
 }
 
 
-/* CALCNOVA selectable page backgrounds — user-provided images are kept unedited */
-body[data-background="starry"],
-body[data-background="pastel-stripes"],
-body[data-background="blue-galaxy"],
-body[data-background="floral"],
-body[data-background="minimal-stars"]{
-  background-position:top center;
-  background-size:100% auto;
-  background-repeat:repeat-y;
-  background-attachment:scroll;
-}
-body[data-background="starry"]{background-image:url("calcnova-starry-background.jpg")}
-body[data-background="pastel-stripes"]{background-image:url("background-pastel-stripes.png")}
-body[data-background="blue-galaxy"]{background-image:url("background-blue-galaxy.jpg")}
-body[data-background="floral"]{background-image:url("background-floral.jpg")}
-body[data-background="minimal-stars"]{background-image:url("background-minimal-stars.jpg")}
-body[data-background="starry"]:before,body[data-background="starry"]:after,
-body[data-background="pastel-stripes"]:before,body[data-background="pastel-stripes"]:after,
-body[data-background="blue-galaxy"]:before,body[data-background="blue-galaxy"]:after,
-body[data-background="floral"]:before,body[data-background="floral"]:after,
-body[data-background="minimal-stars"]:before,body[data-background="minimal-stars"]:after{display:none}
+/* CALCNOVA selectable page backgrounds */
+body[data-background="starry"]{background-image:url("calcnova-starry-background.jpg");background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
+body[data-background="starry"]:before,body[data-background="starry"]:after{display:none}
+body[data-background="midnight"]{background:radial-gradient(ellipse at 20% 10%,#293653 0%,#111827 48%,#090d18 100%)}
+body[data-background="nebula"]{background:radial-gradient(ellipse at 15% 20%,#594078 0%,transparent 45%),radial-gradient(ellipse at 85% 80%,#243e69 0%,transparent 48%),#111321}
+body[data-background="deep-ocean"]{background:radial-gradient(ellipse at 50% 0%,#24536a 0%,#102c43 48%,#081827 100%)}
+body[data-background="soft-grid"]{background-color:#172235;background-image:linear-gradient(rgba(218,190,123,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(218,190,123,.10) 1px,transparent 1px),linear-gradient(135deg,#1d2c43,#101725);background-size:32px 32px,32px 32px,auto}
+@media(max-width:700px){body[data-background="starry"]{background-attachment:scroll}}
 
 </style>
   </head>
@@ -196,10 +183,10 @@ body[data-background="minimal-stars"]:before,body[data-background="minimal-stars
               <span class="control-label">Background design</span>
               <select id="backgroundPicker">
                 <option value="starry">Golden stars · Original image</option>
-                <option value="pastel-stripes">Pastel stripes</option>
-                <option value="blue-galaxy">Blue galaxy</option>
-                <option value="floral">Soft floral pattern</option>
-                <option value="minimal-stars">Minimal stars</option>
+                <option value="midnight">Midnight gradient</option>
+                <option value="nebula">Violet nebula</option>
+                <option value="deep-ocean">Deep ocean</option>
+                <option value="soft-grid">Soft geometric grid</option>
               </select>
             </label>
           </div>
@@ -263,7 +250,7 @@ body[data-background="minimal-stars"]:before,body[data-background="minimal-stars
           <button data-insert="7">7</button>
           <button data-insert="8">8</button>
           <button data-insert="9">9</button>
-          <button class="op" data-insert="*">×</button>
+          <button class="fn" data-insert=".">.</button>
           <button class="op" data-insert="-">−</button>
           <button data-insert="4">4</button>
           <button data-insert="5">5</button>
@@ -274,7 +261,7 @@ body[data-background="minimal-stars"]:before,body[data-background="minimal-stars
           <button data-insert="2">2</button>
           <button data-insert="3">3</button>
           <button class="fn" data-insert=",">,</button>
-          <button class="fn" data-insert=".">.</button>
+          <button class="op" data-insert="*">×</button>
           <button class="wide" data-insert="0">0</button>
           <button data-action="sign">±</button>
           <button class="fn" data-insert="Ans">Ans</button>
@@ -304,7 +291,6 @@ body[data-background="minimal-stars"]:before,body[data-background="minimal-stars
         <div class="cn-tabs" role="tablist" aria-label="Choose a section">
           <button class="cn-tab" id="cn-tab-memory" type="button" role="tab" aria-selected="true" aria-controls="cn-memory-panel">🧠 Memory Challenge</button>
           <button class="cn-tab" id="cn-tab-riddles" type="button" role="tab" aria-selected="false" aria-controls="cn-riddles-panel">🧩 Riddle Library</button>
-          <button class="cn-tab" id="cn-tab-sources" type="button" role="tab" aria-selected="false" aria-controls="cn-sources-panel">📚 Sources &amp; References</button>
         </div>
         <section class="cn-panel" id="cn-memory-panel" role="tabpanel" aria-labelledby="cn-tab-memory">
           <div class="cn-game-head">
@@ -315,15 +301,36 @@ body[data-background="minimal-stars"]:before,body[data-background="minimal-stars
             <div class="cn-controls">
               <label>Difficulty
                 <select id="cn-memory-level">
-                  <option value="1" selected>Level 1 · Beginner · 4 cards</option>
-                  <option value="2">Level 2 · Very easy · 6 cards</option>
-                  <option value="3">Level 3 · Easy · 8 cards</option>
-                  <option value="4">Level 4 · Easy+ · 10 cards</option>
-                  <option value="5">Level 5 · Intermediate · 12 cards</option>
-                  <option value="6">Level 6 · Intermediate+ · 14 cards</option>
-                  <option value="7">Level 7 · Advanced · 16 cards</option>
-                  <option value="8">Level 8 · Expert · 18 cards</option>
-                  <option value="9">Level 9 · Master · 20 cards</option>
+                  <option value="1" selected>Level 1 · 6 cards · 3 pairs</option>
+                  <option value="2">Level 2 · 12 cards · 6 pairs</option>
+                  <option value="3">Level 3 · 18 cards · 9 pairs</option>
+                  <option value="4">Level 4 · 24 cards · 12 pairs</option>
+                  <option value="5">Level 5 · 30 cards · 15 pairs</option>
+                  <option value="6">Level 6 · 36 cards · 18 pairs</option>
+                  <option value="7">Level 7 · 42 cards · 21 pairs</option>
+                  <option value="8">Level 8 · 48 cards · 24 pairs</option>
+                  <option value="9">Level 9 · 54 cards · 27 pairs</option>
+                  <option value="10">Level 10 · 60 cards · 30 pairs</option>
+                  <option value="11">Level 11 · 66 cards · 33 pairs</option>
+                  <option value="12">Level 12 · 72 cards · 36 pairs</option>
+                  <option value="13">Level 13 · 78 cards · 39 pairs</option>
+                  <option value="14">Level 14 · 84 cards · 42 pairs</option>
+                  <option value="15">Level 15 · 90 cards · 45 pairs</option>
+                  <option value="16">Level 16 · 96 cards · 48 pairs</option>
+                  <option value="17">Level 17 · 102 cards · 51 pairs</option>
+                  <option value="18">Level 18 · 108 cards · 54 pairs</option>
+                  <option value="19">Level 19 · 114 cards · 57 pairs</option>
+                  <option value="20">Level 20 · 120 cards · 60 pairs</option>
+                  <option value="21">Level 21 · 126 cards · 63 pairs</option>
+                  <option value="22">Level 22 · 132 cards · 66 pairs</option>
+                  <option value="23">Level 23 · 138 cards · 69 pairs</option>
+                  <option value="24">Level 24 · 144 cards · 72 pairs</option>
+                  <option value="25">Level 25 · 150 cards · 75 pairs</option>
+                  <option value="26">Level 26 · 156 cards · 78 pairs</option>
+                  <option value="27">Level 27 · 162 cards · 81 pairs</option>
+                  <option value="28">Level 28 · 168 cards · 84 pairs</option>
+                  <option value="29">Level 29 · 174 cards · 87 pairs</option>
+                  <option value="30">Level 30 · 180 cards · 90 pairs</option>
                 </select>
               </label>
               <label>Collection
@@ -343,8 +350,8 @@ body[data-background="minimal-stars"]:before,body[data-background="minimal-stars
           </div>
           <div class="cn-stats" aria-live="polite">
             <div class="cn-stat">
-              <span>TIME</span>
-              <strong id="cn-memory-time">00:00</strong>
+              <span>TIME LEFT</span>
+              <strong id="cn-memory-time">01:30</strong>
             </div>
             <div class="cn-stat">
               <span>MOVES</span>
@@ -410,37 +417,17 @@ body[data-background="minimal-stars"]:before,body[data-background="minimal-stars
         </div>
       </div>
     </section>
-    <section class="cn-panel" id="cn-sources-panel" role="tabpanel" aria-labelledby="cn-tab-sources" hidden>
-      <div class="cn-game-head">
-        <div>
-          <h3>📚 Sources &amp; References</h3>
-          <p>Bibliographic details are kept here, away from the riddle cards.</p>
-        </div>
-      </div>
-      <div class="cn-result" style="text-align:left">
-        <strong>Reference policy</strong>
-        <p>Only books and authors that can be verified against a reliable edition will be listed here. Each sourced riddle will be connected to its reference by an internal reference ID.</p>
-        <p>
-          <b>Verification status:</b> The current imported riddle set does not contain reliable book/page citations. No author or title is attributed to those riddles until the original source is verified.</p>
-          <p>
-            <b>Collection status:</b> The current library contains 640 distinct question strings. It is not yet a verified set of 1,000 book-sourced riddles. We will not fill the remaining count with duplicates or invented citations.</p>
-          </div>
-          <div id="cn-source-list" class="cn-result" style="text-align:left">
-            <strong>Verified bibliography</strong>
-            <p>No verified book references have been entered yet.</p>
-          </div>
-        </section>
-        <p class="cn-footnote">The games and riddles run independently from the calculator.</p>
-      </section>
-      <footer>CALCNOVA © 2026 · Calculate smarter</footer>
-    </main>
-    <!-- Ad space 3 of exactly 3 -->
-    <div class="ad-slot ad-bottom" aria-label="Bottom advertisement">
-      <strong>Advertising Space 3</strong>
-      <span>Bottom banner · AdSense placement</span>
-    </div>
-  </div>
-  <script>
+    <p class="cn-footnote">The games and riddles run independently from the calculator.</p>
+  </section>
+  <footer>CALCNOVA © 2026 · Calculate smarter</footer>
+</main>
+<!-- Ad space 3 of exactly 3 -->
+<div class="ad-slot ad-bottom" aria-label="Bottom advertisement">
+  <strong>Advertising Space 3</strong>
+  <span>Bottom banner · AdSense placement</span>
+</div>
+</div>
+<script>
 "use strict";
 const expressionEl=document.getElementById("expression"),resultEl=document.getElementById("result");
 const angleLabel=document.getElementById("angleLabel"),themePicker=document.getElementById("themePicker"),decorPicker=document.getElementById("decorPicker"),backgroundPicker=document.getElementById("backgroundPicker");
@@ -562,25 +549,24 @@ document.addEventListener("keydown",e=>{
  else if(e.key==="Escape")clearAll();
 });
 </script>
-  <script>
+<script>
 (() => {
   "use strict";
   const root = document.getElementById("cn-games");
   if (!root) return;
   const $ = id => root.querySelector("#" + id);
   // Main section tabs are scoped to this add-on.
-  const tabMemory = $("cn-tab-memory"), tabRiddles = $("cn-tab-riddles"), tabSources = $("cn-tab-sources");
-  const panelMemory = $("cn-memory-panel"), panelRiddles = $("cn-riddles-panel"), panelSources = $("cn-sources-panel");
+  const tabMemory = $("cn-tab-memory"), tabRiddles = $("cn-tab-riddles");
+  const panelMemory = $("cn-memory-panel"), panelRiddles = $("cn-riddles-panel");
   function showSection(which) {
-    const active = {memory:which==="memory", riddles:which==="riddles", sources:which==="sources"};
-    [[tabMemory,"memory"],[tabRiddles,"riddles"],[tabSources,"sources"]].forEach(([tab,key])=>tab.setAttribute("aria-selected",String(active[key])));
-    panelMemory.hidden = !active.memory;
-    panelRiddles.hidden = !active.riddles;
-    panelSources.hidden = !active.sources;
+    const memoryActive = which === "memory";
+    tabMemory.setAttribute("aria-selected", String(memoryActive));
+    tabRiddles.setAttribute("aria-selected", String(!memoryActive));
+    panelMemory.hidden = !memoryActive;
+    panelRiddles.hidden = memoryActive;
   }
   tabMemory.addEventListener("click", () => showSection("memory"));
   tabRiddles.addEventListener("click", () => showSection("riddles"));
-  tabSources.addEventListener("click", () => showSection("sources"));
 
   // Memory Challenge: original emoji illustration set, categorized and shuffled.
   const collections = {
@@ -597,153 +583,155 @@ document.addEventListener("keydown",e=>{
     mix:"Surprise mix", desserts:"Desserts", food:"Food & fruit", travel:"Travel & landmarks",
     style:"Accessories", school:"School & art", nature:"Nature & space", daily:"Everyday things", fantasy:"Cute surprises"
   };
-  const levels = { "1":2, "2":3, "3":4, "4":5, "5":6, "6":7, "7":8, "8":9, "9":10 };
+  const levels = Object.fromEntries(Array.from({length:30}, (_,i)=>[String(i+1), 3+i*3]));
   let memDeck = [], memOpen = [], memMatched = 0, memMoves = 0, memScore = 0;
-  let memSeconds = 0, memTimer = null, memRunning = false, memLocked = false;
+  let memSeconds = 90, memTimer = null, memRunning = false, memLocked = false, memPeek = false;
+  let unlockedLevel = Math.max(1, Number(localStorage.getItem("calcnova-memory-unlocked") || 1));
   const memGrid = $("cn-memory-grid");
-
-  const shuffle = arr => {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  };
-  const clock = seconds => String(Math.floor(seconds / 60)).padStart(2,"0") + ":" + String(seconds % 60).padStart(2,"0");
-  function setMemoryMessage(message) { $("cn-memory-message").textContent = message; }
-  function updateMemoryStats() {
-    $("cn-memory-time").textContent = clock(memSeconds);
-    $("cn-memory-moves").textContent = memMoves;
-    $("cn-memory-pairs").textContent = memMatched + "/" + (memDeck.length / 2 || levels[$("cn-memory-level").value]);
-    $("cn-memory-score").textContent = memScore;
+  const shuffle = arr => { const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+  const clock = seconds => String(Math.floor(Math.max(0,seconds)/60)).padStart(2,"0")+":"+String(Math.max(0,seconds)%60).padStart(2,"0");
+  const currentLevel = () => Number($("cn-memory-level").value || 1);
+  const totalCards = level => 6 + (level-1)*6;
+  const timeForLevel = level => 90 + (level-1)*15;
+  function setMemoryMessage(message){$("cn-memory-message").textContent=message;}
+  function updateMemoryStats(){
+    $("cn-memory-time").textContent=clock(memSeconds);
+    $("cn-memory-moves").textContent=memMoves;
+    $("cn-memory-pairs").textContent=memMatched+"/"+(memDeck.length/2 || levels[$("cn-memory-level").value]);
+    $("cn-memory-score").textContent=memScore;
   }
-  function stopMemoryTimer() {
-    if (memTimer !== null) { clearInterval(memTimer); memTimer = null; }
-  }
-  function startMemoryTimer() {
-    if (memTimer !== null) return;
-    memTimer = setInterval(() => {
-      if (!memRunning) return;
-      memSeconds++;
-      $("cn-memory-time").textContent = clock(memSeconds);
-    }, 1000);
-  }
-  function makeMemoryDeck() {
-    const category = $("cn-memory-category").value;
-    const count = levels[$("cn-memory-level").value];
-    let pool;
-    if (category === "mix") {
-      pool = shuffle(Object.values(collections).flat()).filter((item, index, all) => all.indexOf(item) === index);
-    } else {
-      pool = shuffle(collections[category] || collections.desserts);
-    }
-    // The selected collections contain more than enough unique symbols for every level.
-    const chosen = shuffle(pool).slice(0, count);
-    return shuffle(chosen.flatMap((symbol, index) => [
-      { id: index + "-a", symbol, matched: false },
-      { id: index + "-b", symbol, matched: false }
-    ]));
-  }
-  function renderMemoryCards() {
-    memGrid.innerHTML = "";
-    memDeck.forEach((card, index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "cn-card";
-      button.setAttribute("aria-label", "Hidden card " + (index + 1));
-      button.dataset.index = String(index);
-      const back = document.createElement("span");
-      back.className = "cn-card-back";
-      back.textContent = "✦";
-      back.setAttribute("aria-hidden","true");
-      const face = document.createElement("span");
-      face.className = "cn-card-face";
-      face.textContent = card.symbol;
-      face.setAttribute("aria-hidden","true");
-      button.append(back, face);
-      button.addEventListener("click", () => flipMemoryCard(index, button));
-      memGrid.appendChild(button);
-    });
-    memGrid.style.gridTemplateColumns = memDeck.length <= 8 ? "repeat(4,minmax(0,1fr))" :
-      memDeck.length === 16 ? "repeat(4,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))";
-  }
-  function startMemoryRound() {
+  function stopMemoryTimer(){if(memTimer!==null){clearInterval(memTimer);memTimer=null;}}
+  function startMemoryTimer(){
     stopMemoryTimer();
-    memDeck = makeMemoryDeck();
-    memOpen = [];
-    memMatched = 0;
-    memMoves = 0;
-    memScore = 0;
-    memSeconds = 0;
-    memRunning = true;
-    memLocked = false;
-    $("cn-memory-result").hidden = true;
-    $("cn-memory-start").textContent = "↻ Restart Game";
-    $("cn-memory-category-note").textContent = "Collection: " + categoryNames[$("cn-memory-category").value] + " · New shuffle every round";
-    renderMemoryCards();
-    updateMemoryStats();
-    setMemoryMessage("Find all " + (memDeck.length / 2) + " matching pairs. Good luck!");
+    memTimer=setInterval(()=>{
+      if(!memRunning || memPeek) return;
+      memSeconds=Math.max(0,memSeconds-1); updateMemoryStats();
+      if(memSeconds<=0) endMemoryByTime();
+    },1000);
+  }
+  function updateLevelOptions(){
+    Array.from($("cn-memory-level").options).forEach(o=>{o.disabled=Number(o.value)>unlockedLevel;});
+  }
+  function symbolPool(category){
+    let pool=category==="mix"?shuffle(Object.values(collections).flat().filter((v,i,a)=>a.indexOf(v)===i)):shuffle(collections[category]||collections.desserts);
+    // Add distinct, familiar symbols so later stages can keep every pair unique.
+    const extra=["🐈","🐱","🐯","🦁","🐻","🐼","🐨","🐸","🐵","🐰","🦊","🐶","🐺","🐮","🐷","🐹","🐭","🐔","🦉","🦋","🐢","🐬","🦀","🐙","🦖","🦕","🍋","🍊","🍏","🍐","🍑","🍒","🥭","🍈","🥥","🥕","🌽","🥦","🍆","🫑","🥔","⚽","🏀","🎾","🏐","🎱","🎲","♟️","🎯","🎻","🎸","🥁","🎺","🚗","🚕","🚌","🚓","🚑","🚒","🚜","🚲","🛴","🚁","⛵","🚀","🛸","⌛","⏳","🔔","🔑","🧲","💡","🔒","🔍","🧩","🎁","🎈","🎀","🪁","🪀","🪩","💎","👑","🧸","🪴","🌵","🌴","🌳","🌲","🌹","🌺","🌼","🌻","🌞","🌝","🌎","🌋","❄️","🔥"];
+    extra.forEach(x=>{if(!pool.includes(x))pool.push(x);});
+    return pool;
+  }
+  function makeMemoryDeck(){
+    const category=$("cn-memory-category").value, level=currentLevel(), count=totalCards(level)/2;
+    const pool=symbolPool(category);
+    const chosen=[];
+    if(level>=7){
+      const similarGroups=[["🐈","🐱","🐯"],["🍋","🍊","🍑"],["🚗","🚕","🚙"],["🌕","🌝","🌞"],["🦋","🐝","🐞"],["🥐","🥨","🍞"],["🌵","🌲","🌳"],["🏀","⚽","🏐"]];
+      shuffle(similarGroups).slice(0,Math.min(4,Math.floor(count/8))).forEach(group=>group.slice(0,2).forEach(symbol=>{if(pool.includes(symbol)&&!chosen.includes(symbol))chosen.push(symbol);}));
+    }
+    shuffle(pool.filter(symbol=>!chosen.includes(symbol))).slice(0,count-chosen.length).forEach(symbol=>chosen.push(symbol));
+    const specials=level>=10?["bonus","penalty","shuffle"]:[];
+    return shuffle(chosen.flatMap((symbol,index)=>{
+      const special=specials.length && index%7===0 ? specials[(Math.floor(index/7))%specials.length] : null;
+      return [{id:index+"-a",symbol,matched:false,special},{id:index+"-b",symbol,matched:false,special}];
+    }));
+  }
+  function renderMemoryCards(){
+    memGrid.innerHTML="";
+    memDeck.forEach((card,index)=>{
+      const button=document.createElement("button"); button.type="button"; button.className="cn-card";
+      button.setAttribute("aria-label","Hidden card "+(index+1)); button.dataset.index=String(index);
+      const back=document.createElement("span"); back.className="cn-card-back"; back.textContent="✦"; back.setAttribute("aria-hidden","true");
+      const face=document.createElement("span"); face.className="cn-card-face"; face.textContent=card.symbol; face.setAttribute("aria-hidden","true");
+      button.append(back,face); button.addEventListener("click",()=>flipMemoryCard(index,button)); memGrid.appendChild(button);
+    });
+    const n=memDeck.length;
+    const mobile=window.matchMedia("(max-width: 480px)").matches;
+    const columns=mobile?(n<=24?4:n<=60?5:6):(n<=12?4:n<=36?6:n<=72?8:10);
+    memGrid.style.gridTemplateColumns="repeat("+columns+",minmax(0,1fr))";
+  }
+  function revealAllForPeek(){
+    memPeek=true; memGrid.querySelectorAll(".cn-card").forEach((b,i)=>{b.classList.add("is-open");b.setAttribute("aria-label","Preview "+memDeck[i].symbol);});
+    setMemoryMessage("👀 Memorize the card positions! They will be hidden in 5 seconds.");
+    setTimeout(()=>{
+      if(!memRunning)return;
+      memGrid.querySelectorAll(".cn-card").forEach((b,i)=>{if(!memDeck[i].matched){b.classList.remove("is-open");b.setAttribute("aria-label","Hidden card");}});
+      memPeek=false; setMemoryMessage("Go! Find all matching pairs.");
+    },5000);
+  }
+  function startMemoryRound(){
+    stopMemoryTimer(); memDeck=makeMemoryDeck(); memOpen=[]; memMatched=0; memMoves=0; memScore=0;
+    const level=currentLevel(); memSeconds=timeForLevel(level); memRunning=true; memLocked=false; memPeek=false;
+    $("cn-memory-result").hidden=true; $("cn-memory-start").textContent="↻ Restart Game";
+    $("cn-memory-category-note").textContent="Level "+level+" · "+memDeck.length+" cards · "+(level>=3?"5-second memory preview":"No preview")+(level>=7?" · Similar symbols":"")+(level>=10?" · Surprise cards":"");
+    renderMemoryCards(); updateMemoryStats();
+    if(level>=3){revealAllForPeek();}else{setMemoryMessage("Find all "+(memDeck.length/2)+" pairs. You have "+clock(memSeconds)+".");}
     startMemoryTimer();
   }
-  function flipMemoryCard(index, button) {
-    if (!memRunning || memLocked || !button || button.classList.contains("is-open") || button.classList.contains("is-matched")) return;
-    if (memOpen.length >= 2) return;
-    button.classList.add("is-open");
-    button.setAttribute("aria-label", "Revealed " + memDeck[index].symbol);
-    memOpen.push({ index, button });
-    if (memOpen.length !== 2) return;
-    memMoves++;
-    const [first, second] = memOpen;
-    const a = memDeck[first.index], b = memDeck[second.index];
-    if (a.symbol === b.symbol) {
-      a.matched = b.matched = true;
-      first.button.classList.add("is-matched");
-      second.button.classList.add("is-matched");
-      first.button.setAttribute("aria-label", "Matched " + a.symbol);
-      second.button.setAttribute("aria-label", "Matched " + b.symbol);
-      memMatched++;
-      memScore += Math.max(20, 100 - memSeconds);
-      memOpen = [];
-      updateMemoryStats();
-      setMemoryMessage("✨ Match found! Keep going.");
-      if (memMatched === memDeck.length / 2) finishMemoryRound();
-    } else {
-      memLocked = true;
-      memScore = Math.max(0, memScore - 5);
-      updateMemoryStats();
-      setMemoryMessage("Not a match — take another look!");
-      setTimeout(() => {
-        first.button.classList.remove("is-open");
-        second.button.classList.remove("is-open");
-        first.button.setAttribute("aria-label", "Hidden card");
-        second.button.setAttribute("aria-label", "Hidden card");
-        memOpen = [];
-        memLocked = false;
-      }, 750);
+  function applySpecial(special){
+    if(!special)return "";
+    if(special==="bonus"){memSeconds+=15;return " 🎁 +15 seconds!";}
+    if(special==="penalty"){memSeconds=Math.max(0,memSeconds-10);return " ⚡ −10 seconds!";}
+    if(special==="shuffle"){
+      const remaining=Array.from(memGrid.querySelectorAll(".cn-card")).filter((b,i)=>!memDeck[i].matched);
+      const cards=shuffle(remaining.map(b=>({symbol:memDeck[Number(b.dataset.index)].symbol,special:memDeck[Number(b.dataset.index)].special})));
+      remaining.forEach((b,i)=>{const idx=Number(b.dataset.index);memDeck[idx].symbol=cards[i].symbol;memDeck[idx].special=cards[i].special;b.classList.remove("is-open");const face=b.querySelector(".cn-card-face");face.textContent=cards[i].symbol;});
+      return " 🔀 The remaining cards have been shuffled!";
+    }
+    return "";
+  }
+  function flipMemoryCard(index,button){
+    if(!memRunning||memPeek||memLocked||!button||button.classList.contains("is-open")||button.classList.contains("is-matched"))return;
+    if(memOpen.length>=2)return;
+    button.classList.add("is-open");button.setAttribute("aria-label","Revealed "+memDeck[index].symbol);memOpen.push({index,button});
+    if(memOpen.length!==2)return;
+    memMoves++;const [first,second]=memOpen;const a=memDeck[first.index],b=memDeck[second.index];
+    if(a.symbol===b.symbol){
+      a.matched=b.matched=true;first.button.classList.add("is-matched");second.button.classList.add("is-matched");
+      first.button.setAttribute("aria-label","Matched "+a.symbol);second.button.setAttribute("aria-label","Matched "+b.symbol);
+      memMatched++;memScore+=100;const effect=applySpecial(a.special);memOpen=[];updateMemoryStats();
+      setMemoryMessage("✨ Match found!"+effect);
+      if(memSeconds<=0){endMemoryByTime();return;} if(memMatched===memDeck.length/2)finishMemoryRound();
+    }else{
+      memLocked=true;memScore=Math.max(0,memScore-5);updateMemoryStats();setMemoryMessage("Not a match — take another look!");
+      setTimeout(()=>{first.button.classList.remove("is-open");second.button.classList.remove("is-open");first.button.setAttribute("aria-label","Hidden card");second.button.setAttribute("aria-label","Hidden card");memOpen=[];memLocked=false;},750);
     }
   }
-  function finishMemoryRound() {
-    memRunning = false;
-    stopMemoryTimer();
-    const bonus = Math.max(0, 300 - memSeconds * 2 - memMoves * 5);
-    memScore += bonus;
-    updateMemoryStats();
-    setMemoryMessage("🎉 You found every pair!");
-    const result = $("cn-memory-result");
-    result.innerHTML = "";
-    const title = document.createElement("strong");
-    title.textContent = "Amazing memory!";
-    const detail = document.createElement("span");
-    detail.textContent = "Final score: " + memScore + " points · " + memMoves + " moves · " + clock(memSeconds);
-    result.append(title, detail);
-    result.hidden = false;
+  function endMemoryByTime(){
+    if(!memRunning)return;memRunning=false;stopMemoryTimer();memLocked=true;setMemoryMessage("⏰ Time is up! Try again.");
+    const result=$("cn-memory-result");result.innerHTML="";const title=document.createElement("strong");title.textContent="Time is up!";
+    const detail=document.createElement("span");detail.textContent="Matched "+memMatched+" of "+(memDeck.length/2)+" pairs · Score: "+memScore;result.append(title,detail);result.hidden=false;
   }
-  $("cn-memory-start").addEventListener("click", startMemoryRound);
-  $("cn-memory-reset").addEventListener("click", startMemoryRound);
-  $("cn-memory-level").addEventListener("change", startMemoryRound);
-  $("cn-memory-category").addEventListener("change", startMemoryRound);
-  // Render a ready-to-start board without starting the clock.
+  function finishMemoryRound(){
+    memRunning=false;stopMemoryTimer();memScore+=Math.max(0,Math.floor(memSeconds/2));
+    const completed=currentLevel();
+    unlockedLevel=Math.max(unlockedLevel,Math.min(30,completed+1));
+    localStorage.setItem("calcnova-memory-unlocked",String(unlockedLevel));
+    updateLevelOptions();
+    updateMemoryStats();
+    setMemoryMessage(completed<30 ? "🎉 Great job! Level completed. You can move on to the next level." : "🏆 Amazing! You completed all 30 levels!");
+    const result=$("cn-memory-result");result.innerHTML="";
+    const title=document.createElement("strong");title.textContent=completed<30?"Level completed!":"All stages completed!";
+    const detail=document.createElement("span");
+    detail.textContent="Final score: "+memScore+" points · "+memMoves+" moves · Time left: "+clock(memSeconds)+" · Level "+completed+" complete!";
+    result.append(title,detail);
+    if(completed<30){
+      const nextButton=document.createElement("button");
+      nextButton.type="button";nextButton.className="cn-btn primary";
+      nextButton.textContent="➡ Next Level ("+(completed+1)+")";
+      nextButton.addEventListener("click",()=>{
+        $("cn-memory-level").value=String(completed+1);
+        startMemoryRound();
+        memGrid.scrollIntoView({behavior:"smooth",block:"center"});
+      });
+      result.appendChild(nextButton);
+    }
+    result.hidden=false;
+  }
+  updateLevelOptions();
+  $("cn-memory-start").addEventListener("click",startMemoryRound);
+  $("cn-memory-reset").addEventListener("click",startMemoryRound);
+  $("cn-memory-level").addEventListener("change",startMemoryRound);
+  $("cn-memory-category").addEventListener("change",startMemoryRound);
+  // Render the first six-card board without starting the countdown.
   memDeck = makeMemoryDeck();
   renderMemoryCards();
   updateMemoryStats();
