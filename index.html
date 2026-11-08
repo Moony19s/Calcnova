@@ -250,7 +250,7 @@ body[data-background="soft-grid"]{background-color:#172235;background-image:line
           <button data-insert="7">7</button>
           <button data-insert="8">8</button>
           <button data-insert="9">9</button>
-          <button class="op" data-insert="*">×</button>
+          <button class="fn" data-insert=".">.</button>
           <button class="op" data-insert="-">−</button>
           <button data-insert="4">4</button>
           <button data-insert="5">5</button>
@@ -261,7 +261,7 @@ body[data-background="soft-grid"]{background-color:#172235;background-image:line
           <button data-insert="2">2</button>
           <button data-insert="3">3</button>
           <button class="fn" data-insert=",">,</button>
-          <button class="fn" data-insert=".">.</button>
+          <button class="op" data-insert="*">×</button>
           <button class="wide" data-insert="0">0</button>
           <button data-action="sign">±</button>
           <button class="fn" data-insert="Ans">Ans</button>
@@ -650,11 +650,11 @@ document.addEventListener("keydown",e=>{
   }
   function revealAllForPeek(){
     memPeek=true; memGrid.querySelectorAll(".cn-card").forEach((b,i)=>{b.classList.add("is-open");b.setAttribute("aria-label","Preview "+memDeck[i].symbol);});
-    setMemoryMessage("👀 احفظ أماكن البطاقات! ستُخفى بعد 5 ثوانٍ.");
+    setMemoryMessage("👀 Memorize the card positions! They will be hidden in 5 seconds.");
     setTimeout(()=>{
       if(!memRunning)return;
       memGrid.querySelectorAll(".cn-card").forEach((b,i)=>{if(!memDeck[i].matched){b.classList.remove("is-open");b.setAttribute("aria-label","Hidden card");}});
-      memPeek=false; setMemoryMessage("انطلق! ابحث عن الأزواج المتطابقة.");
+      memPeek=false; setMemoryMessage("Go! Find all matching pairs.");
     },5000);
   }
   function startMemoryRound(){
@@ -696,7 +696,7 @@ document.addEventListener("keydown",e=>{
     }
   }
   function endMemoryByTime(){
-    if(!memRunning)return;memRunning=false;stopMemoryTimer();memLocked=true;setMemoryMessage("⏰ انتهى الوقت! حاول مرة أخرى.");
+    if(!memRunning)return;memRunning=false;stopMemoryTimer();memLocked=true;setMemoryMessage("⏰ Time is up! Try again.");
     const result=$("cn-memory-result");result.innerHTML="";const title=document.createElement("strong");title.textContent="Time is up!";
     const detail=document.createElement("span");detail.textContent="Matched "+memMatched+" of "+(memDeck.length/2)+" pairs · Score: "+memScore;result.append(title,detail);result.hidden=false;
   }
@@ -707,7 +707,7 @@ document.addEventListener("keydown",e=>{
     localStorage.setItem("calcnova-memory-unlocked",String(unlockedLevel));
     updateLevelOptions();
     updateMemoryStats();
-    setMemoryMessage(completed<30 ? "🎉 أحسنت! أكملت المرحلة. يمكنك الانتقال إلى المرحلة التالية." : "🏆 مذهل! لقد أكملت جميع المراحل الثلاثين!");
+    setMemoryMessage(completed<30 ? "🎉 Great job! Level completed. You can move on to the next level." : "🏆 Amazing! You completed all 30 levels!");
     const result=$("cn-memory-result");result.innerHTML="";
     const title=document.createElement("strong");title.textContent=completed<30?"Level completed!":"All stages completed!";
     const detail=document.createElement("span");
@@ -716,7 +716,7 @@ document.addEventListener("keydown",e=>{
     if(completed<30){
       const nextButton=document.createElement("button");
       nextButton.type="button";nextButton.className="cn-btn primary";
-      nextButton.textContent="➡ المرحلة التالية ("+(completed+1)+")";
+      nextButton.textContent="➡ Next Level ("+(completed+1)+")";
       nextButton.addEventListener("click",()=>{
         $("cn-memory-level").value=String(completed+1);
         startMemoryRound();
