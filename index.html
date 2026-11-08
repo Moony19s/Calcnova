@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10151f">
-<title>Calcnova - Advanced Scientific Calculator</title>
-<style>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10151f">
+    <title>Calcnova - Advanced Scientific Calculator</title>
+    <style>
 *{box-sizing:border-box}
 :root{
  --page:#151421;--page2:#292039;--text:#fff8fc;--muted:#d0c0d0;--accent:#f0a8c7;
@@ -138,150 +138,296 @@ body[data-background="soft-grid"]{background-color:#172235;background-image:line
 @media(max-width:700px){body[data-background="starry"]{background-attachment:scroll}}
 
 </style>
-</head>
-<body data-theme="dark" data-decor="none">
-<div class="site-layout">
-  <!-- Ad space 1 of exactly 3 -->
-  <div class="ad-slot ad-top" aria-label="Top advertisement"><strong>Advertising Space 1</strong><span>Top banner · AdSense code can be added here after approval</span></div>
-
-  <main class="app">
-    <header><h1>CALCNOVA</h1><p>Advanced Scientific Calculator</p></header>
-
-    <section class="customizer" aria-label="Appearance settings">
-      <div class="customizer-title"><span>Personalize your calculator</span><span aria-hidden="true" style="color:#d9b45b">✦</span></div>
-      <div class="customizer-grid">
-        <label><span class="control-label">Page color</span><select id="themePicker">
-          <option value="dark">Midnight</option><option value="cream">Cream</option><option value="pink">Blossom pink</option><option value="blue">Sky blue</option><option value="green">Sage green</option><option value="purple">Lavender</option>
-        </select></label>
-        <label><span class="control-label">Page decoration</span><select id="decorPicker">
-          <option value="none">No decoration</option><option value="flowers">Ornate flowers</option><option value="stars">Stars & sparkle</option><option value="butterflies">Butterflies</option><option value="geometry">Decorative geometry</option><option value="hearts">Hearts</option>
-        </select></label>
-        <label><span class="control-label">Background design</span><select id="backgroundPicker">
-          <option value="starry">Golden stars · Original image</option><option value="midnight">Midnight gradient</option><option value="nebula">Violet nebula</option><option value="deep-ocean">Deep ocean</option><option value="soft-grid">Soft geometric grid</option>
-        </select></label>
+  </head>
+  <body data-theme="dark" data-decor="none">
+    <div class="site-layout">
+      <!-- Ad space 1 of exactly 3 -->
+      <div class="ad-slot ad-top" aria-label="Top advertisement">
+        <strong>Advertising Space 1</strong>
+        <span>Top banner · AdSense code can be added here after approval</span>
       </div>
-      <div class="swatches" aria-label="Quick color choices">
-        <button class="swatch" style="background:#10151f" data-theme-choice="dark" aria-label="Midnight" aria-pressed="true"></button>
-        <button class="swatch" style="background:#f5eee3" data-theme-choice="cream" aria-label="Cream" aria-pressed="false"></button>
-        <button class="swatch" style="background:#f9e8ef" data-theme-choice="pink" aria-label="Pink" aria-pressed="false"></button>
-        <button class="swatch" style="background:#e8f1fb" data-theme-choice="blue" aria-label="Blue" aria-pressed="false"></button>
-        <button class="swatch" style="background:#e8f3eb" data-theme-choice="green" aria-label="Green" aria-pressed="false"></button>
-        <button class="swatch" style="background:#eee9fa" data-theme-choice="purple" aria-label="Lavender" aria-pressed="false"></button>
-      </div>
-    </section>
-
-    <section class="calc" aria-label="Scientific calculator">
-      <div class="display" aria-live="polite"><div id="expression">Ready to calculate</div><div id="result">0</div></div>
-      <div class="mode"><span>SCIENTIFIC MODE · <span id="angleLabel">DEG</span></span><button id="angle" type="button" style="padding:7px 12px;font-size:12px">DEG / RAD</button></div>
-      <div class="utility-row">
-        <button type="button" id="memoryClear">MC</button><button type="button" id="memoryRecall">MR</button><button type="button" id="memoryAdd">M+</button><button type="button" id="fractionToggle">a/b</button>
-      </div>
-      <div class="keys">
-        <button class="clear" data-action="clear">AC</button><button class="fn" data-insert="(">(</button><button class="fn" data-insert=")">)</button><button class="op" data-action="delete">DEL</button><button class="op" data-insert="^">xʸ</button>
-        <button class="fn" data-insert="sin(">sin</button><button class="fn" data-insert="cos(">cos</button><button class="fn" data-insert="tan(">tan</button><button class="fn" data-insert="asin(">sin⁻¹</button><button class="fn" data-insert="acos(">cos⁻¹</button>
-        <button class="fn" data-insert="atan(">tan⁻¹</button><button class="fn" data-insert="sinh(">sinh</button><button class="fn" data-insert="cosh(">cosh</button><button class="fn" data-insert="tanh(">tanh</button><button class="fn" data-insert="sqrt(">√</button>
-        <button class="fn" data-insert="log(">log</button><button class="fn" data-insert="ln(">ln</button><button class="fn" data-insert="abs(">abs</button><button class="fn" data-insert="exp(">exp</button><button class="fn" data-insert="!">x!</button>
-        <button class="fn" data-insert="nCr(">nCr</button><button class="fn" data-insert="nPr(">nPr</button><button class="fn" data-insert="π">π</button><button class="fn" data-insert="e">e</button><button class="op" data-insert="/">÷</button>
-        <button data-insert="7">7</button><button data-insert="8">8</button><button data-insert="9">9</button><button class="op" data-insert="*">×</button><button class="op" data-insert="-">−</button>
-        <button data-insert="4">4</button><button data-insert="5">5</button><button data-insert="6">6</button><button class="op" data-insert="%">mod</button><button class="op" data-insert="+">+</button>
-        <button data-insert="1">1</button><button data-insert="2">2</button><button data-insert="3">3</button><button class="fn" data-insert=",">,</button><button class="fn" data-insert=".">.</button>
-        <button class="wide" data-insert="0">0</button><button data-action="sign">±</button><button class="fn" data-insert="Ans">Ans</button><button class="equal" data-action="calculate">=</button>
-      </div>
-      <section class="history"><div class="history-head"><span>Calculation history</span><button type="button" id="clearHistory" style="padding:5px 9px;font-size:11px">Clear</button></div><ul class="history-list" id="historyList"><li>No calculations yet</li></ul></section>
-      <div class="small-note">Keyboard supported · Results saved in this browser</div>
-    </section>
-
-    <!-- Ad space 2 of exactly 3 -->
-    <div class="ad-slot ad-after-calculator" aria-label="Advertisement below calculator"><strong>Advertising Space 2</strong><span>Below calculator · AdSense placement</span></div>
-    <section id="cn-games" aria-label="CALCNOVA Play Zone">
-      <div class="cn-intro"><h2>🎮 CALCNOVA PLAY ZONE</h2><p>Take a break, challenge your memory, and enjoy a collection of riddles!</p></div>
-      <div class="cn-tabs" role="tablist" aria-label="Choose a section">
-        <button class="cn-tab" id="cn-tab-memory" type="button" role="tab" aria-selected="true" aria-controls="cn-memory-panel">🧠 Memory Challenge</button>
-        <button class="cn-tab" id="cn-tab-riddles" type="button" role="tab" aria-selected="false" aria-controls="cn-riddles-panel">🧩 Riddle Library</button>
-        <button class="cn-tab" id="cn-tab-sources" type="button" role="tab" aria-selected="false" aria-controls="cn-sources-panel">📚 Sources &amp; References</button>
-      </div>
-      <section class="cn-panel" id="cn-memory-panel" role="tabpanel" aria-labelledby="cn-tab-memory">
-        <div class="cn-game-head">
-          <div><h3>🧠 Memory Challenge</h3><p>Find every matching pair!</p></div>
-          <div class="cn-controls">
-            <label>Difficulty
-              <select id="cn-memory-level">
-                <option value="1" selected>Level 1 · Beginner · 4 cards</option>
-                <option value="2">Level 2 · Very easy · 6 cards</option>
-                <option value="3">Level 3 · Easy · 8 cards</option>
-                <option value="4">Level 4 · Easy+ · 10 cards</option>
-                <option value="5">Level 5 · Intermediate · 12 cards</option>
-                <option value="6">Level 6 · Intermediate+ · 14 cards</option>
-                <option value="7">Level 7 · Advanced · 16 cards</option>
-                <option value="8">Level 8 · Expert · 18 cards</option>
-                <option value="9">Level 9 · Master · 20 cards</option>
+      <main class="app">
+        <header>
+          <h1>CALCNOVA</h1>
+          <p>Advanced Scientific Calculator</p>
+        </header>
+        <section class="customizer" aria-label="Appearance settings">
+          <div class="customizer-title">
+            <span>Personalize your calculator</span>
+            <span aria-hidden="true" style="color:#d9b45b">✦</span>
+          </div>
+          <div class="customizer-grid">
+            <label>
+              <span class="control-label">Page color</span>
+              <select id="themePicker">
+                <option value="dark">Midnight</option>
+                <option value="cream">Cream</option>
+                <option value="pink">Blossom pink</option>
+                <option value="blue">Sky blue</option>
+                <option value="green">Sage green</option>
+                <option value="purple">Lavender</option>
               </select>
             </label>
-            <label>Collection
-              <select id="cn-memory-category">
-                <option value="mix">Surprise mix</option>
-                <option value="desserts">Desserts</option>
-                <option value="food">Food</option>
-                <option value="travel">Travel</option>
-                <option value="style">Accessories</option>
-                <option value="school">School & art</option>
-                <option value="nature">Nature & space</option>
-                <option value="daily">Everyday things</option>
-                <option value="fantasy">Cute surprises</option>
+            <label>
+              <span class="control-label">Page decoration</span>
+              <select id="decorPicker">
+                <option value="none">No decoration</option>
+                <option value="flowers">Ornate flowers</option>
+                <option value="stars">Stars & sparkle</option>
+                <option value="butterflies">Butterflies</option>
+                <option value="geometry">Decorative geometry</option>
+                <option value="hearts">Hearts</option>
+              </select>
+            </label>
+            <label>
+              <span class="control-label">Background design</span>
+              <select id="backgroundPicker">
+                <option value="starry">Golden stars · Original image</option>
+                <option value="midnight">Midnight gradient</option>
+                <option value="nebula">Violet nebula</option>
+                <option value="deep-ocean">Deep ocean</option>
+                <option value="soft-grid">Soft geometric grid</option>
               </select>
             </label>
           </div>
+          <div class="swatches" aria-label="Quick color choices">
+            <button class="swatch" style="background:#10151f" data-theme-choice="dark" aria-label="Midnight" aria-pressed="true">
+            </button>
+            <button class="swatch" style="background:#f5eee3" data-theme-choice="cream" aria-label="Cream" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#f9e8ef" data-theme-choice="pink" aria-label="Pink" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#e8f1fb" data-theme-choice="blue" aria-label="Blue" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#e8f3eb" data-theme-choice="green" aria-label="Green" aria-pressed="false">
+            </button>
+            <button class="swatch" style="background:#eee9fa" data-theme-choice="purple" aria-label="Lavender" aria-pressed="false">
+            </button>
+          </div>
+        </section>
+        <section class="calc" aria-label="Scientific calculator">
+          <div class="display" aria-live="polite">
+            <div id="expression">Ready to calculate</div>
+            <div id="result">0</div>
+          </div>
+          <div class="mode">
+            <span>SCIENTIFIC MODE · <span id="angleLabel">DEG</span>
+          </span>
+          <button id="angle" type="button" style="padding:7px 12px;font-size:12px">DEG / RAD</button>
         </div>
-        <div class="cn-stats" aria-live="polite">
-          <div class="cn-stat"><span>TIME</span><strong id="cn-memory-time">00:00</strong></div>
-          <div class="cn-stat"><span>MOVES</span><strong id="cn-memory-moves">0</strong></div>
-          <div class="cn-stat"><span>PAIRS</span><strong id="cn-memory-pairs">0/2</strong></div>
-          <div class="cn-stat"><span>POINTS</span><strong id="cn-memory-score">0</strong></div>
+        <div class="utility-row">
+          <button type="button" id="memoryClear">MC</button>
+          <button type="button" id="memoryRecall">MR</button>
+          <button type="button" id="memoryAdd">M+</button>
+          <button type="button" id="fractionToggle">a/b</button>
         </div>
-        <div class="cn-message" id="cn-memory-message" aria-live="polite">Choose a collection and press Start Game.</div>
-        <div class="cn-memory-grid" id="cn-memory-grid" aria-label="Memory cards"></div>
-        <div class="cn-category-note" id="cn-memory-category-note">A fresh shuffle every round.</div>
-        <div class="cn-action-row">
-          <button class="cn-btn primary" id="cn-memory-start" type="button">▶ Start Game</button>
-          <button class="cn-btn secondary" id="cn-memory-reset" type="button">↻ New Round</button>
+        <div class="keys">
+          <button class="clear" data-action="clear">AC</button>
+          <button class="fn" data-insert="(">(</button>
+          <button class="fn" data-insert=")">)</button>
+          <button class="op" data-action="delete">DEL</button>
+          <button class="op" data-insert="^">xʸ</button>
+          <button class="fn" data-insert="sin(">sin</button>
+          <button class="fn" data-insert="cos(">cos</button>
+          <button class="fn" data-insert="tan(">tan</button>
+          <button class="fn" data-insert="asin(">sin⁻¹</button>
+          <button class="fn" data-insert="acos(">cos⁻¹</button>
+          <button class="fn" data-insert="atan(">tan⁻¹</button>
+          <button class="fn" data-insert="sinh(">sinh</button>
+          <button class="fn" data-insert="cosh(">cosh</button>
+          <button class="fn" data-insert="tanh(">tanh</button>
+          <button class="fn" data-insert="sqrt(">√</button>
+          <button class="fn" data-insert="log(">log</button>
+          <button class="fn" data-insert="ln(">ln</button>
+          <button class="fn" data-insert="abs(">abs</button>
+          <button class="fn" data-insert="exp(">exp</button>
+          <button class="fn" data-insert="!">x!</button>
+          <button class="fn" data-insert="nCr(">nCr</button>
+          <button class="fn" data-insert="nPr(">nPr</button>
+          <button class="fn" data-insert="π">π</button>
+          <button class="fn" data-insert="e">e</button>
+          <button class="op" data-insert="/">÷</button>
+          <button data-insert="7">7</button>
+          <button data-insert="8">8</button>
+          <button data-insert="9">9</button>
+          <button class="fn" data-insert=".">.</button>
+          <button class="op" data-insert="-">−</button>
+          <button data-insert="4">4</button>
+          <button data-insert="5">5</button>
+          <button data-insert="6">6</button>
+          <button class="op" data-insert="%">mod</button>
+          <button class="op" data-insert="+">+</button>
+          <button data-insert="1">1</button>
+          <button data-insert="2">2</button>
+          <button data-insert="3">3</button>
+          <button class="fn" data-insert=",">,</button>
+          <button class="op" data-insert="*">×</button>
+          <button class="wide" data-insert="0">0</button>
+          <button data-action="sign">±</button>
+          <button class="fn" data-insert="Ans">Ans</button>
+          <button class="equal" data-action="calculate">=</button>
         </div>
-        <div class="cn-result" id="cn-memory-result" hidden aria-live="polite"></div>
+        <section class="history">
+          <div class="history-head">
+            <span>Calculation history</span>
+            <button type="button" id="clearHistory" style="padding:5px 9px;font-size:11px">Clear</button>
+          </div>
+          <ul class="history-list" id="historyList">
+            <li>No calculations yet</li>
+          </ul>
+        </section>
+        <div class="small-note">Keyboard supported · Results saved in this browser</div>
       </section>
-      <section class="cn-panel" id="cn-riddles-panel" role="tabpanel" aria-labelledby="cn-tab-riddles" hidden>
-        <div class="cn-game-head"><div><h3>🧩 Riddle Library</h3><p>Explore the English riddle collection by category and difficulty.</p></div></div>
-        <div class="cn-riddle-wrap">
-          <div class="cn-riddle-toolbar"><label>Riddle category<select id="cn-riddle-category"><option value="all">All categories</option><option value="logic">🧠 Logic &amp; Brain Teasers</option><option value="funny">😂 Funny Riddles</option><option value="culture">📚 Culture &amp; General Knowledge</option><option value="math">🔍 Math &amp; Numbers</option><option value="observation">💡 Focus &amp; Observation</option></select></label>
-          <label>Difficulty<select id="cn-riddle-difficulty"><option value="all">All levels</option><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></label></div>
-          <div class="cn-riddle-card" aria-live="polite"><div class="cn-riddle-category" id="cn-riddle-type">Logic &amp; Brain Teasers</div><p class="cn-riddle-question" id="cn-riddle-question">Choose a category and enjoy your first riddle!</p><div class="cn-riddle-answer" id="cn-riddle-answer" hidden></div></div>
-          <div class="cn-riddle-count" id="cn-riddle-count">Riddle 1 of 640</div>
-          <div class="cn-riddle-actions"><button class="cn-btn primary" id="cn-riddle-show" type="button">Show Answer</button><button class="cn-btn secondary" id="cn-riddle-next" type="button">Next Riddle</button><button class="cn-btn secondary" id="cn-riddle-random" type="button">Random Riddle</button></div>
+      <!-- Ad space 2 of exactly 3 -->
+      <div class="ad-slot ad-after-calculator" aria-label="Advertisement below calculator">
+        <strong>Advertising Space 2</strong>
+        <span>Below calculator · AdSense placement</span>
+      </div>
+      <section id="cn-games" aria-label="CALCNOVA Play Zone">
+        <div class="cn-intro">
+          <h2>🎮 CALCNOVA PLAY ZONE</h2>
+          <p>Take a break, challenge your memory, and enjoy a collection of riddles!</p>
         </div>
-      </section>
-      <section class="cn-panel" id="cn-sources-panel" role="tabpanel" aria-labelledby="cn-tab-sources" hidden>
-        <div class="cn-game-head"><div><h3>📚 Sources &amp; References</h3>
-        <p>Bibliographic details are kept here, away from the riddle cards.</p></div></div>
-        <div class="cn-result" style="text-align:left">
-          <strong>Reference policy</strong>
-          <p>Only books and authors that can be verified against a reliable edition will be listed here. Each sourced riddle will be connected to its reference by an internal reference ID.</p>
-          <p><b>Verification status:</b> The current imported riddle set does not contain reliable book/page citations. No author or title is attributed to those riddles until the original source is verified.</p>
-          <p><b>Collection status:</b> The current library contains 640 distinct question strings. It is not yet a verified set of 1,000 book-sourced riddles. We will not fill the remaining count with duplicates or invented citations.</p>
+        <div class="cn-tabs" role="tablist" aria-label="Choose a section">
+          <button class="cn-tab" id="cn-tab-memory" type="button" role="tab" aria-selected="true" aria-controls="cn-memory-panel">🧠 Memory Challenge</button>
+          <button class="cn-tab" id="cn-tab-riddles" type="button" role="tab" aria-selected="false" aria-controls="cn-riddles-panel">🧩 Riddle Library</button>
+          <button class="cn-tab" id="cn-tab-sources" type="button" role="tab" aria-selected="false" aria-controls="cn-sources-panel">📚 Sources &amp; References</button>
         </div>
-        <div id="cn-source-list" class="cn-result" style="text-align:left">
-          <strong>Verified bibliography</strong>
-          <p>No verified book references have been entered yet.</p>
+        <section class="cn-panel" id="cn-memory-panel" role="tabpanel" aria-labelledby="cn-tab-memory">
+          <div class="cn-game-head">
+            <div>
+              <h3>🧠 Memory Challenge</h3>
+              <p>Find every matching pair!</p>
+            </div>
+            <div class="cn-controls">
+              <label>Difficulty
+                <select id="cn-memory-level">
+                  <option value="1" selected>Level 1 · Beginner · 4 cards</option>
+                  <option value="2">Level 2 · Very easy · 6 cards</option>
+                  <option value="3">Level 3 · Easy · 8 cards</option>
+                  <option value="4">Level 4 · Easy+ · 10 cards</option>
+                  <option value="5">Level 5 · Intermediate · 12 cards</option>
+                  <option value="6">Level 6 · Intermediate+ · 14 cards</option>
+                  <option value="7">Level 7 · Advanced · 16 cards</option>
+                  <option value="8">Level 8 · Expert · 18 cards</option>
+                  <option value="9">Level 9 · Master · 20 cards</option>
+                </select>
+              </label>
+              <label>Collection
+                <select id="cn-memory-category">
+                  <option value="mix">Surprise mix</option>
+                  <option value="desserts">Desserts</option>
+                  <option value="food">Food</option>
+                  <option value="travel">Travel</option>
+                  <option value="style">Accessories</option>
+                  <option value="school">School & art</option>
+                  <option value="nature">Nature & space</option>
+                  <option value="daily">Everyday things</option>
+                  <option value="fantasy">Cute surprises</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="cn-stats" aria-live="polite">
+            <div class="cn-stat">
+              <span>TIME</span>
+              <strong id="cn-memory-time">00:00</strong>
+            </div>
+            <div class="cn-stat">
+              <span>MOVES</span>
+              <strong id="cn-memory-moves">0</strong>
+            </div>
+            <div class="cn-stat">
+              <span>PAIRS</span>
+              <strong id="cn-memory-pairs">0/2</strong>
+            </div>
+            <div class="cn-stat">
+              <span>POINTS</span>
+              <strong id="cn-memory-score">0</strong>
+            </div>
+          </div>
+          <div class="cn-message" id="cn-memory-message" aria-live="polite">Choose a collection and press Start Game.</div>
+          <div class="cn-memory-grid" id="cn-memory-grid" aria-label="Memory cards">
+          </div>
+          <div class="cn-category-note" id="cn-memory-category-note">A fresh shuffle every round.</div>
+          <div class="cn-action-row">
+            <button class="cn-btn primary" id="cn-memory-start" type="button">▶ Start Game</button>
+            <button class="cn-btn secondary" id="cn-memory-reset" type="button">↻ New Round</button>
+          </div>
+          <div class="cn-result" id="cn-memory-result" hidden aria-live="polite">
+          </div>
+        </section>
+        <section class="cn-panel" id="cn-riddles-panel" role="tabpanel" aria-labelledby="cn-tab-riddles" hidden>
+          <div class="cn-game-head">
+            <div>
+              <h3>🧩 Riddle Library</h3>
+              <p>Explore the English riddle collection by category and difficulty.</p>
+            </div>
+          </div>
+          <div class="cn-riddle-wrap">
+            <div class="cn-riddle-toolbar">
+              <label>Riddle category<select id="cn-riddle-category">
+                <option value="all">All categories</option>
+                <option value="logic">🧠 Logic &amp; Brain Teasers</option>
+                <option value="funny">😂 Funny Riddles</option>
+                <option value="culture">📚 Culture &amp; General Knowledge</option>
+                <option value="math">🔍 Math &amp; Numbers</option>
+                <option value="observation">💡 Focus &amp; Observation</option>
+              </select>
+            </label>
+            <label>Difficulty<select id="cn-riddle-difficulty">
+              <option value="all">All levels</option>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </label>
         </div>
-      </section>
-      <p class="cn-footnote">The games and riddles run independently from the calculator.</p>
+        <div class="cn-riddle-card" aria-live="polite">
+          <div class="cn-riddle-category" id="cn-riddle-type">Logic &amp; Brain Teasers</div>
+          <p class="cn-riddle-question" id="cn-riddle-question">Choose a category and enjoy your first riddle!</p>
+          <div class="cn-riddle-answer" id="cn-riddle-answer" hidden>
+          </div>
+        </div>
+        <div class="cn-riddle-count" id="cn-riddle-count">Riddle 1 of 640</div>
+        <div class="cn-riddle-actions">
+          <button class="cn-btn primary" id="cn-riddle-show" type="button">Show Answer</button>
+          <button class="cn-btn secondary" id="cn-riddle-next" type="button">Next Riddle</button>
+          <button class="cn-btn secondary" id="cn-riddle-random" type="button">Random Riddle</button>
+        </div>
+      </div>
     </section>
-
-    <footer>CALCNOVA © 2026 · Calculate smarter</footer>
-  </main>
-
-  <!-- Ad space 3 of exactly 3 -->
-  <div class="ad-slot ad-bottom" aria-label="Bottom advertisement"><strong>Advertising Space 3</strong><span>Bottom banner · AdSense placement</span></div>
-</div>
-
-<script>
+    <section class="cn-panel" id="cn-sources-panel" role="tabpanel" aria-labelledby="cn-tab-sources" hidden>
+      <div class="cn-game-head">
+        <div>
+          <h3>📚 Sources &amp; References</h3>
+          <p>Bibliographic details are kept here, away from the riddle cards.</p>
+        </div>
+      </div>
+      <div class="cn-result" style="text-align:left">
+        <strong>Reference policy</strong>
+        <p>Only books and authors that can be verified against a reliable edition will be listed here. Each sourced riddle will be connected to its reference by an internal reference ID.</p>
+        <p>
+          <b>Verification status:</b> The current imported riddle set does not contain reliable book/page citations. No author or title is attributed to those riddles until the original source is verified.</p>
+          <p>
+            <b>Collection status:</b> The current library contains 640 distinct question strings. It is not yet a verified set of 1,000 book-sourced riddles. We will not fill the remaining count with duplicates or invented citations.</p>
+          </div>
+          <div id="cn-source-list" class="cn-result" style="text-align:left">
+            <strong>Verified bibliography</strong>
+            <p>No verified book references have been entered yet.</p>
+          </div>
+        </section>
+        <p class="cn-footnote">The games and riddles run independently from the calculator.</p>
+      </section>
+      <footer>CALCNOVA © 2026 · Calculate smarter</footer>
+    </main>
+    <!-- Ad space 3 of exactly 3 -->
+    <div class="ad-slot ad-bottom" aria-label="Bottom advertisement">
+      <strong>Advertising Space 3</strong>
+      <span>Bottom banner · AdSense placement</span>
+    </div>
+  </div>
+  <script>
 "use strict";
 const expressionEl=document.getElementById("expression"),resultEl=document.getElementById("result");
 const angleLabel=document.getElementById("angleLabel"),themePicker=document.getElementById("themePicker"),decorPicker=document.getElementById("decorPicker"),backgroundPicker=document.getElementById("backgroundPicker");
@@ -403,8 +549,7 @@ document.addEventListener("keydown",e=>{
  else if(e.key==="Escape")clearAll();
 });
 </script>
-
-<script>
+  <script>
 (() => {
   "use strict";
   const root = document.getElementById("cn-games");
