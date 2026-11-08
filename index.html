@@ -105,7 +105,7 @@ button:active{opacity:.8;transform:scale(.97)}button:focus-visible,select:focus-
 #cn-games .cn-footnote{margin:13px 0 0;text-align:center;color:var(--muted);font-size:10px}
 #cn-games .cn-riddle-wrap{display:grid;gap:12px}
 #cn-games .cn-riddle-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
-#cn-games .cn-riddle-toolbar select{min-width:190px}\n#cn-games #cn-sources-panel p{line-height:1.7;color:var(--text)}
+#cn-games .cn-riddle-toolbar select{min-width:190px}\n
 #cn-games .cn-riddle-card{background:linear-gradient(145deg,var(--calc-panel),var(--calc-display));border:1px solid var(--calc-border);border-radius:16px;padding:clamp(18px,4vw,28px);min-height:190px;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:14px}
 #cn-games .cn-riddle-category{color:var(--calc-accent);font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
 #cn-games .cn-riddle-question{font-size:clamp(16px,3vw,21px);line-height:1.65;color:var(--calc-text);margin:0}
@@ -291,7 +291,6 @@ body[data-background="soft-grid"]{background-color:#172235;background-image:line
         <div class="cn-tabs" role="tablist" aria-label="Choose a section">
           <button class="cn-tab" id="cn-tab-memory" type="button" role="tab" aria-selected="true" aria-controls="cn-memory-panel">🧠 Memory Challenge</button>
           <button class="cn-tab" id="cn-tab-riddles" type="button" role="tab" aria-selected="false" aria-controls="cn-riddles-panel">🧩 Riddle Library</button>
-          <button class="cn-tab" id="cn-tab-sources" type="button" role="tab" aria-selected="false" aria-controls="cn-sources-panel">📚 Sources &amp; References</button>
         </div>
         <section class="cn-panel" id="cn-memory-panel" role="tabpanel" aria-labelledby="cn-tab-memory">
           <div class="cn-game-head">
@@ -418,37 +417,17 @@ body[data-background="soft-grid"]{background-color:#172235;background-image:line
         </div>
       </div>
     </section>
-    <section class="cn-panel" id="cn-sources-panel" role="tabpanel" aria-labelledby="cn-tab-sources" hidden>
-      <div class="cn-game-head">
-        <div>
-          <h3>📚 Sources &amp; References</h3>
-          <p>Bibliographic details are kept here, away from the riddle cards.</p>
-        </div>
-      </div>
-      <div class="cn-result" style="text-align:left">
-        <strong>Reference policy</strong>
-        <p>Only books and authors that can be verified against a reliable edition will be listed here. Each sourced riddle will be connected to its reference by an internal reference ID.</p>
-        <p>
-          <b>Verification status:</b> The current imported riddle set does not contain reliable book/page citations. No author or title is attributed to those riddles until the original source is verified.</p>
-          <p>
-            <b>Collection status:</b> The current library contains 640 distinct question strings. It is not yet a verified set of 1,000 book-sourced riddles. We will not fill the remaining count with duplicates or invented citations.</p>
-          </div>
-          <div id="cn-source-list" class="cn-result" style="text-align:left">
-            <strong>Verified bibliography</strong>
-            <p>No verified book references have been entered yet.</p>
-          </div>
-        </section>
-        <p class="cn-footnote">The games and riddles run independently from the calculator.</p>
-      </section>
-      <footer>CALCNOVA © 2026 · Calculate smarter</footer>
-    </main>
-    <!-- Ad space 3 of exactly 3 -->
-    <div class="ad-slot ad-bottom" aria-label="Bottom advertisement">
-      <strong>Advertising Space 3</strong>
-      <span>Bottom banner · AdSense placement</span>
-    </div>
-  </div>
-  <script>
+    <p class="cn-footnote">The games and riddles run independently from the calculator.</p>
+  </section>
+  <footer>CALCNOVA © 2026 · Calculate smarter</footer>
+</main>
+<!-- Ad space 3 of exactly 3 -->
+<div class="ad-slot ad-bottom" aria-label="Bottom advertisement">
+  <strong>Advertising Space 3</strong>
+  <span>Bottom banner · AdSense placement</span>
+</div>
+</div>
+<script>
 "use strict";
 const expressionEl=document.getElementById("expression"),resultEl=document.getElementById("result");
 const angleLabel=document.getElementById("angleLabel"),themePicker=document.getElementById("themePicker"),decorPicker=document.getElementById("decorPicker"),backgroundPicker=document.getElementById("backgroundPicker");
@@ -570,25 +549,24 @@ document.addEventListener("keydown",e=>{
  else if(e.key==="Escape")clearAll();
 });
 </script>
-  <script>
+<script>
 (() => {
   "use strict";
   const root = document.getElementById("cn-games");
   if (!root) return;
   const $ = id => root.querySelector("#" + id);
   // Main section tabs are scoped to this add-on.
-  const tabMemory = $("cn-tab-memory"), tabRiddles = $("cn-tab-riddles"), tabSources = $("cn-tab-sources");
-  const panelMemory = $("cn-memory-panel"), panelRiddles = $("cn-riddles-panel"), panelSources = $("cn-sources-panel");
+  const tabMemory = $("cn-tab-memory"), tabRiddles = $("cn-tab-riddles");
+  const panelMemory = $("cn-memory-panel"), panelRiddles = $("cn-riddles-panel");
   function showSection(which) {
-    const active = {memory:which==="memory", riddles:which==="riddles", sources:which==="sources"};
-    [[tabMemory,"memory"],[tabRiddles,"riddles"],[tabSources,"sources"]].forEach(([tab,key])=>tab.setAttribute("aria-selected",String(active[key])));
-    panelMemory.hidden = !active.memory;
-    panelRiddles.hidden = !active.riddles;
-    panelSources.hidden = !active.sources;
+    const memoryActive = which === "memory";
+    tabMemory.setAttribute("aria-selected", String(memoryActive));
+    tabRiddles.setAttribute("aria-selected", String(!memoryActive));
+    panelMemory.hidden = !memoryActive;
+    panelRiddles.hidden = memoryActive;
   }
   tabMemory.addEventListener("click", () => showSection("memory"));
   tabRiddles.addEventListener("click", () => showSection("riddles"));
-  tabSources.addEventListener("click", () => showSection("sources"));
 
   // Memory Challenge: original emoji illustration set, categorized and shuffled.
   const collections = {
@@ -724,10 +702,29 @@ document.addEventListener("keydown",e=>{
   }
   function finishMemoryRound(){
     memRunning=false;stopMemoryTimer();memScore+=Math.max(0,Math.floor(memSeconds/2));
-    const completed=currentLevel();unlockedLevel=Math.max(unlockedLevel,Math.min(30,completed+1));localStorage.setItem("calcnova-memory-unlocked",String(unlockedLevel));updateLevelOptions();
-    updateMemoryStats();setMemoryMessage("🎉 You found every pair! Next level unlocked.");
-    const result=$("cn-memory-result");result.innerHTML="";const title=document.createElement("strong");title.textContent="Amazing memory!";
-    const detail=document.createElement("span");detail.textContent="Final score: "+memScore+" points · "+memMoves+" moves · Time left: "+clock(memSeconds)+" · Level "+completed+" complete!";result.append(title,detail);result.hidden=false;
+    const completed=currentLevel();
+    unlockedLevel=Math.max(unlockedLevel,Math.min(30,completed+1));
+    localStorage.setItem("calcnova-memory-unlocked",String(unlockedLevel));
+    updateLevelOptions();
+    updateMemoryStats();
+    setMemoryMessage(completed<30 ? "🎉 أحسنت! أكملت المرحلة. يمكنك الانتقال إلى المرحلة التالية." : "🏆 مذهل! لقد أكملت جميع المراحل الثلاثين!");
+    const result=$("cn-memory-result");result.innerHTML="";
+    const title=document.createElement("strong");title.textContent=completed<30?"Level completed!":"All stages completed!";
+    const detail=document.createElement("span");
+    detail.textContent="Final score: "+memScore+" points · "+memMoves+" moves · Time left: "+clock(memSeconds)+" · Level "+completed+" complete!";
+    result.append(title,detail);
+    if(completed<30){
+      const nextButton=document.createElement("button");
+      nextButton.type="button";nextButton.className="cn-btn primary";
+      nextButton.textContent="➡ المرحلة التالية ("+(completed+1)+")";
+      nextButton.addEventListener("click",()=>{
+        $("cn-memory-level").value=String(completed+1);
+        startMemoryRound();
+        memGrid.scrollIntoView({behavior:"smooth",block:"center"});
+      });
+      result.appendChild(nextButton);
+    }
+    result.hidden=false;
   }
   updateLevelOptions();
   $("cn-memory-start").addEventListener("click",startMemoryRound);
