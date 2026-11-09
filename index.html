@@ -440,9 +440,9 @@ function setTheme(v){
  document.querySelectorAll("[data-theme-choice]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.themeChoice===v)));
  setStore("calcnova-theme",v);
 }
-function setDecor(v){
- if(!["none","flowers","stars","butterflies","geometry","hearts"].includes(v))v="none";
- document.body.dataset.decor=v;decorPicker.value=v;setStore("calcnova-decor",v);
+function setBackground(v){
+ if(!["starry","midnight","nebula","deep-ocean","soft-grid"].includes(v))v="starry";
+ document.body.dataset.background=v;backgroundPicker.value=v;setStore("calcnova-background",v);
 }
 function setBackground(v){
  if(!["starry","midnight","nebula","deep-ocean","soft-grid"].includes(v))v="starry";
