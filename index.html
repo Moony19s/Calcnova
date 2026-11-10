@@ -129,12 +129,51 @@ button:active{opacity:.8;transform:scale(.97)}button:focus-visible,select:focus-
 
 
 /* CALCNOVA selectable page backgrounds */
-body[data-background="starry"]{background-image:url("calcnova-starry-background.jpg");background-position:center center;background-size:cover;background-repeat:no-repeat;background-attachment:fixed}
-body[data-background="starry"]:before,body[data-background="starry"]:after{display:none}
-body[data-background="midnight"]{background:radial-gradient(ellipse at 20% 10%,#293653 0%,#111827 48%,#090d18 100%)}
-body[data-background="nebula"]{background:radial-gradient(ellipse at 15% 20%,#594078 0%,transparent 45%),radial-gradient(ellipse at 85% 80%,#243e69 0%,transparent 48%),#111321}
-body[data-background="deep-ocean"]{background:radial-gradient(ellipse at 50% 0%,#24536a 0%,#102c43 48%,#081827 100%)}
-body[data-background="soft-grid"]{background-color:#172235;background-image:linear-gradient(rgba(218,190,123,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(218,190,123,.10) 1px,transparent 1px),linear-gradient(135deg,#1d2c43,#101725);background-size:32px 32px,32px 32px,auto}
+
+body[data-background="starry"]{
+ background-image:url("calcnova-starry-background.jpg");
+ background-position:center center;
+ background-size:cover;
+ background-repeat:no-repeat;
+ background-attachment:fixed;
+}
+
+body[data-background="pastel-stripes"]{
+ background-image:url("background-pastel-stripes.png");
+ background-position:center;
+ background-size:cover;
+ background-repeat:no-repeat;
+ background-attachment:fixed;
+}
+
+body[data-background="blue-galaxy"]{
+ background-image:url("background-blue-galaxy.jpg");
+ background-position:center;
+ background-size:cover;
+ background-repeat:no-repeat;
+ background-attachment:fixed;
+}
+
+body[data-background="floral"]{
+ background-image:url("background-floral.jpg");
+ background-position:center;
+ background-size:cover;
+ background-repeat:no-repeat;
+ background-attachment:fixed;
+}
+
+body[data-background="minimal-stars"]{
+ background-image:url("background-minimal-stars.jpg");
+ background-position:center;
+ background-size:cover;
+ background-repeat:no-repeat;
+ background-attachment:fixed;
+}
+
+body[data-background="starry"]:before,
+body[data-background="starry"]:after{
+ display:none;
+}
 @media(max-width:700px){body[data-background="starry"]{background-attachment:scroll}}
 
 </style>
