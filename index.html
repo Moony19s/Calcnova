@@ -479,6 +479,24 @@ function setTheme(v){
  document.querySelectorAll("[data-theme-choice]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.themeChoice===v)));
  setStore("calcnova-theme",v);
 }
+
+function setDecor(v){
+ const allowed = [
+  "none",
+  "flowers",
+  "stars",
+  "butterflies",
+  "geometry",
+  "hearts"
+ ];
+
+ if(!allowed.includes(v)) v="none";
+
+ document.body.dataset.decor=v;
+ decorPicker.value=v;
+ setStore("calcnova-decor",v);
+}
+
 function setBackground(v){
  const allowed = [
   "starry",
