@@ -491,6 +491,8 @@ function setBackground(v){
  if(!allowed.includes(v)) v="starry";
 
  document.body.dataset.background=v;
+ if(v==="blue-galaxy") document.body.style.backgroundImage = 'url("background-blue-galaxy.jpg")';
+ else document.body.style.backgroundImage = "";
  backgroundPicker.value=v;
  setStore("calcnova-background",v);
 }
