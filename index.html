@@ -494,7 +494,7 @@ function setBackground(v){
  backgroundPicker.value=v;
  setStore("calcnova-background",v);
 }
-}
+
 setTheme(getStore("calcnova-theme","dark"));setDecor(getStore("calcnova-decor","none"));setBackground(getStore("calcnova-background","starry"));
 themePicker.addEventListener("change",()=>setTheme(themePicker.value));
 decorPicker.addEventListener("change",()=>setDecor(decorPicker.value));
