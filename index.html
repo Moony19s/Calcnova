@@ -518,7 +518,7 @@ function setBackground(v){
 setTheme(getStore("calcnova-theme","dark"));setDecor(getStore("calcnova-decor","none"));setBackground(getStore("calcnova-background","starry"));
 themePicker.addEventListener("change",()=>setTheme(themePicker.value));
 decorPicker.addEventListener("change",()=>setDecor(decorPicker.value));
-backgroundPicker.addEventListener("change",()=>{alert("Selected: "+backgroundPicker.value);setBackground(backgroundPicker.value);});
+backgroundPicker.addEventListener("change",()=>{setBackground(backgroundPicker.value);});
 document.querySelectorAll("[data-theme-choice]").forEach(b=>b.addEventListener("click",()=>setTheme(b.dataset.themeChoice)));
 document.getElementById("angle").addEventListener("click",()=>{degree=!degree;angleLabel.textContent=degree?"DEG":"RAD";});
 const FUNCS=new Set(["sin","cos","tan","asin","acos","atan","sinh","cosh","tanh","asinh","acosh","atanh","sqrt","log","ln","abs","exp","floor","ceil","round","ncr","npr"]);
