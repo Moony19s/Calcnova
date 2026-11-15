@@ -781,6 +781,7 @@ $("cn-memory-start").onclick=startMemoryRound;
     const detail=document.createElement("span");
     detail.textContent="Final score: "+memScore+" points · "+memMoves+" moves · Time left: "+clock(memSeconds)+" · Level "+completed+" complete!";
     result.append(title,detail);
+    $("cn-memory-start").textContent="➡ Next Level ("+(completed+1)+")";
     if(completed<30){
       
       
