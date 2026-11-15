@@ -794,7 +794,7 @@ $("cn-memory-start").onclick=startMemoryRound;
     result.hidden=false;
   }
   updateLevelOptions();
-  $("cn-memory-start").addEventListener("click",startMemoryRound);
+  $("cn-memory-start").onclick=startMemoryRound;
   $("cn-memory-reset").addEventListener("click",startMemoryRound);
   $("cn-memory-level").addEventListener("change",startMemoryRound);
   $("cn-memory-category").addEventListener("change",startMemoryRound);
