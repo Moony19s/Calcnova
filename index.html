@@ -727,7 +727,8 @@ document.addEventListener("keydown",e=>{
   function startMemoryRound(){
     stopMemoryTimer(); memDeck=makeMemoryDeck(); memOpen=[]; memMatched=0; memMoves=0; memScore=0;
     const level=currentLevel(); memSeconds=timeForLevel(level); memRunning=true; memLocked=false; memPeek=false;
-    $("cn-memory-result").hidden=true; $("cn-memory-start").textContent="↻ Restart Game";
+    $("cn-memory-start").textContent="↻ Restart Game";
+$("cn-memory-start").onclick=startMemoryRound;
     $("cn-memory-category-note").textContent="Level "+level+" · "+memDeck.length+" cards · "+(level>=3?"5-second memory preview":"No preview")+(level>=7?" · Similar symbols":"")+(level>=10?" · Surprise cards":"");
     renderMemoryCards(); updateMemoryStats();
     if(level>=3){revealAllForPeek();}else{setMemoryMessage("Find all "+(memDeck.length/2)+" pairs. You have "+clock(memSeconds)+".");}
