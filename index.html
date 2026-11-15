@@ -784,7 +784,6 @@ $("cn-memory-start").onclick=startMemoryRound;
     $("cn-memory-start").textContent="➡ Next Level ("+(completed+1)+")";
     if(completed<30){
     $("cn-memory-start").textContent="➡ Next Level ("+(completed+1)+")";  
-      
      $("cn-memory-start").onclick=()=>{
         $("cn-memory-level").value=String(completed+1);
         startMemoryRound();
