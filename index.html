@@ -781,7 +781,7 @@ document.addEventListener("keydown",e=>{
     detail.textContent="Final score: "+memScore+" points · "+memMoves+" moves · Time left: "+clock(memSeconds)+" · Level "+completed+" complete!";
     result.append(title,detail);
     if(completed<30){
-      const nextButton=document.createElement("button");
+      
       nextButton.type="button";nextButton.className="cn-btn primary";
       nextButton.textContent="➡ Next Level ("+(completed+1)+")";
       nextButton.addEventListener("click",()=>{
