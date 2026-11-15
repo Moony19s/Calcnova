@@ -783,8 +783,7 @@ document.addEventListener("keydown",e=>{
     if(completed<30){
       
       
-     
-      nextButton.addEventListener("click",()=>{
+     $("cn-memory-start").onclick=()=>{
         $("cn-memory-level").value=String(completed+1);
         startMemoryRound();
         memGrid.scrollIntoView({behavior:"smooth",block:"center"});
