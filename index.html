@@ -686,7 +686,56 @@ document.addEventListener("keydown",e=>{
     extra.forEach(x=>{if(!pool.includes(x))pool.push(x);});
     return pool;
   }
-  function makeMemoryDeck(){
+function makeMemoryDeck(){
+    const category=$("cn-memory-category").value, level=currentLevel(), count=totalCards(level)/2;
+    const pool=symbolPool(category);
+    const chosen=[];
+
+    if(level>=7){
+      const similarGroups=[["🐈","🐱","🐯"],["🍋","🍊","🍑"],["🚗","🚕","🚙"],["🌕","🌝","🌞"],["🦋","🐝","🐞"],["🥐","🥨","🍞"],["🌵","🌲","🌳"],["🏀","⚽","🏐"]];
+      shuffle(similarGroups).slice(0,Math.min(4,Math.floor(count/8))).forEach(group=>group.slice(0,2).forEach(symbol=>{if(pool.includes(symbol)&&!chosen.includes(symbol))chosen.push(symbol);}));
+    }
+
+    shuffle(pool.filter(symbol=>!chosen.includes(symbol))).slice(0,count-chosen.length).forEach(symbol=>chosen.push(symbol));
+
+    const specials=level>=10?["bonus","penalty","shuffle"]:[];
+    const cards=chosen.flatMap((symbol,index)=>{
+      const special=specials.length && index%7===0 ? specials[(Math.floor(index/7))%specials.length] : null;
+      return [{id:index+"-a",symbol,matched:false,special},{id:index+"-b",symbol,matched:false,special}];
+    });
+
+    const n=cards.length;
+    const mobile=window.matchMedia("(max-width: 480px)").matches;
+    const columns=mobile?(n<=24?4:n<=60?5:6):(n<=12?4:n<=36?6:n<=72?8:10);
+
+    let deck;
+    let valid=false;
+
+    for(let attempt=0;attempt<2000;attempt++){
+      deck=shuffle(cards);
+      valid=true;
+
+      for(let i=0;i<n&&valid;i++){
+        for(let j=i+1;j<n;j++){
+          if(deck[i].symbol===deck[j].symbol){
+            const row1=Math.floor(i/columns);
+            const col1=i%columns;
+            const row2=Math.floor(j/columns);
+            const col2=j%columns;
+
+            if(Math.abs(row1-row2)<=1&&Math.abs(col1-col2)<=1){
+              valid=false;
+              break;
+            }
+          }
+        }
+      }
+
+      if(valid)break;
+    }
+
+    return deck;
+}
     const category=$("cn-memory-category").value, level=currentLevel(), count=totalCards(level)/2;
     const pool=symbolPool(category);
     const chosen=[];
