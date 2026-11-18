@@ -736,20 +736,7 @@ function makeMemoryDeck(){
 
     return deck;
 }
-    const category=$("cn-memory-category").value, level=currentLevel(), count=totalCards(level)/2;
-    const pool=symbolPool(category);
-    const chosen=[];
-    if(level>=7){
-      const similarGroups=[["🐈","🐱","🐯"],["🍋","🍊","🍑"],["🚗","🚕","🚙"],["🌕","🌝","🌞"],["🦋","🐝","🐞"],["🥐","🥨","🍞"],["🌵","🌲","🌳"],["🏀","⚽","🏐"]];
-      shuffle(similarGroups).slice(0,Math.min(4,Math.floor(count/8))).forEach(group=>group.slice(0,2).forEach(symbol=>{if(pool.includes(symbol)&&!chosen.includes(symbol))chosen.push(symbol);}));
-    }
-    shuffle(pool.filter(symbol=>!chosen.includes(symbol))).slice(0,count-chosen.length).forEach(symbol=>chosen.push(symbol));
-    const specials=level>=10?["bonus","penalty","shuffle"]:[];
-    return shuffle(chosen.flatMap((symbol,index)=>{
-      const special=specials.length && index%7===0 ? specials[(Math.floor(index/7))%specials.length] : null;
-      return [{id:index+"-a",symbol,matched:false,special},{id:index+"-b",symbol,matched:false,special}];
-    }));
-  }
+    
   function renderMemoryCards(){
     memGrid.innerHTML="";
     memDeck.forEach((card,index)=>{
