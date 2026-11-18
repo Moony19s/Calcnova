@@ -496,7 +496,18 @@ function setDecor(v){
  decorPicker.value=v;
  setStore("calcnova-decor",v);
 }
+const bgImages = [
+  "calcnova-starry-background.jpg",
+  "background-pastel-stripes.png",
+  "background-blue-galaxy.jpg",
+  "background-floral.jpg",
+  "background-minimal-stars.jpg"
+];
 
+bgImages.forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
 function setBackground(v){
  const allowed = [
   "starry",
