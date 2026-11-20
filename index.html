@@ -29,6 +29,28 @@ body[data-decor="stars"]:after{content:"✧";font-size:clamp(90px,15vw,170px);te
 body[data-decor="butterflies"]:after{content:"🦋";font-size:clamp(65px,11vw,125px);text-shadow:80vw 68vh 0 currentColor}
 body[data-decor="geometry"]:after{content:"❖";font-size:clamp(90px,15vw,160px);text-shadow:80vw 68vh 0 currentColor, 42vw 35vh 0 currentColor}
 body[data-decor="hearts"]:after{content:"♥";font-size:clamp(75px,13vw,145px);text-shadow:80vw 68vh 0 currentColor, 42vw 35vh 0 currentColor}
+
+/* Decoration colors for each background */
+body[data-background="starry"]:after {
+  color: #8EDDE0;
+}
+
+body[data-background="pastel-stripes"]:after {
+  color: #BD7185;
+}
+
+body[data-background="blue-galaxy"]:after {
+  color: #FFD39B;
+}
+
+body[data-background="floral"]:after {
+  color: #B86F85;
+}
+
+body[data-background="minimal-stars"]:after {
+  color: #829DBB;
+}
+      
 .site-layout{position:relative;z-index:1;width:100%;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,540px) minmax(0,1fr);grid-template-areas:"top top top" ". main ." "bottom bottom bottom";gap:22px;align-items:start}
 .ad-top{grid-area:top}.ad-bottom{grid-area:bottom}.app{grid-area:main;width:100%;max-width:540px;justify-self:center}
 .ad-slot{width:100%;min-height:105px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;border:2px dashed var(--panel-border);border-radius:18px;background:var(--ad);color:var(--muted);text-align:center;box-shadow:0 8px 22px rgba(40,20,40,.07)}
