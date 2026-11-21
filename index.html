@@ -20,7 +20,7 @@ body[data-theme="blue"]{--page:#dceaf7;--page2:#bfd8ec;--text:#203b56;--muted:#5
 body[data-theme="green"]{--page:#deeee3;--page2:#bfdcc9;--text:#234333;--muted:#5f806c;--accent:#347b54;--panel:#f7fff9;--panel-border:#a9cbb4;--ad:#f7fff9;--calc-panel:#213d34;--calc-display:#142b24;--calc-text:#f4fff7;--calc-muted:#c6dfcf;--calc-key:#3b6251;--calc-fn:#456e5b;--calc-op:#527b62;--calc-border:#729984;--calc-accent:#a7e2b9;--calc-danger:#a84c60}
 body[data-theme="purple"]{--page:#e8def7;--page2:#d0c1eb;--text:#392c55;--muted:#77658f;--accent:#7650ae;--panel:#fbf8ff;--panel-border:#c1b0dd;--ad:#fbf8ff;--calc-panel:#33264c;--calc-display:#211a34;--calc-text:#fbf8ff;--calc-muted:#d8c9ef;--calc-key:#574573;--calc-fn:#684d89;--calc-op:#426458;--calc-border:#806ca0;--calc-accent:#d0b2ff;--calc-danger:#ad5274}
 body{margin:0;background:linear-gradient(135deg,var(--page),var(--page2));color:var(--text);font-family:Arial,sans-serif;min-height:100vh;padding:20px;transition:background .25s,color .25s;position:relative;isolation:isolate}
-body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-1;display:block}
+
       
 .site-layout{position:relative;z-index:1;width:100%;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,540px) minmax(0,1fr);grid-template-areas:"top top top" ". main ." "bottom bottom bottom";gap:22px;align-items:start}
 .ad-top{grid-area:top}.ad-bottom{grid-area:bottom}.app{grid-area:main;width:100%;max-width:540px;justify-self:center}
