@@ -20,7 +20,195 @@ body[data-theme="blue"]{--page:#dceaf7;--page2:#bfd8ec;--text:#203b56;--muted:#5
 body[data-theme="green"]{--page:#deeee3;--page2:#bfdcc9;--text:#234333;--muted:#5f806c;--accent:#347b54;--panel:#f7fff9;--panel-border:#a9cbb4;--ad:#f7fff9;--calc-panel:#213d34;--calc-display:#142b24;--calc-text:#f4fff7;--calc-muted:#c6dfcf;--calc-key:#3b6251;--calc-fn:#456e5b;--calc-op:#527b62;--calc-border:#729984;--calc-accent:#a7e2b9;--calc-danger:#a84c60}
 body[data-theme="purple"]{--page:#e8def7;--page2:#d0c1eb;--text:#392c55;--muted:#77658f;--accent:#7650ae;--panel:#fbf8ff;--panel-border:#c1b0dd;--ad:#fbf8ff;--calc-panel:#33264c;--calc-display:#211a34;--calc-text:#fbf8ff;--calc-muted:#d8c9ef;--calc-key:#574573;--calc-fn:#684d89;--calc-op:#426458;--calc-border:#806ca0;--calc-accent:#d0b2ff;--calc-danger:#ad5274}
 body{margin:0;background:linear-gradient(135deg,var(--page),var(--page2));color:var(--text);font-family:Arial,sans-serif;min-height:100vh;padding:20px;transition:background .25s,color .25s;position:relative;isolation:isolate}
+/* ===== CALCNOVA NEW PAGE DECORATIONS ===== */
 
+body {
+  --decor-1: #9FE3E7;
+  --decor-2: #F6D88D;
+  --decor-3: #B9B5E8;
+}
+
+body[data-background="starry"] {
+  --decor-1: #9FE3E7;
+  --decor-2: #F6D88D;
+  --decor-3: #B9B5E8;
+}
+
+body[data-background="pastel-stripes"] {
+  --decor-1: #789B83;
+  --decor-2: #C98294;
+  --decor-3: #DDAA78;
+}
+
+body[data-background="blue-galaxy"] {
+  --decor-1: #F6D58A;
+  --decor-2: #F2B7A0;
+  --decor-3: #BDEBF0;
+}
+
+body[data-background="floral"] {
+  --decor-1: #B9788D;
+  --decor-2: #78977F;
+  --decor-3: #A88BAA;
+}
+
+body[data-background="minimal-stars"] {
+  --decor-1: #8EA5C0;
+  --decor-2: #D58D78;
+  --decor-3: #A0A58A;
+}
+
+body:before,
+body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+body:before {
+  background-repeat: repeat;
+  animation: decorFloat 18s ease-in-out infinite alternate;
+}
+
+body:after {
+  background-repeat: repeat;
+  animation: decorFloat 24s ease-in-out infinite alternate-reverse;
+}
+
+body[data-decor="none"]:before,
+body[data-decor="none"]:after {
+  display: none;
+}
+
+body[data-decor="sparkles"]:before {
+  opacity: .65;
+  background-image:
+    radial-gradient(circle, var(--decor-1) 1.5px, transparent 2px),
+    radial-gradient(circle, var(--decor-2) 2px, transparent 3px),
+    radial-gradient(circle, var(--decor-3) 1px, transparent 2px);
+  background-size: 95px 110px, 145px 160px, 75px 85px;
+  background-position: 5% 10%, 90% 25%, 50% 80%;
+}
+
+body[data-decor="sparkles"]:after {
+  opacity: .45;
+  background-image:
+    radial-gradient(circle, white 1px, transparent 2px),
+    radial-gradient(circle, var(--decor-2) 2px, transparent 3px);
+  background-size: 125px 135px, 180px 190px;
+  background-position: 95% 90%, 5% 75%;
+}
+
+body[data-decor="bubbles"]:before {
+  opacity: .55;
+  background-image:
+    radial-gradient(circle at center, transparent 9px, var(--decor-1) 10px, transparent 11px),
+    radial-gradient(circle at center, transparent 15px, var(--decor-2) 16px, transparent 17px);
+  background-size: 115px 145px, 185px 205px;
+  background-position: 3% 15%, 95% 70%;
+}
+
+body[data-decor="bubbles"]:after {
+  opacity: .4;
+  background-image:
+    radial-gradient(circle at center, transparent 5px, var(--decor-3) 6px, transparent 7px),
+    radial-gradient(circle at center, transparent 12px, var(--decor-1) 13px, transparent 14px);
+  background-size: 85px 100px, 155px 175px;
+  background-position: 90% 10%, 8% 85%;
+}
+
+body[data-decor="petals"]:before {
+  opacity: .6;
+  background-image:
+    radial-gradient(ellipse 5px 11px at center, var(--decor-1) 70%, transparent 75%),
+    radial-gradient(ellipse 4px 9px at center, var(--decor-2) 70%, transparent 75%);
+  background-size: 95px 120px, 145px 165px;
+  background-position: 2% 5%, 96% 35%;
+}
+
+body[data-decor="petals"]:after {
+  opacity: .45;
+  background-image:
+    radial-gradient(ellipse 5px 10px at center, var(--decor-3) 70%, transparent 75%);
+  background-size: 125px 150px;
+  background-position: 92% 85%;
+}
+
+body[data-decor="moon-stars"]:before {
+  opacity: .7;
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--decor-2) 0 19px, transparent 20px),
+    radial-gradient(circle, var(--decor-1) 2px, transparent 3px),
+    radial-gradient(circle, var(--decor-3) 1.5px, transparent 2px);
+  background-size: 100% 100%, 95px 110px, 135px 145px;
+  background-position: 95% 8%, 5% 15%, 85% 75%;
+  background-repeat: no-repeat, repeat, repeat;
+}
+
+body[data-decor="moon-stars"]:after {
+  opacity: .5;
+  background-image:
+    radial-gradient(circle, white 2px, transparent 3px),
+    radial-gradient(circle, var(--decor-2) 1.5px, transparent 2px);
+  background-size: 155px 165px, 105px 125px;
+  background-position: 90% 30%, 5% 80%;
+}
+
+body[data-decor="ribbons"]:before {
+  opacity: .4;
+  background-image:
+    linear-gradient(135deg, transparent 47%, var(--decor-1) 48%, transparent 50%),
+    linear-gradient(135deg, transparent 47%, var(--decor-2) 48%, transparent 50%);
+  background-size: 180px 230px, 230px 280px;
+  background-position: left top, right bottom;
+}
+
+body[data-decor="ribbons"]:after {
+  opacity: .3;
+  background-image:
+    linear-gradient(45deg, transparent 47%, var(--decor-3) 48%, transparent 50%);
+  background-size: 250px 300px;
+  background-position: right top;
+}
+
+body[data-decor="dust"]:before {
+  opacity: .65;
+  background-image:
+    radial-gradient(circle, var(--decor-1) 1px, transparent 2px),
+    radial-gradient(circle, var(--decor-2) 1.5px, transparent 2px);
+  background-size: 45px 55px, 75px 85px;
+  background-position: 0 0, 30px 40px;
+}
+
+body[data-decor="dust"]:after {
+  opacity: .4;
+  background-image:
+    radial-gradient(circle, var(--decor-3) 2px, transparent 3px),
+    radial-gradient(circle, white 1px, transparent 2px);
+  background-size: 105px 115px, 65px 75px;
+  background-position: 20px 15px, 50px 60px;
+}
+
+@keyframes decorFloat {
+  from {
+    transform: translateY(-8px);
+  }
+  to {
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:before,
+  body:after {
+    animation: none !important;
+  }
+}
       
 .site-layout{position:relative;z-index:1;width:100%;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,540px) minmax(0,1fr);grid-template-areas:"top top top" ". main ." "bottom bottom bottom";gap:22px;align-items:start}
 .ad-top{grid-area:top}.ad-bottom{grid-area:bottom}.app{grid-area:main;width:100%;max-width:540px;justify-self:center}
